@@ -1,0 +1,26 @@
+<h3>Nouveau {{ questionnaire.libelle }} à valider</h3>
+
+<p>Soumis par :</p>
+
+<p>{{ agent.nomium }} / {{ agent.nom }} / {{ agent.prenom }}</p>
+
+<p>Le questionnaire est directement disponible à cette adresse :</p>
+
+{% if questionnaire.idDdqCampagne.idDdqCategorie.libelle == 'Parking' %}
+    <a href="{{ url('validation_parking', {'idQuestionnaire': questionnaire.id}) }}">{{ questionnaire.libelle }}
+        de {{ agent.prenom }} {{ agent.nom }}</a>
+    <p>La liste de tous les questionnaires Parking ayant déjà été soumis est disponible à cette adresse :</p>
+    <a href="{{ url('liste_questionnaires_parking') }}">Liste Questionnaires Parking</a>
+{% elseif questionnaire.idDdqCampagne.idDdqCategorie.libelle == 'RTT' %}
+    <a href="{{ url('validation_rtt', {'idQuestionnaire': questionnaire.id}) }}">{{ questionnaire.libelle }}
+        de {{ agent.prenom }} {{ agent.nom }}</a>
+    <p>La liste de tous les questionnaires RTT ayant déjà été soumis est disponible à cette adresse :</p>
+    <a href="{{ url('liste_questionnaires_rtt') }}">Liste Questionnaires RTT</a>
+{% elseif questionnaire.idDdqCampagne.idDdqCategorie.libelle == 'Temps_partiel' %}
+    <a href="{{ url('validation_tp', {'idQuestionnaire': questionnaire.id}) }}">{{ questionnaire.libelle }}
+        de {{ agent.prenom }} {{ agent.nom }}</a>
+    <p>La liste de tous les questionnaires Temps partiel ayant déjà été soumis est disponible à cette adresse :</p>
+    <a href="{{ url('liste_questionnaires_tp') }}">Liste Questionnaires Temps partiel</a>
+{% else %}
+    <p>!!! Erreur !!!</p>
+{% endif %} 

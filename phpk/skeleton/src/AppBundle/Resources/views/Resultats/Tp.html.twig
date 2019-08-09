@@ -1,0 +1,22 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block head %}
+    {{ parent() }}
+    {% javascripts
+        '@PHPKTemplateBundle/Resources/public/biblicnam/js/biblicnam-graphe.min.js' %}
+        <script src='{{ asset_url }}' charset='UTF-8'></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+    <h1>Résultats de la Campagne : {{ campagne.libelle }}</h1>
+    <div>
+        <h3 class="zone-info">Fig1 : Répartition des demandes validées/invalidées</h3>
+        <div>{{ phpk('graphique', dataPie) }}</div>
+        </br>
+    </div></br>
+
+{% endblock %}
+
+

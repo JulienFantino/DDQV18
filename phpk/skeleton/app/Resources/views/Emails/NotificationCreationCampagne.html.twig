@@ -1,0 +1,10 @@
+<h3>Ouverture de la Campagne {{ campagne.idDdqCategorie.libelle }} {{ campagne.datedebut|date('Y') }}</h3>
+
+<p>Bonjour,</p>
+<p>Vous pouvez dès à présent soumettre une demande d'attribution de place sur le parking Mourey au service Ressources
+    Humaines en vous rendant à cette adresse :</p>
+<a href="{{ url('campagnes_parking') }}">Votre campagne Parking</a>
+<p>Vous avez jusqu'au {{ campagne.datefin|date('d-m-Y') }}, date de clôture de la campagne, pour soumettre votre
+    demande</p>
+<p>Vous recevrez ue notification par email lorsque votre demande aura été soumise, puis traitée.</p>
+

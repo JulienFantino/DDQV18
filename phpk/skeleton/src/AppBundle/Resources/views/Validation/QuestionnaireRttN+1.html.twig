@@ -1,0 +1,61 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Questionnaire RTT</h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class='zone-info'>
+        <strong>N° Agent :</strong> {{ agent.nomium }}</br>
+        <strong>Nom :</strong> {{ agent.nom }}</br>
+        <strong>Prénom :</strong> {{ agent.prenom }}</br>
+        <strong>Service :</strong> {{ agent.nomEntite }}
+    </div>
+    <div class='zone-info'><strong>Temps plein</strong></div>
+    <div class='section'>
+        Nombre d'heures hebdomadaire souhaité : {{ form_widget(form.idDdqContrat) }}
+    </div>
+    <div class='zone-info'><strong>Votre Choix à compter du 1er Octobre</strong></br></br>
+        (cocher la case correspondante)
+    </div>
+    <div class='section'>
+        {{ form_widget(form.formule) }}
+    </div>
+    <div class='section'>
+        {{ form_widget(form.formule1j) }}
+    </div>
+    <div class='section'>
+        {{ form_widget(form.formule1s) }}
+    </div>
+    <div class='zone-info'><strong>Temps partiel</strong></div>
+    <div class='section'>
+        {{ form_widget(form.reprisetp) }}
+    </div>
+    <div class='zone-info'>Fait à {{ agent.idsite.ville }} le {{ form_widget(form.datemodif) }}</div>
+    <div class='zone-info'><strong>{{ agent.prenom }} {{ agent.nom }}</strong></div>
+    <div class='section'>
+        <div>{{ form_widget(form.signature) }}</div>
+    </div>
+    <div class="zone-info"><strong>Avis du responsable de service :</strong></div>
+    <div class="section">
+        {% if questionnaire.statut == 'validé N+1' %}
+            <input type="checkbox" checked="checked" disabled="true"> Accord</br>
+            <input type="checkbox" disabled="true"> Refus
+        {% elseif questionnaire.statut == 'invalidé N+1' %}
+            <input type="checkbox" disabled="true"> Accord</br>
+            <input type="checkbox" checked="checked" disabled="true"> Refus
+        {% else %}
+            !!! Erreur !!!
+        {% endif %}
+    </div>
+    <div class="zone-info"><strong>Avis du directeur de branche :</strong></div>
+    <div class="section">
+        {{ form_start(validForm) }}
+        {{ form_errors(validForm) }}
+        <div>{{ form_widget(validForm.avis) }}</div>
+        {{ form_end(validForm) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+

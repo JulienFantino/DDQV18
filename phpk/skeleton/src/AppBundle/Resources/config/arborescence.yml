@@ -1,0 +1,170 @@
+# Modifiez ce fichier pour qu'il corresponde à votre application
+phpk_core:
+  arborescence:
+    Campagne:
+      libelle: Mes Campagnes
+      habilitations: [  DDQ_CONSULTE ]
+      fils:
+        Parking:
+          route: campagnes_parking
+          libelle: Parking
+          habilitations:  [ DDQ_CONSULTE ]
+        RTT:
+          route: campagnes_rtt
+          libelle: RTT
+          habilitations: [DDQ_CONSULTE]
+        Temps Partiel:
+          route: campagnes_tp
+          libelle: Temps Partiel
+          habilitations: [ DDQ_CONSULTE ]
+        Télétravail:
+          route: campagnes_tp
+          libelle: Télétravail
+          habilitations: [DDQ_CONSULTE]
+    Historique:
+      libelle: Historique
+      habilitations: [DDQ_CONSULTE]
+      fils:
+        Parking:
+          route: historique_parking
+          libelle: Parking
+        RTT:
+          route: historique_rtt
+          libelle: RTT
+        Temps Partiel:
+          route: historique_tp
+          libelle: Temps Partiel
+        Télétravail:
+          route: campagnes_tp
+          libelle: Télétravail
+
+    Validations:
+      libelle: Validations
+      habilitations: [DDQ_VALID]
+      fils:
+        Parking:
+          habilitations: [DDQ_VAL_PARK]
+          route: liste_questionnaires_parking
+          libelle: Parking
+        RTT:
+          libelle: RTT
+          fils:
+            Niveau 1:
+              route: liste_questionnaires_rtt
+              libelle: Niveau 1
+              habilitations: [DDQ_VAL_RTT1]
+            Niveau 2:
+              route: liste_questionnaires_rttN+1
+              libelle: Niveau 2
+              habilitations: [DDQ_VAL_RTT2]
+        Temps Partiel:
+          libelle: Temps Partiel
+          fils:
+            Niveau 1:
+              route: liste_questionnaires_tp
+              libelle: Niveau 1
+              habilitations: [DDQ_VAL_TP1]
+            Niveau 2:
+              route: liste_questionnaires_tpN+1
+              libelle: Niveau 2
+              habilitations: [DDQ_VAL_TP2]
+        Télétravail:
+          route: campagnes_tp
+          libelle: Télétravail
+
+    Administration:
+      libelle: Administration
+      habilitations: [ DDQ_ADMIN ]
+      fils:
+        Nouvelle Campagne:
+          route: nouvelle_campagne
+          libelle: Nouvelle Campagne
+        Clôture Campagne:
+          route: cloture_campagne
+          libelle: Clôture Campagne
+        Parking:
+          libelle: Parking
+          habilitations: [ DDQ_ADMIN_PARK ]
+          fils:
+            Resultats:
+              route: resultats_parking
+              libelle: Résultats
+              habilitations: [ DDQ_ADMIN_STAT ]
+              # Stats:
+              #    route : test
+              #  libelle: Statistiques
+
+            #                        Utilisateurs:
+            #                            route: utilisateur_parking
+            #                            libelle: Utilisateurs
+            Userparking:
+              route: user_park
+              libelle: Utilisateurs
+              habilitations: [ DDQ_ADMIN_UTIL ]
+        RTT:
+          libelle: RTT
+          habilitations: [ DDQ_ADMIN_RTT ]
+          fils:
+            Resultats:
+              route: resultats_rtt
+              libelle: Résultats
+
+            Utilisateurs:
+              libelle: Utilisateurs
+              habilitations: [ DDQ_ADMIN_UTIL ]
+        Temps Partiel:
+          libelle: Temps Partiel
+          habilitations: [ DDQ_ADMIN_TP ]
+          fils:
+            Resultats:
+              route: resultats_tp
+              libelle: Résultats
+            Items:
+              libelle: Gestion des Items
+              habilitations: [ DDQ_ADMIN_ITEM ]
+
+            Utilisateurs:
+              libelle: Utilisateurs
+              habilitations: [ DDQ_ADMIN_UTIL ]
+            Télétravail:
+              libelle: Télétravail
+              fils:
+                Resultats:
+                  route: resultats_tp
+                  libelle: Résultats
+                  habilitations: [ DDQ_ADMIN_STAT ]
+                Items:
+                  libelle: Gestion des Items
+                  habilitations: [ DDQ_ADMIN_ITEM ]
+                  #habilitations: [ DDQ_ADMIN_STAT ]
+                Utilisateurs:
+                  libelle: Utilisateurs
+
+
+            # Structure :
+            # <nom>:
+            #     route: <identifiant de la route>
+            #     libelle: <libellé du menu>
+            #     habilitations: <tableau d'habilitations>
+            #     fils: # 2 niveaux maximum en mode horizontal / 3 niveaux maximum en mode vertical
+            #           <nom> ...
+            #
+            # Exemple :
+            # exemple_sous_menu:
+            #     libelle: Sous-menu
+            #     habilitations: [ XXX_XXX ]
+            #     fils:
+            #         exemple_sous_menu1:
+            #             libelle: Sous-menu 1
+            #         exemple_sous_menu2:
+            #             libelle: Sous-menu 2
+            #             fils:
+            #                 exemple_sous_menu21:
+            #                     libelle: Sous-menu 21
+            #                     route: <identifiant de la route>
+            #                     menu: false # Permet d'indiquer que ce fils n'est pas un menu mais une simple page. Cela permet de gérer correctement le fil d'Ariane.
+            #                 exemple_sous_menu22:
+            #                     libelle: Sous-menu 22
+
+
+# Vous pouvez également configurer phpk_core.interapplications et phpk_core.outils dans ce fichier si vous le souhaitez

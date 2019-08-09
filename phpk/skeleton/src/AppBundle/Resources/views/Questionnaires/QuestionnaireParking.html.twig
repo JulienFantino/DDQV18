@@ -1,0 +1,34 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Demande d'attribution d'une place sur le parking Mourey</h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class='zone-info'><strong>N° agent :</strong> {{ agent.nomium }}</br></br>
+        <strong>Nom :</strong> {{ agent.nom }} <strong>Prénom :</strong> {{ agent.prenom }}
+    </div>
+    <div class='zone-info'>sollicite une place sur le parking Mourey :</div>
+    <div class='section'>
+        <div>{{ form_widget(form.enfants) }}</div>
+        <div>{{ form_widget(form.handicap) }}</div>
+        <div>{{ form_widget(form.emploi) }}</div>
+    </div>
+    <div class='zone-info'>Je soussigné(e) {{ agent.nom }} {{ agent.prenom }}</div>
+    <div class='zone-info'>Domicilié(e) au :</div>
+    <div class="section"> {{ form_widget(form.adresse) }} </div>
+
+    <div class='zone-info'>Certifie sur l'honneur avoir à ma charge, au sens fiscal :</div>
+    <div class='section'>
+        <div>Enfant 1 : {{ form_widget(form.enfant1) }} né(e) le {{ form_widget(form.datenaissance1) }}</div>
+        <div>Enfant 2 : {{ form_widget(form.enfant2) }} né(e) le {{ form_widget(form.datenaissance2) }}</div>
+        <div>Enfant 3 : {{ form_widget(form.enfant3) }} né(e) le {{ form_widget(form.datenaissance3) }}</div>
+        <div>Enfant 4 : {{ form_widget(form.enfant4) }} né(e) le {{ form_widget(form.datenaissance4) }}</div>
+    </div>
+    <div class='zone-info'>Fait à {{ agent.idsite.ville }} le {{ form_widget(form.datemodif) }}</div>
+    <div class='zone-info'><strong>{{ agent.prenom }} {{ agent.nom }}</strong></div>
+    <div class='section'>
+        <div>{{ form_widget(form.signature) }}</div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

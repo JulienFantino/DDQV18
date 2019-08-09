@@ -1,0 +1,95 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Demande de travail à temps partiel choisi</h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="zone-info">
+        <strong>N° Agent :</strong> {{ agent.nomium }}</br>
+        <strong>Nom :</strong> {{ agent.nom }}</br>
+        <strong>Prénom :</strong> {{ agent.prenom }}</br>
+        <strong>Service :</strong> {{ agent.nomEntite }}</br>
+        <strong>Qualification :</strong>
+    </div>
+    <div class="zone-info">
+        <h3>ENFANTS A CHARGE :</h3>
+    </div>
+    <div class="section">
+        <div>Date de naissance Enfant 1 : {{ form_widget(form.dateenfant1) }} Date de naissance Enfant 2
+            : {{ form_widget(form.dateenfant2) }}</div>
+        <div>Date de naissance Enfant 3 : {{ form_widget(form.dateenfant3) }} Date de naissance Enfant 4
+            : {{ form_widget(form.dateenfant4) }}</div>
+    </div>
+    <div class="zone-info">
+        <h3>CONTRAT EN COURS : {{ agent.idDdqContrat.id }}-{{ agent.idDdqContrat.nbHeures }}</h3>
+    </div>
+    <div class="section">
+        <h3>MOTIF :</h3></br>
+        <div>{{ form_widget(form.motif) }}</div>
+    </div>
+
+    <div class="col1-2">
+        <div class="zone-info">
+            <h3>PERIODE DU CONTRAT</h3>
+            <p>Période réglementaire de conclusion</p>
+        </div>
+
+        <div class="zone-info">
+            <h3>HORAIRE HEBDOMADAIRE SOUHAITE</h3>
+            <p>Conformément aux types de contrats prévus</p>
+        </div>
+        <div class="section">
+            <h3>REPARTITION HEBDOMADAIRE SOUHAITEE</h3>
+            <p>Conformément aux différentes répartitions prévues</p>
+            <div>{{ form_widget(form.lundi) }}</div>
+            <div>{{ form_widget(form.mardi) }}</div>
+            <div>{{ form_widget(form.mercredi) }}</div>
+            <div>{{ form_widget(form.jeudi) }}</div>
+            <div>{{ form_widget(form.vendredi) }}</div>
+        </div>
+    </div>
+    <div class="col2-2">
+        <div class="zone-info">
+            <h3>Du 1er Octobre {{ year }} au 30 Septembre {{ year+1 }}</h3>
+        </div>
+        <div class="section">
+            <h3>Choix du contrat :</h3>
+            <p>{{ form_widget(form.idDdqContrat) }}</p>
+        </div>
+        <div class="section">
+            </br></br>
+            <div>{{ form_widget(form.lundim) }} {{ form_widget(form.lundiam) }}</div>
+            <div>{{ form_widget(form.mardim) }} {{ form_widget(form.mardiam) }}</div>
+            <div>{{ form_widget(form.mercredim) }} {{ form_widget(form.mercrediam) }}</div>
+            <div>{{ form_widget(form.jeudim) }} {{ form_widget(form.jeudiam) }}</div>
+            <div>{{ form_widget(form.vendredim) }} {{ form_widget(form.vendrediam) }}</div>
+        </div>
+    </div>
+    <div class="zone-info">Fait à {{ agent.idsite.ville }} le {{ form_widget(form.datemodif) }}</div>
+    <div class="zone-info"><strong>{{ agent.prenom }} {{ agent.nom }}</strong></div>
+    <div class='section'>
+        <div>{{ form_widget(form.signature) }}</div>
+    </div>
+    <div class="zone-info"><strong>Avis du responsable de service :</strong></div>
+    <div class="section">
+        {% if questionnaire.statut == 'validé N+1' %}
+            <input type="checkbox" checked="checked" disabled="true"> Accord</br>
+            <input type="checkbox" disabled="true"> Refus
+        {% elseif questionnaire.statut == 'invalidé N+1' %}
+            <input type="checkbox" disabled="true"> Accord</br>
+            <input type="checkbox" checked="checked" disabled="true"> Refus
+        {% else %}
+            !!! Erreur !!!
+        {% endif %}
+    </div>
+    <div class="zone-info"><strong>Avis du directeur de branche :</strong></div>
+    <div class="section">
+        {{ form_start(validForm) }}
+        {{ form_errors(validForm) }}
+        <div>{{ form_widget(validForm.avis) }}</div>
+        {{ form_end(validForm) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+

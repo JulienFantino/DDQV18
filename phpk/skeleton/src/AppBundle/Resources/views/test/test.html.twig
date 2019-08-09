@@ -1,0 +1,38 @@
+{# empty Twig template #}
+{% extends "DDQ001Bundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+{% block body %}
+    <FORM name=form class=form_center method=post>
+        <DIV class="ligne "><LABEL class=w150px for=input_form_libelle>Campagne : &nbsp;<SPAN class=obligatoire>*</SPAN></LABEL><SPAN
+                    class=zone_champ_saisie>
+<DIV class="zone_combo "><SELECT name=form[libelle] class=chzn-done id=form_libelle style="DISPLAY: none"
+                                 data-no_result_text="" data-placeholder="" data-search="" data-width="">
+        <OPTION value=41 selected>PARKING JUJU 2017</OPTION>
+        <OPTION value=43>TPJUJU 2017</OPTION>
+        <OPTION value=36>test_juju</OPTION>
+        <OPTION value=35>juju</OPTION></SELECT>
+<DIV class="chzn-container-single-nosearch chzn-container chzn-container-single" id=form_libelle_chzn
+     style="WIDTH: 167px">
+<DIV class="chzn-drop-down chzn-drop" id=form_libelle_chzn_drop
+     style="WIDTH: 165px; LEFT: -9000px; TOP: 22px; BOTTOM: auto">
+<DIV class=chzn-search>
+    <INPUT id=input_form_libelle aria-controls=form_libelle_chzn_listbox style="WIDTH: 133px" type=text
+           autocomplete="off"></DIV>
+</DIV></DIV></DIV></SPAN></DIV>
+        <DIV class=zone-action-bas>
+            <DIV class=zone-liens><SPAN class=barre-boutons><BUTTON name=btn_5a1bf7233a37d title='Rétablir (Alt + "R")'
+                                                                    class="bouton" id=btn_5a1bf7233a37d accessKey=R
+                                                                    type=reset>
+            <SPAN class="btn_action avec_img"><SPAN><SPAN>
+                        <SPAN class=btn_retablir>Rétablir </SPAN></SPAN></SPAN></SPAN></BUTTON>
+                        <BUTTON name=btn_5a1bf7233a829 title='Valider (Alt + "V")' class="bouton"
+                                id=btn_5a1bf7233a829 accessKey=V type=submit>
+                            <SPAN class="btn_defaut avec_img"><SPAN><SPAN>
+                        <SPAN class=btn_valider>Valider </SPAN></SPAN></SPAN></SPAN></BUTTON>
+                                
+    </SPAN></DIV>
+        </DIV>
+        <INPUT name=form[_token] id=form__token type=hidden value=dbaLOYAn5HPk_ESxFAIdkapUZMaI0jnny5jBz_S0Jcs>
+    </FORM>
+{% endblock %}
+

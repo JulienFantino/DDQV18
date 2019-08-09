@@ -1,0 +1,13 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Sélection d'une Campagne</h1></br>
+    <div class='zone-info'><h3>Sélectionner la Campagne souhaitée dans cette liste</h3></div>
+    <div class='section'>
+        {{ phpk('formulaire',  {form: formCampagne, center:true}) }}
+
+
+    </div>
+
+{% endblock %}

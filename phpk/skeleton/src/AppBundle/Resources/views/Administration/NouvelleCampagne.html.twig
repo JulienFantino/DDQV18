@@ -1,0 +1,9 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Création d'une nouvelle Campagne</h1>
+    <div class='section'>
+        {{ phpk('formulaire',  {form: formCampagne, center:true}) }}
+    </div>
+{% endblock %}

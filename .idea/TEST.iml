@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/dbal/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/event-manager/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/cache/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/collections/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/Tests/Fixtures/beta" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/framework-standard-edition" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/annotations/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/monolog/monolog/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/persistence/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/var/cache/dev" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/sensio/framework-extra-bundle" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Bridge/PhpUnit/Tests/Fixtures/coverage" isTestSource="false" packagePrefix="PhpUnitCoverageTest" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/Tests/Fixtures/Apc/alpha" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/twig/twig/src" isTestSource="false" packagePrefix="Twig" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/Tests/Fixtures/alpha" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/orm/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/inflector/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/kriswallsmith/assetic/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/Tests/Fixtures/Apc/fallback" isTestSource="false" packagePrefix="Apc" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/psr/log" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/ensepar/html2pdf-bundle" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/sensiolabs/security-checker" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/reflection/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/monolog/monolog/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/instantiator/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/common/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/Tests/Fixtures" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Tests/Fixtures" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/doctrine/lexer/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/framework-standard-edition/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/Tests/Fixtures/Apc/beta" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/knplabs/knp-snappy/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/Tests/Fixtures/fallback" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/app/sessions" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/doc" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/var" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/web/bundles" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/web/css" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/web/js" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/web/webfonts" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

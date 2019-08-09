@@ -1,0 +1,158 @@
+imports:
+  - resource: parameters.yml
+  - resource: security.yml
+  - resource: services.yml
+  - resource: databases.yml
+  - resource: '@PHPKCoreBundle/Resources/config/parameters.yml'
+parameters:
+  locale: fr
+framework:
+  secret: '%secret%'
+  router:
+    resource: '%kernel.root_dir%/config/routing.yml'
+    strict_requirements: null
+  form: null
+  csrf_protection: null
+  validation:
+    enabled: true
+    enable_annotations: false
+  templating:
+    engines: [twig]
+  default_locale: '%locale%'
+  trusted_hosts: null
+  trusted_proxies: null
+  session:
+    handler_id: session.handler.native_file
+    save_path: '%kernel.root_dir%/sessions'
+  fragments: null
+  http_method_override: true
+twig:
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
+  globals:
+    phpk_app_name: '%name%'
+    phpk_app_description: '%description%'
+    phpk_app_indication_logo: '%indicationLogo%'
+    phpk_app_assistance: '%assistance%'
+    phpk_app_version: '%version%'
+  form_themes:
+    - 'PHPKTemplateBundle:form:template.html.twig'
+    - 'PHPKTemplateBundle:form:button.html.twig'
+doctrine:
+  dbal:
+    driver: pdo_pgsql
+    host: '%database_host%'
+    port: '%database_port%'
+    dbname: '%database_name%'
+    user: '%database_user%'
+    password: '%database_password%'
+    charset: UTF8
+    # if using pdo_sqlite as your database driver:
+    #   1. add the path in parameters.yml
+    #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
+    #   2. Uncomment database_path in parameters.yml.dist
+    #   3. Uncomment next line:
+    #path: '%database_path%'
+
+  orm:
+    auto_generate_proxy_classes: '%kernel.debug%'
+    naming_strategy: doctrine.orm.naming_strategy.underscore
+    auto_mapping: true
+assetic:
+  use_controller: false
+  bundles:
+    - TwigBundle
+    - PHPKCoreBundle
+    - PHPKTemplateBundle
+    - '%bundle.name%'
+    - PHPKExportBundle
+    - PHPKSecurityBundle
+  debug: '%kernel.debug%'
+  filters:
+    cssrewrite: null
+  assets:
+    fontawesome_webfonts_solid_eot:
+      inputs: '%kernel.root_dir%/../vendor/components/font-awesome/webfonts/fa-solid-900.eot'
+      output: 'webfonts/fa-solid-900.eot'
+    fontawesome_webfonts_solid_svg:
+      inputs: '%kernel.root_dir%/../vendor/components/font-awesome/webfonts/fa-solid-900.svg'
+      output: 'webfonts/fa-solid-900.svg'
+    fontawesome_webfonts_solid_ttf:
+      inputs: '%kernel.root_dir%/../vendor/components/font-awesome/webfonts/fa-solid-900.ttf'
+      output: 'webfonts/fa-solid-900.ttf'
+    fontawesome_webfonts_solid_woff:
+      inputs: '%kernel.root_dir%/../vendor/components/font-awesome/webfonts/fa-solid-900.woff'
+      output: 'webfonts/fa-solid-900.woff'
+    fontawesome_webfonts_solid_woff2:
+      inputs: '%kernel.root_dir%/../vendor/components/font-awesome/webfonts/fa-solid-900.woff'
+      output: 'webfonts/fa-solid-900.woff2'
+    fontawesome_css:
+      inputs:
+        - '%kernel.root_dir%/../vendor/components/font-awesome/css/fa-solid.css'
+        - '%kernel.root_dir%/../vendor/components/font-awesome/css/fontawesome.css'
+      output: 'css/fontawesome.css'
+knp_snappy:
+  pdf:
+    enabled: true
+    binary: ../bin/wkhtmltopdf-amd64
+    options: {  }
+    env: null
+  image:
+    enabled: true
+    binary: ../bin/wkhtmltoimage-amd64
+    options: {  }
+    env: null
+swiftmailer:
+  transport: "smtp"
+  host:      "smtp.ramage"
+  port:      "25"
+  username:  "C110101-MSG-DDQ"
+  password:  "c6Po@011bourgCpam@011bourg"
+  encryption: "tls"
+  stream_options:
+    ssl:
+      allow_self_signed: false
+      verify_peer_name: true
+      verify_peer:  true
+      cafile: /etc/ssl/certs/ac_cnamts_racine.cer
+phpkws_client:
+  anr:
+    # URL du Webservice ANR
+
+    # Version de l'ANR à utiliser. Exemple : '01'
+    version: '01'
+    # Libellé du Demandeur. Exemple : 'CPAM-KIWI'
+    demandeur: 'CPAM-AIN-MACOM'
+    # Numéro de contrat. Exemple : '42a362b1337c2698'
+    numContrat: '46424981d12617a4cdd1ba7fe76521f53b5e1ba4'
+    #Gestion du cache
+    soap:
+      # Nom ou URL du fichier WSDL
+      wsdl:                 'http://wsanr.cnamts.fr:7299/wsanr/ws?wsdl'
+      # Required
+      # L'option service_location est l'URL du serveur SOAP vers lequel la requète est envoyée
+      service_location:     null
+      # L'option service_uri est l'espace de noms cible du service SOAP.
+      service_uri:          null
+      # Version du webservice
+      version:              null
+      # L'option connection_timeout définit le délai de connexion en secondes pour la connexion au service SOAP.
+      connection_timeout:   10
+      # L'option trace active le suivi des requêtes pour permettre le retraçage des défauts. FALSE par défaut.
+      trace:                false
+      # L'option encoding définit le jeu d'encodage des caractères internes. Cette option ne modifie pas l'encodage des requêtes SOAP (il est toujours utf-8), mais convertit les chaînes en utilisant ce dernier.
+      encoding:             utf-8
+      # L'option compression permet d'utiliser la compression sur les requêtes et les réponses HTTP SOAP
+      compression:          false
+      # L'option cache_wsdl est une constante parmi WSDL_CACHE_NONE, WSDL_CACHE_DISK, WSDL_CACHE_MEMORY ou WSDL_CACHE_BOTH.
+      cache_wsdl:           false
+      # L'option exceptions est un booléen définissant si les erreurs SOAP doivent lancer des exceptions du type SoapFault.
+      exceptions:           false
+      # Logguer les évènements
+      debug:                false
+      # Paramètres relatifs au cache
+      cache:
+        # Durée de conservation du cache (en minutes)
+        duration:             1440
+        # Repertoire du cache
+        directory:            '%kernel.cache_dir%/webservices/'

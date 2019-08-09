@@ -1,0 +1,205 @@
+app_index:
+  path: /
+  defaults:
+    { _controller: 'AppBundle:Default:index' }
+
+error:
+  path: /error
+  defaults:
+    { _controller: 'AppBundle:Default:error' }
+
+nouvelle_campagne:
+  path: /nouvelle_campagne
+  defaults:
+    { _controller: 'AppBundle:Administration:nouvelleCampagne' }
+
+cloture_campagne:
+  path: /cloture_campagne
+  defaults:
+    { _controller: 'AppBundle:Administration:clotureCampagne' }
+
+campagnes_parking:
+  path: /campagnes_parking
+  defaults:
+    _controller: AppBundle:MesCampagnes:getCampagnesParking
+
+
+campagnes_rtt:
+  path: /campagnes_rtt
+  defaults:
+    _controller: AppBundle:MesCampagnes:getCampagnesRtt
+
+campagnes_tp:
+  path: /campagnes_tp
+  defaults:
+    _controller: AppBundle:MesCampagnes:getCampagnesTp
+
+questionnaire_parking:
+  path: /questionnaire_parking/{campagne}
+  defaults:
+    _controller: AppBundle:Questionnaires:getQuestionnaireParking
+
+questionnaire_rtt:
+  path: /questionnaire_rtt/{campagne}
+  defaults:
+    _controller: AppBundle:Questionnaires:getQuestionnaireRtt
+questionnaire_rtt1:
+  path: /questionnaire_rtt1/{campagne}
+  defaults:
+    _controller: AppBundle:Questionnaires:getQuestionnaireRtt
+questionnaire_rtt2:
+  path: /questionnaire_rtt2/{campagne}
+  defaults:
+    _controller: AppBundle:Questionnaires:getQuestionnaireRtt
+questionnaire_rtt3:
+  path: /questionnaire_rtt3/{campagne}
+  defaults:
+    _controller: AppBundle:Questionnaires:getQuestionnaireRtt
+    #  DdqQuestionnaireRttType_3
+questionnaire_tp:
+  path: /questionnaire_tp/{campagne}
+  defaults:
+    _controller: AppBundle:Questionnaires:getQuestionnaireTp
+
+historique_parking:
+  path: /historique_parking
+  defaults:
+    _controller: AppBundle:MonHistorique:getHistoriqueParking
+
+historique_rtt:
+  path: /historique_rtt
+  defaults:
+    _controller: AppBundle:MonHistorique:getHistoriqueRtt
+
+historique_tp:
+  path: /historique_tp
+  defaults:
+    _controller: AppBundle:MonHistorique:getHistoriqueTp
+
+liste_questionnaires_parking:
+  path: /liste_questionnaires_parking
+  defaults:
+    _controller: AppBundle:Liste:getListeParkingRemplis
+
+liste_questionnaires_rtt:
+  path: /liste_questionnaires_rtt
+  defaults:
+    _controller: AppBundle:Liste:getListeRttRemplis
+
+liste_questionnaires_rttN+1:
+  path: /liste_questionnaires_rttN+1
+  defaults:
+    _controller: AppBundle:Liste:getListeRttRemplisN1
+
+liste_questionnaires_tp:
+  path: /liste_questionnaires_tp
+  defaults:
+    _controller: AppBundle:Liste:getListeTpRemplis
+
+liste_questionnaires_tpN+1:
+  path: /liste_questionnaires_tpN+1
+  defaults:
+    _controller: AppBundle:Liste:getListeTpRemplisN1
+
+validation_parking:
+  path: /validation_parking/{idQuestionnaire}
+  defaults:
+    _controller: AppBundle:Validation:validationParking
+  requirements:
+    idQuestionnaire: '\d+'
+
+validation_rtt:
+  path: /validation_rtt/{idQuestionnaire}
+  defaults:
+    _controller: AppBundle:Validation:validationRtt
+  requirements:
+    idQuestionnaire: '\d+'
+
+validation_rttN+1:
+  path: /validation_rttN+1/{idQuestionnaire}
+  defaults:
+    _controller: AppBundle:Validation:validationRttN1
+  requirements:
+    idQuestionnaire: '\d+'
+
+validation_tp:
+  path: /validation_tp/{idQuestionnaire}
+  defaults:
+    _controller: AppBundle:Validation:validationTp
+  requirements:
+    idQuestionnaire: '\d+'
+
+validation_tpN+1:
+  path: /validation_tpN+1/{idQuestionnaire}
+  defaults:
+    _controller: AppBundle:Validation:validationTpN1
+  requirements:
+    idQuestionnaire: '\d+'
+
+resultats_parking:
+  path: /resultats_parking
+  defaults:
+    _controller: 'AppBundle:Resultats:ResultatsParking'
+
+resultats_rtt:
+  path: /resultats_rtt
+  defaults:
+    _controller: AppBundle:Resultats:ResultatsRtt
+
+resultats_tp:
+  path: /resultats_tp
+  defaults:
+    _controller: AppBundle:Resultats:ResultatsTp
+
+resultats_parking_campagne:
+  path: /resultats_parking_campagne/{idCampagne}
+  defaults:
+    _controller: AppBundle:Resultats:getResultatsParking
+  requirements:
+    idCampagne: '\d+'
+
+resultats_rtt_campagne:
+  path: /resultats_rtt_campagne/{idCampagne}
+  defaults:
+    _controller: AppBundle:Resultats:getResultatsRtt
+  requirements:
+    idCampagne: '\d+'
+
+resultats_tp_campagne:
+  path: /resultats_tp_campagne/{idCampagne}
+  defaults:
+    _controller: AppBundle:Resultats:getResultatsTp
+  requirements:
+    idCampagne: '\d+'
+
+test:
+  path: /resultats_tp_campagne/{idCampagne}
+  defaults:
+    _controller: AppBundle:Resultats:getResultatsTp
+  requirements:
+    idCampagne: '\d+'
+
+
+utilisateur_parking:
+  path: /utilisateur_parking
+  defaults:
+    _controller: AppBundle:GestionUtilisateur:GestionUtilisateurParking
+
+user_park:
+  path: /user_park/{idCampagne}
+  defaults:
+    # _controller: AppBundle:GestionUtilisateur:getUserParking
+    { _controller: AppBundle:GestionUtilisateur:UserParking,idCampagne:112}
+  requirements:
+    idCampagne: '\d+'
+anr_test:
+  path: /anr
+  defaults: { _controller: 'AppBundle:Anr:anr' }
+
+anr_agent:
+  path: /agent
+  defaults: { _controller: 'AppBundle:Anr:agent' }
+
+anr_update_anr:
+  path: /update_anr
+  defaults: { _controller: 'AppBundle:AnrUpdate:persist' }

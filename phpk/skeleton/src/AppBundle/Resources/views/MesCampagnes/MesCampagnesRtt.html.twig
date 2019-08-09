@@ -1,0 +1,9 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Mes Campagnes RTT</h1></br>
+    <div class="zone-info"><h3>Bonjour {{ agent.prenom }} {{ agent.nom }}, voici le questionnaire auquel vous
+            pouvez/devez répondre.</h3></div>
+    <div>{{ phpk('tableau', {tableau: tabAgentQuestionnaire, filter: false, affichageLignesTrouvees: false}) }}</div>
+{% endblock %}

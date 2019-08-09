@@ -1,0 +1,41 @@
+#parameters:
+#phpk_wsclient:
+#        anr:
+#            # URL du Webservice ANR
+#           
+#            # Version de l'ANR à utiliser. Exemple : '01'
+#            version: '01'
+#            # Libellé du Demandeur. Exemple : 'CPAM-KIWI'
+#            demandeur: 'CPAM-AIN-MACOM'
+#            # Numéro de contrat. Exemple : '42a362b1337c2698'
+#            numContrat: 46424981d12617a4cdd1ba7fe76521f53b5e1ba4
+#            # Gestion du cache
+#            soap:
+#                # Nom ou URL du fichier WSDL
+#                wsdl:                 'http://wsanr.cnamts.fr:7299/wsanr/ws?wsdl' # Required
+#                # L'option service_location est l'URL du serveur SOAP vers lequel la requète est envoyée
+#                service_location:     null
+#                # L'option service_uri est l'espace de noms cible du service SOAP.
+#                service_uri:          null
+#                # Version du webservice
+#                version:              null
+#                # L'option connection_timeout définit le délai de connexion en secondes pour la connexion au service SOAP.
+#                connection_timeout:   10
+#                # L'option trace active le suivi des requêtes pour permettre le retraçage des défauts. FALSE par défaut.
+#                trace:                false
+#                # L'option encoding définit le jeu d'encodage des caractères internes. Cette option ne modifie pas l'encodage des requêtes SOAP (il est toujours utf-8), mais convertit les chaînes en utilisant ce dernier.
+#                encoding:             utf-8
+#                # L'option compression permet d'utiliser la compression sur les requêtes et les réponses HTTP SOAP
+#                compression:          false
+#                # L'option cache_wsdl est une constante parmi WSDL_CACHE_NONE, WSDL_CACHE_DISK, WSDL_CACHE_MEMORY ou WSDL_CACHE_BOTH.
+#                cache_wsdl:           0
+#                # L'option exceptions est un booléen définissant si les erreurs SOAP doivent lancer des exceptions du type SoapFault.
+#                exceptions:           false
+#                # Logguer les évènements
+#                debug:                false
+#                # Paramètres relatifs au cache
+#                cache:
+#                    # Durée de conservation du cache (en minutes)
+#                    duration:             600
+#                    # Repertoire du cache
+#                    directory:            '%kernel.cache_dir%/webservices/'

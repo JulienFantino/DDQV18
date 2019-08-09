@@ -1,0 +1,52 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Questionnaire RTT</h1>
+    {{ campagne }}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ phpk('etapes', {
+        selection: 'selection',
+        etapes: [
+            {url: path('questionnaire_rtt', app.request.get('_route_params')), text: 'Étape 1',id:'selection'},
+            {url: path('questionnaire_rtt1', app.request.get('_route_params')), text: 'Étape 2'},
+            {url: path('questionnaire_rtt2', app.request.get('_route_params')), text: 'Étape 3'},
+            {url: path(app.request.get('_route'), app.request.get('_route_params')), text: 'Étape 4'},
+
+            {text: 'Récapitulatif', title: 'Finalisation', disabled: false}
+        ]
+    }) }}
+    <div class='zone-info'>
+        <strong>N° Agent :</strong> {{ agent.nomium }}</br>
+        <strong>Nom :</strong> {{ agent.nom }}</br>
+        <strong>Prénom :</strong> {{ agent.prenom }}</br>
+        <strong>Service :</strong> {{ agent.nomEntite }}
+    </div>
+    <div class='zone-info'><strong>Temps partiel</strong></div>
+    <div class='section'>
+        {{ form_widget(form.reprisetp) }}
+    </div>
+
+
+
+
+
+    {{ form_end(form) }}
+    {# on va utiliser ca {{render(controller("AppBundle:Default:setContrat"))}} pour persist l'idcontrat en BDD #}
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            {# Recup de la checkbox reprise temps partiel #}
+            var reprisetp = parseInt(jQuery('#cnamts_ddq_bundle_ddqquestionnairertt_reprisetp').attr('value'));
+            jQuery('#cnamts_ddq_bundle_ddqquestionnairertt_reprisetp').change(function () {
+                console.log(formule);
+                reprisetp += 1;
+                if ((reprisetp) % 2) {
+                    jQuery('#tempsplein').attr('hidden', false);
+                } else {
+                    jQuery('#tempsplein').attr('hidden', true);
+                }
+            });
+        });
+    </script>
+{% endblock %}

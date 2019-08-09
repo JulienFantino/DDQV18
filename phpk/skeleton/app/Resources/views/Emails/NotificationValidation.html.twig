@@ -1,0 +1,42 @@
+<h3>Votre {{ questionnaire.libelle }} a été traité</h3>
+
+{% if statut == 'validé' %}
+    <p>Suite à votre demande d’une place de parking sur Mourey, vous pouvez bénéficier d’une place à compter du 1er
+        octobre.
+
+        Pour rappel, l’accès au parking est possible grâce à votre carte sécurisée.
+
+        Enfin, merci de communiquer, par mail, à servicesgeneraux@cpam-ain.cnamts.fr, la marque et le numéro
+        d’immatriculation du véhicule que vous serez amené(e) à garer sur le parking Mourey.
+
+        Cordialement.
+    </p>
+{% elseif statut == 'invalidé' %}
+    <p>Suite à votre demande d’une place de parking sur Mourey, nous avons le regret de vous informer, qu’au vu des
+        critères d’attribution, vous ne pouvez bénéficier d’un emplacement.
+
+        Le service Ressources Humaines reste à votre disposition pour toute question.
+        .</p>
+{% elseif statut == 'validé N+1' %}
+    <p>Votre demande a été validée par votre chef de service.</p>
+{% elseif statut == 'invalidé N+1' %}
+    <p>Votre demande a été invalidée par votre chef de service.</p>
+{% elseif statut == 'validé N+2' %}
+    <p>Votre demande a été validée par votre directeur/directrice de branche.</p>
+{% elseif statut == 'invalidé N+2' %}
+    <p>Votre demande a été invalidée par votre directeur/directrice de branche.</p>
+{% else %}
+    <p>!!! Erreur !!!</p>
+{% endif %}
+
+<p>Vous pouvez consulter le statut de votre questionnaire à cette adresse :</p>
+
+{% if questionnaire.idDdqCampagne.idDdqCategorie.libelle == 'Parking' %}
+    <a href="{{ url('campagnes_parking') }}">Mes Campagnes Parking</a>
+{% elseif questionnaire.idDdqCampagne.idDdqCategorie.libelle == 'RTT' %}
+    <a href="{{ url('campagnes_rtt') }}">Mes Campagnes RTT</a>
+{% elseif questionnaire.idDdqCampagne.idDdqCategorie.libelle == 'Temps_partiel' %}
+    <a href="{{ url('campagnes_tp') }}">Mes Campagnes Temps partiel</a>
+{% else %}
+    <p>!!! Erreur !!!</p>
+{% endif %}   

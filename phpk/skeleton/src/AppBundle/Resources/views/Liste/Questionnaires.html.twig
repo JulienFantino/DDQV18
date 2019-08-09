@@ -1,0 +1,7 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Liste des Questionnaires Soumis et non traités :</h1>
+    <div>{{ phpk('tableau', {tableau: tabQuestionnaires, filter: false, affichageLignesTrouvees: false}) }}</div>
+{% endblock %}

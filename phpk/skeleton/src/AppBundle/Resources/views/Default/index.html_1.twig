@@ -1,0 +1,10 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <div class="zone-info">
+        <p>Bonjour <strong>{{ agent.prenom }} {{ agent.nom }}</strong></p></br>
+        <p>Bienvenue sur l'application de Dématérialisation Des Questionnaires du parking, des RTT et des temps
+            partiels</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block head %}
+    {{ parent() }}
+    {% javascripts
+        '@PHPKTemplateBundle/Resources/public/biblicnam/js/biblicnam-graphe.min.js' %}
+        <script src='{{ asset_url }}' charset='UTF-8'></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+    <h1>Résultats de la Campagne : {{ campagne.libelle }}</h1>
+    <div>
+        <h3 class="zone-info">Fig1 : Répartition des demandes validées/invalidées</h3>
+        <div>{{ phpk('graphique', dataPie) }}</div>
+        </br>
+    </div></br>
+    <div>
+        <h3 class="zone-info">Fig2 : Répartition des demandes selon le motif</h3>
+        <div>
+            {{ phpk('graphique',{
+                graphique: {
+                    width:600,
+                    height:400,
+                    type: 'columns',
+                    legend: 'right'
+                },
+                data: {
+                    xAxis: 'Motif',
+                    yAxis: 'Nombre de demandes',
+                    series: [
+                        { name: 'Enfants à charge' , data: [enfants]},
+                        { name: 'Travailleur handicapé' , data: [handicap]},
+                        { name: 'Emploi Téléconseiller au Accueil'  , data: [emploi]},
+                    ],
+                }
+            }) }}
+        </div>
+        </br>
+    </div>
+{% endblock %}
+

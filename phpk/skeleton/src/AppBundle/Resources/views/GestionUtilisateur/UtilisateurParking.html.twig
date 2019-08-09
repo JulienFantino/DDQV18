@@ -1,0 +1,14 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+
+{% block title "Gestion utilisateur parking" %}
+
+{% block body %}
+    <div class="section">
+
+        <p>Contenu de ma variable : "{#{ maVariable }#}"</p>
+    </div>
+    <h1>Liste des Questionnaires Soumis et non traités :</h1>
+    <div>{{ phpk('tableau', {tableau:  TableAgentParking, filter: false, affichageLignesTrouvees: true}) }}</div>
+{% endblock %}

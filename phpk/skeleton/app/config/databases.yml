@@ -1,0 +1,26 @@
+parameters:
+  database.default_driver: "pdo_pgsql"
+  database.default_charset: UTF8
+
+doctrine:
+  dbal:
+    connections:
+      # Ne pas changer le nom de la connexion par défaut
+      default:
+        driver:   %database.default_driver%
+        host:    127.0.0.1
+        port:     5432
+        dbname:    %database_name%
+        user:     %database_user%
+        password:  %database_password%
+        charset:  %database.default_charset%
+
+# Ajoutez à la suite autant de connexions que vous le souhaitez
+#            <nom_de_la_connexion>:
+#                driver:   %database.default_driver%
+#                host:     ~
+#                port:     ~
+#                dbname:   ~
+#                user:     ~
+#                password: ~
+#                charset:  %database.default_charset%

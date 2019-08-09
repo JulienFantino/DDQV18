@@ -1,0 +1,13 @@
+services:
+  #    ddq.example:
+  #        class: CNAMTS\DDQ\Bundle\Example
+  #        arguments: ["@service_id", "plain_value", "%parameter%"]
+  app.test.mycommand:
+    class: CNAMTS\DDQ01\Bundle\Service\MailerService
+    public: true
+  serializer.mapping.cache.apcu:
+    class: Doctrine\Common\Cache\ApcuCache
+#AppBundle\Service\ContactService:
+#        arguments:
+#            $recipient: '%contact-us-email%'
+#        public: true

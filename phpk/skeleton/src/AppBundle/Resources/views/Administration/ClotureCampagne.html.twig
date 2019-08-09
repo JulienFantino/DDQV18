@@ -1,0 +1,10 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Clôture d'une Campagne</h1>
+    <div class='zone-info'>Sélectionner la campagne souhaitée dans cette liste</div>
+    <div class='section'>
+        {{ {form_widget(form.libelle)} }}
+    </div>
+{% endblock %}
