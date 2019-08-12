@@ -1,0 +1,23 @@
+parameters:
+  bundle.name: AppBundle
+  name: 'DDQ'
+  version: '5'
+  description: 'Dématerialisation des questionnaires RH'
+  indicationLogo: 'CPAM DE L''AIN'
+  assistance: 'infolocale.cpam-ain@assurance-maladie.fr'
+  secret: 3064cd8809ae6e4eb114b0d17f7ece07
+  contact-us-email: julien.fantino@assurance-maladie.fr
+
+  database_host: 127.0.0.1
+  database_port: 5432
+  database_name: symfony
+  database_user: adminuser
+  database_password: c6Po
+
+
+imports:
+  - resource: '@AppBundle/Resources/config/arborescence.yml'
+phpk_security:
+  accessmaster:
+    system: SY_DDQ
+    required: true
