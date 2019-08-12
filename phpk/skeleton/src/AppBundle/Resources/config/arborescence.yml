@@ -108,10 +108,19 @@ phpk_core:
             Resultats:
               route: resultats_rtt
               libelle: Résultats
+            Rtt_global:
+              libelle: Global
+            Rtt_JourFixe39h00:
+              libelle: 39h00 Jour fixe
+            Rtt_quadrimestre39h00:
+              libelle: 39h00 quadrimestre
+            Rtt_quadrimestre37h00:
+              libelle: 37h00
+            Rtt_quadrimestre36h00:
+              libelle: 36h00
+            Rtt_Non_Transmis:
+              libelle: Non Transmis
 
-            Utilisateurs:
-              libelle: Utilisateurs
-              habilitations: [ DDQ_ADMIN_UTIL ]
         Temps Partiel:
           libelle: Temps Partiel
           habilitations: [ DDQ_ADMIN_TP ]

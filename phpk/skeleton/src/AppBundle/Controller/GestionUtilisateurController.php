@@ -82,7 +82,7 @@ class GestionUtilisateurController extends AbstractController
                 'attr' => array('class' => 'bouton', 'img' => 'valider'),
                 'predefined' => Bouton::PREDEFINED_VALIDER,));
         $form = $formBuilder->getForm();
-        if ($form->handleRequest($request)->isValid()) {
+        // if ($form->handleRequest($request)->isValid()) {
 
             try {
                 $data = $form->getData();
@@ -92,7 +92,7 @@ class GestionUtilisateurController extends AbstractController
                 $this->notification('Une erreur s\'est produite. La campagne n\'a pas pu être sélectionnée', 'error');
                 return $this->render(' AppBundle:Default:index.html.twig');
             }
-        }
+        //  }
 
         return $this->render(' AppBundle:Administration:SelectionCampagne.html.twig',
             array('formCampagne' => $form->createView()

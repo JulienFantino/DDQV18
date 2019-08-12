@@ -35,10 +35,10 @@ services:
     #         $someArgument: 'some_value'
     # AppBundle\Service\MailerService:
     # public:true
-    #    AppBundle\Service\ContactService:
-    #        ressource : '../../src/AppBundle/Service '
-    #        arguments:
-    #            $recipient: '%contact-us-email%'
-    #        public: true
+  AppBundle\Service\ContactService:
+    ressource: '../../src/AppBundle/Entity'
+    arguments:
+      $recipient: 'coucou'
+    public: true
         
         
