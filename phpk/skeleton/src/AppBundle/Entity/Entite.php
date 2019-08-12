@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Entite
  *
@@ -143,16 +145,6 @@ class Entite
     }
 
     /**
-     * Get nomentcomplet.
-     *
-     * @return string|null
-     */
-    public function getNomentcomplet()
-    {
-        return $this->nomentcomplet;
-    }
-
-    /**
      * Set nomentcomplet.
      *
      * @param string|null $nomentcomplet
@@ -167,13 +159,13 @@ class Entite
     }
 
     /**
-     * Get nomentabrege.
+     * Get nomentcomplet.
      *
      * @return string|null
      */
-    public function getNomentabrege()
+    public function getNomentcomplet()
     {
-        return $this->nomentabrege;
+        return $this->nomentcomplet;
     }
 
     /**
@@ -191,13 +183,13 @@ class Entite
     }
 
     /**
-     * Get sigleent.
+     * Get nomentabrege.
      *
      * @return string|null
      */
-    public function getSigleent()
+    public function getNomentabrege()
     {
-        return $this->sigleent;
+        return $this->nomentabrege;
     }
 
     /**
@@ -215,13 +207,13 @@ class Entite
     }
 
     /**
-     * Get direction.
+     * Get sigleent.
      *
      * @return string|null
      */
-    public function getDirection()
+    public function getSigleent()
     {
-        return $this->direction;
+        return $this->sigleent;
     }
 
     /**
@@ -239,13 +231,13 @@ class Entite
     }
 
     /**
-     * Get parent.
+     * Get direction.
      *
      * @return string|null
      */
-    public function getParent()
+    public function getDirection()
     {
-        return $this->parent;
+        return $this->direction;
     }
 
     /**
@@ -263,13 +255,13 @@ class Entite
     }
 
     /**
-     * Get nomorganisme.
+     * Get parent.
      *
      * @return string|null
      */
-    public function getNomorganisme()
+    public function getParent()
     {
-        return $this->nomorganisme;
+        return $this->parent;
     }
 
     /**
@@ -287,13 +279,13 @@ class Entite
     }
 
     /**
-     * Get tel.
+     * Get nomorganisme.
      *
      * @return string|null
      */
-    public function getTel()
+    public function getNomorganisme()
     {
-        return $this->tel;
+        return $this->nomorganisme;
     }
 
     /**
@@ -311,13 +303,13 @@ class Entite
     }
 
     /**
-     * Get idresponsable.
+     * Get tel.
      *
      * @return string|null
      */
-    public function getIdresponsable()
+    public function getTel()
     {
-        return $this->idresponsable;
+        return $this->tel;
     }
 
     /**
@@ -335,13 +327,13 @@ class Entite
     }
 
     /**
-     * Get nomresponsable.
+     * Get idresponsable.
      *
      * @return string|null
      */
-    public function getNomresponsable()
+    public function getIdresponsable()
     {
-        return $this->nomresponsable;
+        return $this->idresponsable;
     }
 
     /**
@@ -359,13 +351,13 @@ class Entite
     }
 
     /**
-     * Get contact.
+     * Get nomresponsable.
      *
      * @return string|null
      */
-    public function getContact()
+    public function getNomresponsable()
     {
-        return $this->contact;
+        return $this->nomresponsable;
     }
 
     /**
@@ -383,13 +375,13 @@ class Entite
     }
 
     /**
-     * Get nomcontact.
+     * Get contact.
      *
      * @return string|null
      */
-    public function getNomcontact()
+    public function getContact()
     {
-        return $this->nomcontact;
+        return $this->contact;
     }
 
     /**
@@ -407,13 +399,13 @@ class Entite
     }
 
     /**
-     * Get rattachement.
+     * Get nomcontact.
      *
      * @return string|null
      */
-    public function getRattachement()
+    public function getNomcontact()
     {
-        return $this->rattachement;
+        return $this->nomcontact;
     }
 
     /**
@@ -431,13 +423,13 @@ class Entite
     }
 
     /**
-     * Get cheminphoto.
+     * Get rattachement.
      *
      * @return string|null
      */
-    public function getCheminphoto()
+    public function getRattachement()
     {
-        return $this->cheminphoto;
+        return $this->rattachement;
     }
 
     /**
@@ -455,13 +447,13 @@ class Entite
     }
 
     /**
-     * Get idOrganisme.
+     * Get cheminphoto.
      *
-     * @return \AppBundle\Entity\Organisme|null
+     * @return string|null
      */
-    public function getIdOrganisme()
+    public function getCheminphoto()
     {
-        return $this->idOrganisme;
+        return $this->cheminphoto;
     }
 
     /**
@@ -479,13 +471,13 @@ class Entite
     }
 
     /**
-     * Get idSite.
+     * Get idOrganisme.
      *
-     * @return \AppBundle\Entity\Site|null
+     * @return \AppBundle\Entity\Organisme|null
      */
-    public function getIdSite()
+    public function getIdOrganisme()
     {
-        return $this->idSite;
+        return $this->idOrganisme;
     }
 
     /**
@@ -500,5 +492,15 @@ class Entite
         $this->idSite = $idSite;
 
         return $this;
+    }
+
+    /**
+     * Get idSite.
+     *
+     * @return \AppBundle\Entity\Site|null
+     */
+    public function getIdSite()
+    {
+        return $this->idSite;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqCampagne
  *
@@ -70,16 +72,6 @@ class DdqCampagne
     }
 
     /**
-     * Get libelle.
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-
-    /**
      * Set libelle.
      *
      * @param string $libelle
@@ -94,13 +86,13 @@ class DdqCampagne
     }
 
     /**
-     * Get datedebut.
+     * Get libelle.
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDatedebut()
+    public function getLibelle()
     {
-        return $this->datedebut;
+        return $this->libelle;
     }
 
     /**
@@ -118,13 +110,13 @@ class DdqCampagne
     }
 
     /**
-     * Get datefin.
+     * Get datedebut.
      *
      * @return \DateTime
      */
-    public function getDatefin()
+    public function getDatedebut()
     {
-        return $this->datefin;
+        return $this->datedebut;
     }
 
     /**
@@ -142,13 +134,13 @@ class DdqCampagne
     }
 
     /**
-     * Get statut.
+     * Get datefin.
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getStatut()
+    public function getDatefin()
     {
-        return $this->statut;
+        return $this->datefin;
     }
 
     /**
@@ -166,13 +158,13 @@ class DdqCampagne
     }
 
     /**
-     * Get idDdqCategorie.
+     * Get statut.
      *
-     * @return \AppBundle\Entity\DdqCategorie|null
+     * @return string
      */
-    public function getIdDdqCategorie()
+    public function getStatut()
     {
-        return $this->idDdqCategorie;
+        return $this->statut;
     }
 
     /**
@@ -187,5 +179,15 @@ class DdqCampagne
         $this->idDdqCategorie = $idDdqCategorie;
 
         return $this;
+    }
+
+    /**
+     * Get idDdqCategorie.
+     *
+     * @return \AppBundle\Entity\DdqCategorie|null
+     */
+    public function getIdDdqCategorie()
+    {
+        return $this->idDdqCategorie;
     }
 }

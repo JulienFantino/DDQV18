@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * AnrEntite
  *
@@ -124,15 +126,6 @@ class AnrEntite
      */
     private $cheminphoto;
 
-    /**
-     * Get identite.
-     *
-     * @return string
-     */
-    public function getIdentite()
-    {
-        return $this->identite;
-    }
 
     /**
      * Set identite
@@ -148,13 +141,13 @@ class AnrEntite
     }
 
     /**
-     * Get nomentcomplet.
+     * Get identite.
      *
-     * @return string|null
+     * @return string
      */
-    public function getNomentcomplet()
+    public function getIdentite()
     {
-        return $this->nomentcomplet;
+        return $this->identite;
     }
 
     /**
@@ -172,13 +165,13 @@ class AnrEntite
     }
 
     /**
-     * Get nomentabrege.
+     * Get nomentcomplet.
      *
      * @return string|null
      */
-    public function getNomentabrege()
+    public function getNomentcomplet()
     {
-        return $this->nomentabrege;
+        return $this->nomentcomplet;
     }
 
     /**
@@ -196,13 +189,13 @@ class AnrEntite
     }
 
     /**
-     * Get sigleent.
+     * Get nomentabrege.
      *
      * @return string|null
      */
-    public function getSigleent()
+    public function getNomentabrege()
     {
-        return $this->sigleent;
+        return $this->nomentabrege;
     }
 
     /**
@@ -220,13 +213,13 @@ class AnrEntite
     }
 
     /**
-     * Get direction.
+     * Get sigleent.
      *
      * @return string|null
      */
-    public function getDirection()
+    public function getSigleent()
     {
-        return $this->direction;
+        return $this->sigleent;
     }
 
     /**
@@ -244,13 +237,13 @@ class AnrEntite
     }
 
     /**
-     * Get parent.
+     * Get direction.
      *
      * @return string|null
      */
-    public function getParent()
+    public function getDirection()
     {
-        return $this->parent;
+        return $this->direction;
     }
 
     /**
@@ -268,13 +261,13 @@ class AnrEntite
     }
 
     /**
-     * Get idorganisme.
+     * Get parent.
      *
      * @return string|null
      */
-    public function getIdorganisme()
+    public function getParent()
     {
-        return $this->idorganisme;
+        return $this->parent;
     }
 
     /**
@@ -292,13 +285,13 @@ class AnrEntite
     }
 
     /**
-     * Get nomorganisme.
+     * Get idorganisme.
      *
      * @return string|null
      */
-    public function getNomorganisme()
+    public function getIdorganisme()
     {
-        return $this->nomorganisme;
+        return $this->idorganisme;
     }
 
     /**
@@ -316,13 +309,13 @@ class AnrEntite
     }
 
     /**
-     * Get idsite.
+     * Get nomorganisme.
      *
      * @return string|null
      */
-    public function getIdsite()
+    public function getNomorganisme()
     {
-        return $this->idsite;
+        return $this->nomorganisme;
     }
 
     /**
@@ -340,13 +333,13 @@ class AnrEntite
     }
 
     /**
-     * Get tel.
+     * Get idsite.
      *
      * @return string|null
      */
-    public function getTel()
+    public function getIdsite()
     {
-        return $this->tel;
+        return $this->idsite;
     }
 
     /**
@@ -364,13 +357,13 @@ class AnrEntite
     }
 
     /**
-     * Get idresponsable.
+     * Get tel.
      *
      * @return string|null
      */
-    public function getIdresponsable()
+    public function getTel()
     {
-        return $this->idresponsable;
+        return $this->tel;
     }
 
     /**
@@ -388,13 +381,13 @@ class AnrEntite
     }
 
     /**
-     * Get nomresponsable.
+     * Get idresponsable.
      *
      * @return string|null
      */
-    public function getNomresponsable()
+    public function getIdresponsable()
     {
-        return $this->nomresponsable;
+        return $this->idresponsable;
     }
 
     /**
@@ -412,13 +405,13 @@ class AnrEntite
     }
 
     /**
-     * Get contact.
+     * Get nomresponsable.
      *
      * @return string|null
      */
-    public function getContact()
+    public function getNomresponsable()
     {
-        return $this->contact;
+        return $this->nomresponsable;
     }
 
     /**
@@ -436,13 +429,13 @@ class AnrEntite
     }
 
     /**
-     * Get nomcontact.
+     * Get contact.
      *
      * @return string|null
      */
-    public function getNomcontact()
+    public function getContact()
     {
-        return $this->nomcontact;
+        return $this->contact;
     }
 
     /**
@@ -460,13 +453,13 @@ class AnrEntite
     }
 
     /**
-     * Get rattachement.
+     * Get nomcontact.
      *
      * @return string|null
      */
-    public function getRattachement()
+    public function getNomcontact()
     {
-        return $this->rattachement;
+        return $this->nomcontact;
     }
 
     /**
@@ -484,13 +477,13 @@ class AnrEntite
     }
 
     /**
-     * Get cheminphoto.
+     * Get rattachement.
      *
      * @return string|null
      */
-    public function getCheminphoto()
+    public function getRattachement()
     {
-        return $this->cheminphoto;
+        return $this->rattachement;
     }
 
     /**
@@ -505,5 +498,15 @@ class AnrEntite
         $this->cheminphoto = $cheminphoto;
 
         return $this;
+    }
+
+    /**
+     * Get cheminphoto.
+     *
+     * @return string|null
+     */
+    public function getCheminphoto()
+    {
+        return $this->cheminphoto;
     }
 }

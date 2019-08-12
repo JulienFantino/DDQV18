@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqContratRepartition
  *
@@ -52,16 +54,6 @@ class DdqContratRepartition
     }
 
     /**
-     * Get idDdqRepartition.
-     *
-     * @return \AppBundle\Entity\DdqRepartition|null
-     */
-    public function getIdDdqRepartition()
-    {
-        return $this->idDdqRepartition;
-    }
-
-    /**
      * Set idDdqRepartition.
      *
      * @param \AppBundle\Entity\DdqRepartition|null $idDdqRepartition
@@ -76,13 +68,13 @@ class DdqContratRepartition
     }
 
     /**
-     * Get idDdqContrat.
+     * Get idDdqRepartition.
      *
-     * @return \AppBundle\Entity\DdqContrat|null
+     * @return \AppBundle\Entity\DdqRepartition|null
      */
-    public function getIdDdqContrat()
+    public function getIdDdqRepartition()
     {
-        return $this->idDdqContrat;
+        return $this->idDdqRepartition;
     }
 
     /**
@@ -97,5 +89,15 @@ class DdqContratRepartition
         $this->idDdqContrat = $idDdqContrat;
 
         return $this;
+    }
+
+    /**
+     * Get idDdqContrat.
+     *
+     * @return \AppBundle\Entity\DdqContrat|null
+     */
+    public function getIdDdqContrat()
+    {
+        return $this->idDdqContrat;
     }
 }

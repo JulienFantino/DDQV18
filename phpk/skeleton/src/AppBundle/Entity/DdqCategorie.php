@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqCategorie
  *
@@ -39,16 +41,6 @@ class DdqCategorie
     }
 
     /**
-     * Get libelle.
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-
-    /**
      * Set libelle.
      *
      * @param string $libelle
@@ -60,5 +52,15 @@ class DdqCategorie
         $this->libelle = $libelle;
 
         return $this;
+    }
+
+    /**
+     * Get libelle.
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
     }
 }

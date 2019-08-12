@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Agent
  *
@@ -345,16 +347,6 @@ class Agent
     }
 
     /**
-     * Get nomium.
-     *
-     * @return string
-     */
-    public function getNomium()
-    {
-        return $this->nomium;
-    }
-
-    /**
      * Set nomium.
      *
      * @param string $nomium
@@ -369,13 +361,13 @@ class Agent
     }
 
     /**
-     * Get nom.
+     * Get nomium.
      *
-     * @return string|null
+     * @return string
      */
-    public function getNom()
+    public function getNomium()
     {
-        return $this->nom;
+        return $this->nomium;
     }
 
     /**
@@ -393,13 +385,13 @@ class Agent
     }
 
     /**
-     * Get nomcomplet.
+     * Get nom.
      *
      * @return string|null
      */
-    public function getNomcomplet()
+    public function getNom()
     {
-        return $this->nomcomplet;
+        return $this->nom;
     }
 
     /**
@@ -417,13 +409,13 @@ class Agent
     }
 
     /**
-     * Get tel.
+     * Get nomcomplet.
      *
      * @return string|null
      */
-    public function getTel()
+    public function getNomcomplet()
     {
-        return $this->tel;
+        return $this->nomcomplet;
     }
 
     /**
@@ -441,13 +433,13 @@ class Agent
     }
 
     /**
-     * Get numabrege.
+     * Get tel.
      *
      * @return string|null
      */
-    public function getNumabrege()
+    public function getTel()
     {
-        return $this->numabrege;
+        return $this->tel;
     }
 
     /**
@@ -465,13 +457,13 @@ class Agent
     }
 
     /**
-     * Get etablissement.
+     * Get numabrege.
      *
      * @return string|null
      */
-    public function getEtablissement()
+    public function getNumabrege()
     {
-        return $this->etablissement;
+        return $this->numabrege;
     }
 
     /**
@@ -489,13 +481,13 @@ class Agent
     }
 
     /**
-     * Get libelleemploi.
+     * Get etablissement.
      *
      * @return string|null
      */
-    public function getLibelleemploi()
+    public function getEtablissement()
     {
-        return $this->libelleemploi;
+        return $this->etablissement;
     }
 
     /**
@@ -513,13 +505,13 @@ class Agent
     }
 
     /**
-     * Get codeemploi.
+     * Get libelleemploi.
      *
      * @return string|null
      */
-    public function getCodeemploi()
+    public function getLibelleemploi()
     {
-        return $this->codeemploi;
+        return $this->libelleemploi;
     }
 
     /**
@@ -537,13 +529,13 @@ class Agent
     }
 
     /**
-     * Get role.
+     * Get codeemploi.
      *
      * @return string|null
      */
-    public function getRole()
+    public function getCodeemploi()
     {
-        return $this->role;
+        return $this->codeemploi;
     }
 
     /**
@@ -561,13 +553,13 @@ class Agent
     }
 
     /**
-     * Get numemploye.
+     * Get role.
      *
      * @return string|null
      */
-    public function getNumemploye()
+    public function getRole()
     {
-        return $this->numemploye;
+        return $this->role;
     }
 
     /**
@@ -585,13 +577,13 @@ class Agent
     }
 
     /**
-     * Get typeemploye.
+     * Get numemploye.
      *
      * @return string|null
      */
-    public function getTypeemploye()
+    public function getNumemploye()
     {
-        return $this->typeemploye;
+        return $this->numemploye;
     }
 
     /**
@@ -609,13 +601,13 @@ class Agent
     }
 
     /**
-     * Get prenom.
+     * Get typeemploye.
      *
      * @return string|null
      */
-    public function getPrenom()
+    public function getTypeemploye()
     {
-        return $this->prenom;
+        return $this->typeemploye;
     }
 
     /**
@@ -633,13 +625,13 @@ class Agent
     }
 
     /**
-     * Get mail.
+     * Get prenom.
      *
      * @return string|null
      */
-    public function getMail()
+    public function getPrenom()
     {
-        return $this->mail;
+        return $this->prenom;
     }
 
     /**
@@ -657,13 +649,13 @@ class Agent
     }
 
     /**
-     * Get idresponsable.
+     * Get mail.
      *
      * @return string|null
      */
-    public function getIdresponsable()
+    public function getMail()
     {
-        return $this->idresponsable;
+        return $this->mail;
     }
 
     /**
@@ -681,13 +673,13 @@ class Agent
     }
 
     /**
-     * Get nomresponsable.
+     * Get idresponsable.
      *
      * @return string|null
      */
-    public function getNomresponsable()
+    public function getIdresponsable()
     {
-        return $this->nomresponsable;
+        return $this->idresponsable;
     }
 
     /**
@@ -705,13 +697,13 @@ class Agent
     }
 
     /**
-     * Get mobile.
+     * Get nomresponsable.
      *
      * @return string|null
      */
-    public function getMobile()
+    public function getNomresponsable()
     {
-        return $this->mobile;
+        return $this->nomresponsable;
     }
 
     /**
@@ -729,13 +721,13 @@ class Agent
     }
 
     /**
-     * Get codeorganisme.
+     * Get mobile.
      *
      * @return string|null
      */
-    public function getCodeorganisme()
+    public function getMobile()
     {
-        return $this->codeorganisme;
+        return $this->mobile;
     }
 
     /**
@@ -753,13 +745,13 @@ class Agent
     }
 
     /**
-     * Get codecaisse.
+     * Get codeorganisme.
      *
      * @return string|null
      */
-    public function getCodecaisse()
+    public function getCodeorganisme()
     {
-        return $this->codecaisse;
+        return $this->codeorganisme;
     }
 
     /**
@@ -777,13 +769,13 @@ class Agent
     }
 
     /**
-     * Get nomorganisme.
+     * Get codecaisse.
      *
      * @return string|null
      */
-    public function getNomorganisme()
+    public function getCodecaisse()
     {
-        return $this->nomorganisme;
+        return $this->codecaisse;
     }
 
     /**
@@ -801,13 +793,13 @@ class Agent
     }
 
     /**
-     * Get contact.
+     * Get nomorganisme.
      *
      * @return string|null
      */
-    public function getContact()
+    public function getNomorganisme()
     {
-        return $this->contact;
+        return $this->nomorganisme;
     }
 
     /**
@@ -825,13 +817,13 @@ class Agent
     }
 
     /**
-     * Get civilite.
+     * Get contact.
      *
      * @return string|null
      */
-    public function getCivilite()
+    public function getContact()
     {
-        return $this->civilite;
+        return $this->contact;
     }
 
     /**
@@ -849,13 +841,13 @@ class Agent
     }
 
     /**
-     * Get nomsite.
+     * Get civilite.
      *
      * @return string|null
      */
-    public function getNomsite()
+    public function getCivilite()
     {
-        return $this->nomsite;
+        return $this->civilite;
     }
 
     /**
@@ -873,13 +865,13 @@ class Agent
     }
 
     /**
-     * Get nomentite.
+     * Get nomsite.
      *
      * @return string|null
      */
-    public function getNomentite()
+    public function getNomsite()
     {
-        return $this->nomentite;
+        return $this->nomsite;
     }
 
     /**
@@ -897,13 +889,13 @@ class Agent
     }
 
     /**
-     * Get nomentabrege.
+     * Get nomentite.
      *
      * @return string|null
      */
-    public function getNomentabrege()
+    public function getNomentite()
     {
-        return $this->nomentabrege;
+        return $this->nomentite;
     }
 
     /**
@@ -921,13 +913,13 @@ class Agent
     }
 
     /**
-     * Get sigleent.
+     * Get nomentabrege.
      *
      * @return string|null
      */
-    public function getSigleent()
+    public function getNomentabrege()
     {
-        return $this->sigleent;
+        return $this->nomentabrege;
     }
 
     /**
@@ -945,13 +937,13 @@ class Agent
     }
 
     /**
-     * Get listerouge.
+     * Get sigleent.
      *
      * @return string|null
      */
-    public function getListerouge()
+    public function getSigleent()
     {
-        return $this->listerouge;
+        return $this->sigleent;
     }
 
     /**
@@ -969,13 +961,13 @@ class Agent
     }
 
     /**
-     * Get typeagent.
+     * Get listerouge.
      *
      * @return string|null
      */
-    public function getTypeagent()
+    public function getListerouge()
     {
-        return $this->typeagent;
+        return $this->listerouge;
     }
 
     /**
@@ -993,13 +985,13 @@ class Agent
     }
 
     /**
-     * Get finvaliditeentree.
+     * Get typeagent.
      *
      * @return string|null
      */
-    public function getFinvaliditeentree()
+    public function getTypeagent()
     {
-        return $this->finvaliditeentree;
+        return $this->typeagent;
     }
 
     /**
@@ -1017,13 +1009,13 @@ class Agent
     }
 
     /**
-     * Get abslongueduree.
+     * Get finvaliditeentree.
      *
      * @return string|null
      */
-    public function getAbslongueduree()
+    public function getFinvaliditeentree()
     {
-        return $this->abslongueduree;
+        return $this->finvaliditeentree;
     }
 
     /**
@@ -1041,13 +1033,13 @@ class Agent
     }
 
     /**
-     * Get entreeinvalidee.
+     * Get abslongueduree.
      *
      * @return string|null
      */
-    public function getEntreeinvalidee()
+    public function getAbslongueduree()
     {
-        return $this->entreeinvalidee;
+        return $this->abslongueduree;
     }
 
     /**
@@ -1065,13 +1057,13 @@ class Agent
     }
 
     /**
-     * Get typeorganisme.
+     * Get entreeinvalidee.
      *
      * @return string|null
      */
-    public function getTypeorganisme()
+    public function getEntreeinvalidee()
     {
-        return $this->typeorganisme;
+        return $this->entreeinvalidee;
     }
 
     /**
@@ -1089,13 +1081,13 @@ class Agent
     }
 
     /**
-     * Get listerougephoto.
+     * Get typeorganisme.
      *
      * @return string|null
      */
-    public function getListerougephoto()
+    public function getTypeorganisme()
     {
-        return $this->listerougephoto;
+        return $this->typeorganisme;
     }
 
     /**
@@ -1113,13 +1105,13 @@ class Agent
     }
 
     /**
-     * Get listeorange.
+     * Get listerougephoto.
      *
      * @return string|null
      */
-    public function getListeorange()
+    public function getListerougephoto()
     {
-        return $this->listeorange;
+        return $this->listerougephoto;
     }
 
     /**
@@ -1137,13 +1129,13 @@ class Agent
     }
 
     /**
-     * Get listejaune.
+     * Get listeorange.
      *
      * @return string|null
      */
-    public function getListejaune()
+    public function getListeorange()
     {
-        return $this->listejaune;
+        return $this->listeorange;
     }
 
     /**
@@ -1161,13 +1153,13 @@ class Agent
     }
 
     /**
-     * Get parking.
+     * Get listejaune.
      *
      * @return string|null
      */
-    public function getParking()
+    public function getListejaune()
     {
-        return $this->parking;
+        return $this->listejaune;
     }
 
     /**
@@ -1185,13 +1177,13 @@ class Agent
     }
 
     /**
-     * Get publication.
+     * Get parking.
      *
      * @return string|null
      */
-    public function getPublication()
+    public function getParking()
     {
-        return $this->publication;
+        return $this->parking;
     }
 
     /**
@@ -1209,13 +1201,13 @@ class Agent
     }
 
     /**
-     * Get exceptionddq.
+     * Get publication.
      *
      * @return string|null
      */
-    public function getExceptionddq()
+    public function getPublication()
     {
-        return $this->exceptionddq;
+        return $this->publication;
     }
 
     /**
@@ -1233,13 +1225,13 @@ class Agent
     }
 
     /**
-     * Get compteactif.
+     * Get exceptionddq.
      *
-     * @return bool
+     * @return string|null
      */
-    public function getCompteactif()
+    public function getExceptionddq()
     {
-        return $this->compteactif;
+        return $this->exceptionddq;
     }
 
     /**
@@ -1257,13 +1249,13 @@ class Agent
     }
 
     /**
-     * Get statutparking.
+     * Get compteactif.
      *
-     * @return string|null
+     * @return bool
      */
-    public function getStatutparking()
+    public function getCompteactif()
     {
-        return $this->statutparking;
+        return $this->compteactif;
     }
 
     /**
@@ -1281,13 +1273,13 @@ class Agent
     }
 
     /**
-     * Get idOrganisme.
+     * Get statutparking.
      *
-     * @return \AppBundle\Entity\Organisme|null
+     * @return string|null
      */
-    public function getIdOrganisme()
+    public function getStatutparking()
     {
-        return $this->idOrganisme;
+        return $this->statutparking;
     }
 
     /**
@@ -1305,13 +1297,13 @@ class Agent
     }
 
     /**
-     * Get idDdqContrat.
+     * Get idOrganisme.
      *
-     * @return \AppBundle\Entity\DdqContrat|null
+     * @return \AppBundle\Entity\Organisme|null
      */
-    public function getIdDdqContrat()
+    public function getIdOrganisme()
     {
-        return $this->idDdqContrat;
+        return $this->idOrganisme;
     }
 
     /**
@@ -1329,13 +1321,13 @@ class Agent
     }
 
     /**
-     * Get idEntite.
+     * Get idDdqContrat.
      *
-     * @return \AppBundle\Entity\Entite|null
+     * @return \AppBundle\Entity\DdqContrat|null
      */
-    public function getIdEntite()
+    public function getIdDdqContrat()
     {
-        return $this->idEntite;
+        return $this->idDdqContrat;
     }
 
     /**
@@ -1353,13 +1345,13 @@ class Agent
     }
 
     /**
-     * Get idSite.
+     * Get idEntite.
      *
-     * @return \AppBundle\Entity\Site|null
+     * @return \AppBundle\Entity\Entite|null
      */
-    public function getIdSite()
+    public function getIdEntite()
     {
-        return $this->idSite;
+        return $this->idEntite;
     }
 
     /**
@@ -1374,5 +1366,15 @@ class Agent
         $this->idSite = $idSite;
 
         return $this;
+    }
+
+    /**
+     * Get idSite.
+     *
+     * @return \AppBundle\Entity\Site|null
+     */
+    public function getIdSite()
+    {
+        return $this->idSite;
     }
 }

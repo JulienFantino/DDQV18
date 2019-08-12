@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqRepartition
  *
@@ -46,16 +48,6 @@ class DdqRepartition
     }
 
     /**
-     * Get nbjours.
-     *
-     * @return float
-     */
-    public function getNbjours()
-    {
-        return $this->nbjours;
-    }
-
-    /**
      * Set nbjours.
      *
      * @param float $nbjours
@@ -70,13 +62,13 @@ class DdqRepartition
     }
 
     /**
-     * Get nbdemiesjournees.
+     * Get nbjours.
      *
-     * @return int
+     * @return float
      */
-    public function getNbdemiesjournees()
+    public function getNbjours()
     {
-        return $this->nbdemiesjournees;
+        return $this->nbjours;
     }
 
     /**
@@ -91,5 +83,15 @@ class DdqRepartition
         $this->nbdemiesjournees = $nbdemiesjournees;
 
         return $this;
+    }
+
+    /**
+     * Get nbdemiesjournees.
+     *
+     * @return int
+     */
+    public function getNbdemiesjournees()
+    {
+        return $this->nbdemiesjournees;
     }
 }

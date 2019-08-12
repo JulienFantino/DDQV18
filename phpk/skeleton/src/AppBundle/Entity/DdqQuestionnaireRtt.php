@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqQuestionnaireRtt
  *
@@ -118,16 +120,6 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get libelle.
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-
-    /**
      * Set libelle.
      *
      * @param string $libelle
@@ -142,13 +134,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get formule.
+     * Get libelle.
      *
-     * @return bool|null
+     * @return string
      */
-    public function getFormule()
+    public function getLibelle()
     {
-        return $this->formule;
+        return $this->libelle;
     }
 
     /**
@@ -166,13 +158,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get formule1j.
+     * Get formule.
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getFormule1j()
+    public function getFormule()
     {
-        return $this->formule1j;
+        return $this->formule;
     }
 
     /**
@@ -190,13 +182,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get formule1s.
+     * Get formule1j.
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getFormule1s()
+    public function getFormule1j()
     {
-        return $this->formule1s;
+        return $this->formule1j;
     }
 
     /**
@@ -214,13 +206,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get reprisetp.
+     * Get formule1s.
      *
      * @return bool|null
      */
-    public function getReprisetp()
+    public function getFormule1s()
     {
-        return $this->reprisetp;
+        return $this->formule1s;
     }
 
     /**
@@ -238,13 +230,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get datemodif.
+     * Get reprisetp.
      *
-     * @return \DateTime|null
+     * @return bool|null
      */
-    public function getDatemodif()
+    public function getReprisetp()
     {
-        return $this->datemodif;
+        return $this->reprisetp;
     }
 
     /**
@@ -262,13 +254,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get signature.
+     * Get datemodif.
      *
-     * @return bool|null
+     * @return \DateTime|null
      */
-    public function getSignature()
+    public function getDatemodif()
     {
-        return $this->signature;
+        return $this->datemodif;
     }
 
     /**
@@ -286,13 +278,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get statut.
+     * Get signature.
      *
-     * @return string
+     * @return bool|null
      */
-    public function getStatut()
+    public function getSignature()
     {
-        return $this->statut;
+        return $this->signature;
     }
 
     /**
@@ -310,13 +302,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get idAgent.
+     * Get statut.
      *
-     * @return \AppBundle\Entity\Agent|null
+     * @return string
      */
-    public function getIdAgent()
+    public function getStatut()
     {
-        return $this->idAgent;
+        return $this->statut;
     }
 
     /**
@@ -334,13 +326,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get idDdqContrat.
+     * Get idAgent.
      *
-     * @return \AppBundle\Entity\DdqContrat|null
+     * @return \AppBundle\Entity\Agent|null
      */
-    public function getIdDdqContrat()
+    public function getIdAgent()
     {
-        return $this->idDdqContrat;
+        return $this->idAgent;
     }
 
     /**
@@ -358,13 +350,13 @@ class DdqQuestionnaireRtt
     }
 
     /**
-     * Get idDdqCampagne.
+     * Get idDdqContrat.
      *
-     * @return \AppBundle\Entity\DdqCampagne|null
+     * @return \AppBundle\Entity\DdqContrat|null
      */
-    public function getIdDdqCampagne()
+    public function getIdDdqContrat()
     {
-        return $this->idDdqCampagne;
+        return $this->idDdqContrat;
     }
 
     /**
@@ -379,5 +371,15 @@ class DdqQuestionnaireRtt
         $this->idDdqCampagne = $idDdqCampagne;
 
         return $this;
+    }
+
+    /**
+     * Get idDdqCampagne.
+     *
+     * @return \AppBundle\Entity\DdqCampagne|null
+     */
+    public function getIdDdqCampagne()
+    {
+        return $this->idDdqCampagne;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqHoraireRepartition
  *
@@ -52,16 +54,6 @@ class DdqHoraireRepartition
     }
 
     /**
-     * Get idDdqHoraire.
-     *
-     * @return \AppBundle\Entity\DdqHoraire|null
-     */
-    public function getIdDdqHoraire()
-    {
-        return $this->idDdqHoraire;
-    }
-
-    /**
      * Set idDdqHoraire.
      *
      * @param \AppBundle\Entity\DdqHoraire|null $idDdqHoraire
@@ -76,13 +68,13 @@ class DdqHoraireRepartition
     }
 
     /**
-     * Get idDdqRepartition.
+     * Get idDdqHoraire.
      *
-     * @return \AppBundle\Entity\DdqRepartition|null
+     * @return \AppBundle\Entity\DdqHoraire|null
      */
-    public function getIdDdqRepartition()
+    public function getIdDdqHoraire()
     {
-        return $this->idDdqRepartition;
+        return $this->idDdqHoraire;
     }
 
     /**
@@ -97,5 +89,15 @@ class DdqHoraireRepartition
         $this->idDdqRepartition = $idDdqRepartition;
 
         return $this;
+    }
+
+    /**
+     * Get idDdqRepartition.
+     *
+     * @return \AppBundle\Entity\DdqRepartition|null
+     */
+    public function getIdDdqRepartition()
+    {
+        return $this->idDdqRepartition;
     }
 }

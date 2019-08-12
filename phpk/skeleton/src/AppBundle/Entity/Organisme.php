@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Organisme
  *
@@ -116,16 +118,6 @@ class Organisme
     }
 
     /**
-     * Get nomabrege.
-     *
-     * @return string|null
-     */
-    public function getNomabrege()
-    {
-        return $this->nomabrege;
-    }
-
-    /**
      * Set nomabrege.
      *
      * @param string|null $nomabrege
@@ -140,13 +132,13 @@ class Organisme
     }
 
     /**
-     * Get nomcomplet.
+     * Get nomabrege.
      *
      * @return string|null
      */
-    public function getNomcomplet()
+    public function getNomabrege()
     {
-        return $this->nomcomplet;
+        return $this->nomabrege;
     }
 
     /**
@@ -164,13 +156,13 @@ class Organisme
     }
 
     /**
-     * Get codeorganisme.
+     * Get nomcomplet.
      *
      * @return string|null
      */
-    public function getCodeorganisme()
+    public function getNomcomplet()
     {
-        return $this->codeorganisme;
+        return $this->nomcomplet;
     }
 
     /**
@@ -188,13 +180,13 @@ class Organisme
     }
 
     /**
-     * Get numucanss.
+     * Get codeorganisme.
      *
      * @return string|null
      */
-    public function getNumucanss()
+    public function getCodeorganisme()
     {
-        return $this->numucanss;
+        return $this->codeorganisme;
     }
 
     /**
@@ -212,13 +204,13 @@ class Organisme
     }
 
     /**
-     * Get typeorganisme.
+     * Get numucanss.
      *
      * @return string|null
      */
-    public function getTypeorganisme()
+    public function getNumucanss()
     {
-        return $this->typeorganisme;
+        return $this->numucanss;
     }
 
     /**
@@ -236,13 +228,13 @@ class Organisme
     }
 
     /**
-     * Get sitesiege.
+     * Get typeorganisme.
      *
      * @return string|null
      */
-    public function getSitesiege()
+    public function getTypeorganisme()
     {
-        return $this->sitesiege;
+        return $this->typeorganisme;
     }
 
     /**
@@ -260,13 +252,13 @@ class Organisme
     }
 
     /**
-     * Get sitesgeographiques.
+     * Get sitesiege.
      *
      * @return string|null
      */
-    public function getSitesgeographiques()
+    public function getSitesiege()
     {
-        return $this->sitesgeographiques;
+        return $this->sitesiege;
     }
 
     /**
@@ -284,13 +276,13 @@ class Organisme
     }
 
     /**
-     * Get idcti.
+     * Get sitesgeographiques.
      *
      * @return string|null
      */
-    public function getIdcti()
+    public function getSitesgeographiques()
     {
-        return $this->idcti;
+        return $this->sitesgeographiques;
     }
 
     /**
@@ -308,13 +300,13 @@ class Organisme
     }
 
     /**
-     * Get nomcti.
+     * Get idcti.
      *
      * @return string|null
      */
-    public function getNomcti()
+    public function getIdcti()
     {
-        return $this->nomcti;
+        return $this->idcti;
     }
 
     /**
@@ -332,13 +324,13 @@ class Organisme
     }
 
     /**
-     * Get codegdp.
+     * Get nomcti.
      *
      * @return string|null
      */
-    public function getCodegdp()
+    public function getNomcti()
     {
-        return $this->codegdp;
+        return $this->nomcti;
     }
 
     /**
@@ -356,13 +348,13 @@ class Organisme
     }
 
     /**
-     * Get nomdomaine.
+     * Get codegdp.
      *
      * @return string|null
      */
-    public function getNomdomaine()
+    public function getCodegdp()
     {
-        return $this->nomdomaine;
+        return $this->codegdp;
     }
 
     /**
@@ -380,13 +372,13 @@ class Organisme
     }
 
     /**
-     * Get codecaisse.
+     * Get nomdomaine.
      *
      * @return string|null
      */
-    public function getCodecaisse()
+    public function getNomdomaine()
     {
-        return $this->codecaisse;
+        return $this->nomdomaine;
     }
 
     /**
@@ -401,5 +393,15 @@ class Organisme
         $this->codecaisse = $codecaisse;
 
         return $this;
+    }
+
+    /**
+     * Get codecaisse.
+     *
+     * @return string|null
+     */
+    public function getCodecaisse()
+    {
+        return $this->codecaisse;
     }
 }

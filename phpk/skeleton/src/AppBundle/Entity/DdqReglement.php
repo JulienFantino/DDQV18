@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqReglement
  *
@@ -46,16 +48,6 @@ class DdqReglement
     }
 
     /**
-     * Get min.
-     *
-     * @return string
-     */
-    public function getMin()
-    {
-        return $this->min;
-    }
-
-    /**
      * Set min.
      *
      * @param string $min
@@ -70,13 +62,13 @@ class DdqReglement
     }
 
     /**
-     * Get max.
+     * Get min.
      *
      * @return string
      */
-    public function getMax()
+    public function getMin()
     {
-        return $this->max;
+        return $this->min;
     }
 
     /**
@@ -91,5 +83,15 @@ class DdqReglement
         $this->max = $max;
 
         return $this;
+    }
+
+    /**
+     * Get max.
+     *
+     * @return string
+     */
+    public function getMax()
+    {
+        return $this->max;
     }
 }

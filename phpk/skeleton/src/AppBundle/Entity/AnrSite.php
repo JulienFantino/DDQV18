@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * AnrSite
  *
@@ -83,16 +85,6 @@ class AnrSite
     private $nomorganisme;
 
     /**
-     * Get idsite.
-     *
-     * @return string
-     */
-    public function getIdsite()
-    {
-        return $this->idsite;
-    }
-
-    /**
      * Set idsite
      *
      * @param string $idsite
@@ -105,14 +97,15 @@ class AnrSite
         return $this;
     }
 
+
     /**
-     * Get nomsite.
+     * Get idsite.
      *
-     * @return string|null
+     * @return string
      */
-    public function getNomsite()
+    public function getIdsite()
     {
-        return $this->nomsite;
+        return $this->idsite;
     }
 
     /**
@@ -130,13 +123,13 @@ class AnrSite
     }
 
     /**
-     * Get tel.
+     * Get nomsite.
      *
      * @return string|null
      */
-    public function getTel()
+    public function getNomsite()
     {
-        return $this->tel;
+        return $this->nomsite;
     }
 
     /**
@@ -154,13 +147,13 @@ class AnrSite
     }
 
     /**
-     * Get adressepostale.
+     * Get tel.
      *
      * @return string|null
      */
-    public function getAdressepostale()
+    public function getTel()
     {
-        return $this->adressepostale;
+        return $this->tel;
     }
 
     /**
@@ -178,13 +171,13 @@ class AnrSite
     }
 
     /**
-     * Get batiment.
+     * Get adressepostale.
      *
      * @return string|null
      */
-    public function getBatiment()
+    public function getAdressepostale()
     {
-        return $this->batiment;
+        return $this->adressepostale;
     }
 
     /**
@@ -202,13 +195,13 @@ class AnrSite
     }
 
     /**
-     * Get boitepostale.
+     * Get batiment.
      *
      * @return string|null
      */
-    public function getBoitepostale()
+    public function getBatiment()
     {
-        return $this->boitepostale;
+        return $this->batiment;
     }
 
     /**
@@ -226,13 +219,13 @@ class AnrSite
     }
 
     /**
-     * Get codepostal.
+     * Get boitepostale.
      *
      * @return string|null
      */
-    public function getCodepostal()
+    public function getBoitepostale()
     {
-        return $this->codepostal;
+        return $this->boitepostale;
     }
 
     /**
@@ -250,13 +243,13 @@ class AnrSite
     }
 
     /**
-     * Get ville.
+     * Get codepostal.
      *
      * @return string|null
      */
-    public function getVille()
+    public function getCodepostal()
     {
-        return $this->ville;
+        return $this->codepostal;
     }
 
     /**
@@ -274,13 +267,13 @@ class AnrSite
     }
 
     /**
-     * Get idorganisme.
+     * Get ville.
      *
      * @return string|null
      */
-    public function getIdorganisme()
+    public function getVille()
     {
-        return $this->idorganisme;
+        return $this->ville;
     }
 
     /**
@@ -298,13 +291,13 @@ class AnrSite
     }
 
     /**
-     * Get nomorganisme.
+     * Get idorganisme.
      *
      * @return string|null
      */
-    public function getNomorganisme()
+    public function getIdorganisme()
     {
-        return $this->nomorganisme;
+        return $this->idorganisme;
     }
 
     /**
@@ -319,5 +312,15 @@ class AnrSite
         $this->nomorganisme = $nomorganisme;
 
         return $this;
+    }
+
+    /**
+     * Get nomorganisme.
+     *
+     * @return string|null
+     */
+    public function getNomorganisme()
+    {
+        return $this->nomorganisme;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqHoraire
  *
@@ -63,16 +65,6 @@ class DdqHoraire
     }
 
     /**
-     * Get nbjours.
-     *
-     * @return string
-     */
-    public function getNbjours()
-    {
-        return $this->nbjours;
-    }
-
-    /**
      * Set nbjours.
      *
      * @param string $nbjours
@@ -87,13 +79,13 @@ class DdqHoraire
     }
 
     /**
-     * Get nbheures.
+     * Get nbjours.
      *
      * @return string
      */
-    public function getNbheures()
+    public function getNbjours()
     {
-        return $this->nbheures;
+        return $this->nbjours;
     }
 
     /**
@@ -111,13 +103,13 @@ class DdqHoraire
     }
 
     /**
-     * Get details.
+     * Get nbheures.
      *
-     * @return string|null
+     * @return string
      */
-    public function getDetails()
+    public function getNbheures()
     {
-        return $this->details;
+        return $this->nbheures;
     }
 
     /**
@@ -135,13 +127,13 @@ class DdqHoraire
     }
 
     /**
-     * Get idDdqReglement.
+     * Get details.
      *
-     * @return \AppBundle\Entity\DdqReglement|null
+     * @return string|null
      */
-    public function getIdDdqReglement()
+    public function getDetails()
     {
-        return $this->idDdqReglement;
+        return $this->details;
     }
 
     /**
@@ -156,5 +148,15 @@ class DdqHoraire
         $this->idDdqReglement = $idDdqReglement;
 
         return $this;
+    }
+
+    /**
+     * Get idDdqReglement.
+     *
+     * @return \AppBundle\Entity\DdqReglement|null
+     */
+    public function getIdDdqReglement()
+    {
+        return $this->idDdqReglement;
     }
 }

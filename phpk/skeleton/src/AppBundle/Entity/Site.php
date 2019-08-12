@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Site
  *
@@ -98,16 +100,6 @@ class Site
     }
 
     /**
-     * Get nomsite.
-     *
-     * @return string|null
-     */
-    public function getNomsite()
-    {
-        return $this->nomsite;
-    }
-
-    /**
      * Set nomsite.
      *
      * @param string|null $nomsite
@@ -122,13 +114,13 @@ class Site
     }
 
     /**
-     * Get tel.
+     * Get nomsite.
      *
      * @return string|null
      */
-    public function getTel()
+    public function getNomsite()
     {
-        return $this->tel;
+        return $this->nomsite;
     }
 
     /**
@@ -146,13 +138,13 @@ class Site
     }
 
     /**
-     * Get adressepostale.
+     * Get tel.
      *
      * @return string|null
      */
-    public function getAdressepostale()
+    public function getTel()
     {
-        return $this->adressepostale;
+        return $this->tel;
     }
 
     /**
@@ -170,13 +162,13 @@ class Site
     }
 
     /**
-     * Get batiment.
+     * Get adressepostale.
      *
      * @return string|null
      */
-    public function getBatiment()
+    public function getAdressepostale()
     {
-        return $this->batiment;
+        return $this->adressepostale;
     }
 
     /**
@@ -194,13 +186,13 @@ class Site
     }
 
     /**
-     * Get boitepostale.
+     * Get batiment.
      *
      * @return string|null
      */
-    public function getBoitepostale()
+    public function getBatiment()
     {
-        return $this->boitepostale;
+        return $this->batiment;
     }
 
     /**
@@ -218,13 +210,13 @@ class Site
     }
 
     /**
-     * Get codepostal.
+     * Get boitepostale.
      *
      * @return string|null
      */
-    public function getCodepostal()
+    public function getBoitepostale()
     {
-        return $this->codepostal;
+        return $this->boitepostale;
     }
 
     /**
@@ -242,13 +234,13 @@ class Site
     }
 
     /**
-     * Get ville.
+     * Get codepostal.
      *
      * @return string|null
      */
-    public function getVille()
+    public function getCodepostal()
     {
-        return $this->ville;
+        return $this->codepostal;
     }
 
     /**
@@ -266,13 +258,13 @@ class Site
     }
 
     /**
-     * Get nomorganisme.
+     * Get ville.
      *
      * @return string|null
      */
-    public function getNomorganisme()
+    public function getVille()
     {
-        return $this->nomorganisme;
+        return $this->ville;
     }
 
     /**
@@ -290,13 +282,13 @@ class Site
     }
 
     /**
-     * Get idOrganisme.
+     * Get nomorganisme.
      *
-     * @return \AppBundle\Entity\Organisme|null
+     * @return string|null
      */
-    public function getIdOrganisme()
+    public function getNomorganisme()
     {
-        return $this->idOrganisme;
+        return $this->nomorganisme;
     }
 
     /**
@@ -311,5 +303,15 @@ class Site
         $this->idOrganisme = $idOrganisme;
 
         return $this;
+    }
+
+    /**
+     * Get idOrganisme.
+     *
+     * @return \AppBundle\Entity\Organisme|null
+     */
+    public function getIdOrganisme()
+    {
+        return $this->idOrganisme;
     }
 }

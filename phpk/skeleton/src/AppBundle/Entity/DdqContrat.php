@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqContrat
  *
@@ -53,16 +55,6 @@ class DdqContrat
     }
 
     /**
-     * Get tempspartiel.
-     *
-     * @return bool|null
-     */
-    public function getTempspartiel()
-    {
-        return $this->tempspartiel;
-    }
-
-    /**
      * Set tempspartiel.
      *
      * @param bool|null $tempspartiel
@@ -77,13 +69,13 @@ class DdqContrat
     }
 
     /**
-     * Get nbheures.
+     * Get tempspartiel.
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getNbheures()
+    public function getTempspartiel()
     {
-        return $this->nbheures;
+        return $this->tempspartiel;
     }
 
     /**
@@ -101,13 +93,13 @@ class DdqContrat
     }
 
     /**
-     * Get horairecontractuel.
+     * Get nbheures.
      *
      * @return string|null
      */
-    public function getHorairecontractuel()
+    public function getNbheures()
     {
-        return $this->horairecontractuel;
+        return $this->nbheures;
     }
 
     /**
@@ -122,5 +114,15 @@ class DdqContrat
         $this->horairecontractuel = $horairecontractuel;
 
         return $this;
+    }
+
+    /**
+     * Get horairecontractuel.
+     *
+     * @return string|null
+     */
+    public function getHorairecontractuel()
+    {
+        return $this->horairecontractuel;
     }
 }

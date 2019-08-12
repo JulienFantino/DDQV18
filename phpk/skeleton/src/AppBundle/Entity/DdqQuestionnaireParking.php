@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqQuestionnaireParking
  *
@@ -164,16 +166,6 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get libelle.
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-
-    /**
      * Set libelle.
      *
      * @param string $libelle
@@ -188,13 +180,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get enfants.
+     * Get libelle.
      *
-     * @return bool|null
+     * @return string
      */
-    public function getEnfants()
+    public function getLibelle()
     {
-        return $this->enfants;
+        return $this->libelle;
     }
 
     /**
@@ -212,13 +204,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get handicap.
+     * Get enfants.
      *
      * @return bool|null
      */
-    public function getHandicap()
+    public function getEnfants()
     {
-        return $this->handicap;
+        return $this->enfants;
     }
 
     /**
@@ -236,13 +228,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get emploi.
+     * Get handicap.
      *
      * @return bool|null
      */
-    public function getEmploi()
+    public function getHandicap()
     {
-        return $this->emploi;
+        return $this->handicap;
     }
 
     /**
@@ -260,13 +252,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get adresse.
+     * Get emploi.
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getAdresse()
+    public function getEmploi()
     {
-        return $this->adresse;
+        return $this->emploi;
     }
 
     /**
@@ -284,13 +276,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get enfant1.
+     * Get adresse.
      *
      * @return string|null
      */
-    public function getEnfant1()
+    public function getAdresse()
     {
-        return $this->enfant1;
+        return $this->adresse;
     }
 
     /**
@@ -308,13 +300,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get datenaissance1.
+     * Get enfant1.
      *
-     * @return \DateTime|null
+     * @return string|null
      */
-    public function getDatenaissance1()
+    public function getEnfant1()
     {
-        return $this->datenaissance1;
+        return $this->enfant1;
     }
 
     /**
@@ -332,13 +324,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get enfant2.
+     * Get datenaissance1.
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getEnfant2()
+    public function getDatenaissance1()
     {
-        return $this->enfant2;
+        return $this->datenaissance1;
     }
 
     /**
@@ -356,13 +348,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get datenaissance2.
+     * Get enfant2.
      *
-     * @return \DateTime|null
+     * @return string|null
      */
-    public function getDatenaissance2()
+    public function getEnfant2()
     {
-        return $this->datenaissance2;
+        return $this->enfant2;
     }
 
     /**
@@ -380,13 +372,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get enfant3.
+     * Get datenaissance2.
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getEnfant3()
+    public function getDatenaissance2()
     {
-        return $this->enfant3;
+        return $this->datenaissance2;
     }
 
     /**
@@ -404,13 +396,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get datenaissance3.
+     * Get enfant3.
      *
-     * @return \DateTime|null
+     * @return string|null
      */
-    public function getDatenaissance3()
+    public function getEnfant3()
     {
-        return $this->datenaissance3;
+        return $this->enfant3;
     }
 
     /**
@@ -428,13 +420,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get enfant4.
+     * Get datenaissance3.
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getEnfant4()
+    public function getDatenaissance3()
     {
-        return $this->enfant4;
+        return $this->datenaissance3;
     }
 
     /**
@@ -452,13 +444,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get datenaissance4.
+     * Get enfant4.
      *
-     * @return \DateTime|null
+     * @return string|null
      */
-    public function getDatenaissance4()
+    public function getEnfant4()
     {
-        return $this->datenaissance4;
+        return $this->enfant4;
     }
 
     /**
@@ -476,13 +468,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get datemodif.
+     * Get datenaissance4.
      *
      * @return \DateTime|null
      */
-    public function getDatemodif()
+    public function getDatenaissance4()
     {
-        return $this->datemodif;
+        return $this->datenaissance4;
     }
 
     /**
@@ -500,13 +492,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get signature.
+     * Get datemodif.
      *
-     * @return bool|null
+     * @return \DateTime|null
      */
-    public function getSignature()
+    public function getDatemodif()
     {
-        return $this->signature;
+        return $this->datemodif;
     }
 
     /**
@@ -524,13 +516,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get statut.
+     * Get signature.
      *
-     * @return string
+     * @return bool|null
      */
-    public function getStatut()
+    public function getSignature()
     {
-        return $this->statut;
+        return $this->signature;
     }
 
     /**
@@ -548,13 +540,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get idAgent.
+     * Get statut.
      *
-     * @return \AppBundle\Entity\Agent|null
+     * @return string
      */
-    public function getIdAgent()
+    public function getStatut()
     {
-        return $this->idAgent;
+        return $this->statut;
     }
 
     /**
@@ -572,13 +564,13 @@ class DdqQuestionnaireParking
     }
 
     /**
-     * Get idDdqCampagne.
+     * Get idAgent.
      *
-     * @return \AppBundle\Entity\DdqCampagne|null
+     * @return \AppBundle\Entity\Agent|null
      */
-    public function getIdDdqCampagne()
+    public function getIdAgent()
     {
-        return $this->idDdqCampagne;
+        return $this->idAgent;
     }
 
     /**
@@ -593,5 +585,15 @@ class DdqQuestionnaireParking
         $this->idDdqCampagne = $idDdqCampagne;
 
         return $this;
+    }
+
+    /**
+     * Get idDdqCampagne.
+     *
+     * @return \AppBundle\Entity\DdqCampagne|null
+     */
+    public function getIdDdqCampagne()
+    {
+        return $this->idDdqCampagne;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * DdqQuestionnaireTp
  *
@@ -250,16 +252,6 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get libelle.
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-
-    /**
      * Set libelle.
      *
      * @param string $libelle
@@ -274,13 +266,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get dateenfant1.
+     * Get libelle.
      *
-     * @return \DateTime|null
+     * @return string
      */
-    public function getDateenfant1()
+    public function getLibelle()
     {
-        return $this->dateenfant1;
+        return $this->libelle;
     }
 
     /**
@@ -298,13 +290,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get dateenfant2.
+     * Get dateenfant1.
      *
      * @return \DateTime|null
      */
-    public function getDateenfant2()
+    public function getDateenfant1()
     {
-        return $this->dateenfant2;
+        return $this->dateenfant1;
     }
 
     /**
@@ -322,13 +314,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get dateenfant3.
+     * Get dateenfant2.
      *
      * @return \DateTime|null
      */
-    public function getDateenfant3()
+    public function getDateenfant2()
     {
-        return $this->dateenfant3;
+        return $this->dateenfant2;
     }
 
     /**
@@ -346,13 +338,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get dateenfant4.
+     * Get dateenfant3.
      *
      * @return \DateTime|null
      */
-    public function getDateenfant4()
+    public function getDateenfant3()
     {
-        return $this->dateenfant4;
+        return $this->dateenfant3;
     }
 
     /**
@@ -370,13 +362,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get motif.
+     * Get dateenfant4.
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getMotif()
+    public function getDateenfant4()
     {
-        return $this->motif;
+        return $this->dateenfant4;
     }
 
     /**
@@ -394,13 +386,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get lundim.
+     * Get motif.
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getLundim()
+    public function getMotif()
     {
-        return $this->lundim;
+        return $this->motif;
     }
 
     /**
@@ -418,13 +410,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get lundi.
+     * Get lundim.
      *
      * @return bool|null
      */
-    public function getLundi()
+    public function getLundim()
     {
-        return $this->lundi;
+        return $this->lundim;
     }
 
     /**
@@ -442,13 +434,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get mardi.
+     * Get lundi.
      *
      * @return bool|null
      */
-    public function getMardi()
+    public function getLundi()
     {
-        return $this->mardi;
+        return $this->lundi;
     }
 
     /**
@@ -466,13 +458,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get mercredi.
+     * Get mardi.
      *
      * @return bool|null
      */
-    public function getMercredi()
+    public function getMardi()
     {
-        return $this->mercredi;
+        return $this->mardi;
     }
 
     /**
@@ -490,13 +482,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get jeudi.
+     * Get mercredi.
      *
      * @return bool|null
      */
-    public function getJeudi()
+    public function getMercredi()
     {
-        return $this->jeudi;
+        return $this->mercredi;
     }
 
     /**
@@ -514,13 +506,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get vendredi.
+     * Get jeudi.
      *
      * @return bool|null
      */
-    public function getVendredi()
+    public function getJeudi()
     {
-        return $this->vendredi;
+        return $this->jeudi;
     }
 
     /**
@@ -538,13 +530,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get lundiam.
+     * Get vendredi.
      *
      * @return bool|null
      */
-    public function getLundiam()
+    public function getVendredi()
     {
-        return $this->lundiam;
+        return $this->vendredi;
     }
 
     /**
@@ -562,13 +554,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get mardim.
+     * Get lundiam.
      *
      * @return bool|null
      */
-    public function getMardim()
+    public function getLundiam()
     {
-        return $this->mardim;
+        return $this->lundiam;
     }
 
     /**
@@ -586,13 +578,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get mardiam.
+     * Get mardim.
      *
      * @return bool|null
      */
-    public function getMardiam()
+    public function getMardim()
     {
-        return $this->mardiam;
+        return $this->mardim;
     }
 
     /**
@@ -610,13 +602,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get mercredim.
+     * Get mardiam.
      *
      * @return bool|null
      */
-    public function getMercredim()
+    public function getMardiam()
     {
-        return $this->mercredim;
+        return $this->mardiam;
     }
 
     /**
@@ -634,13 +626,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get mercrediam.
+     * Get mercredim.
      *
      * @return bool|null
      */
-    public function getMercrediam()
+    public function getMercredim()
     {
-        return $this->mercrediam;
+        return $this->mercredim;
     }
 
     /**
@@ -658,13 +650,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get jeudim.
+     * Get mercrediam.
      *
      * @return bool|null
      */
-    public function getJeudim()
+    public function getMercrediam()
     {
-        return $this->jeudim;
+        return $this->mercrediam;
     }
 
     /**
@@ -682,13 +674,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get jeudiam.
+     * Get jeudim.
      *
      * @return bool|null
      */
-    public function getJeudiam()
+    public function getJeudim()
     {
-        return $this->jeudiam;
+        return $this->jeudim;
     }
 
     /**
@@ -706,13 +698,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get vendredim.
+     * Get jeudiam.
      *
      * @return bool|null
      */
-    public function getVendredim()
+    public function getJeudiam()
     {
-        return $this->vendredim;
+        return $this->jeudiam;
     }
 
     /**
@@ -730,13 +722,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get vendrediam.
+     * Get vendredim.
      *
      * @return bool|null
      */
-    public function getVendrediam()
+    public function getVendredim()
     {
-        return $this->vendrediam;
+        return $this->vendredim;
     }
 
     /**
@@ -754,13 +746,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get datemodif.
+     * Get vendrediam.
      *
-     * @return \DateTime|null
+     * @return bool|null
      */
-    public function getDatemodif()
+    public function getVendrediam()
     {
-        return $this->datemodif;
+        return $this->vendrediam;
     }
 
     /**
@@ -778,13 +770,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get signature.
+     * Get datemodif.
      *
-     * @return bool|null
+     * @return \DateTime|null
      */
-    public function getSignature()
+    public function getDatemodif()
     {
-        return $this->signature;
+        return $this->datemodif;
     }
 
     /**
@@ -802,13 +794,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get statut.
+     * Get signature.
      *
-     * @return string
+     * @return bool|null
      */
-    public function getStatut()
+    public function getSignature()
     {
-        return $this->statut;
+        return $this->signature;
     }
 
     /**
@@ -826,13 +818,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get idAgent.
+     * Get statut.
      *
-     * @return \AppBundle\Entity\Agent|null
+     * @return string
      */
-    public function getIdAgent()
+    public function getStatut()
     {
-        return $this->idAgent;
+        return $this->statut;
     }
 
     /**
@@ -850,13 +842,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get idDdqContrat.
+     * Get idAgent.
      *
-     * @return \AppBundle\Entity\DdqContrat|null
+     * @return \AppBundle\Entity\Agent|null
      */
-    public function getIdDdqContrat()
+    public function getIdAgent()
     {
-        return $this->idDdqContrat;
+        return $this->idAgent;
     }
 
     /**
@@ -874,13 +866,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get idDdqRepartition.
+     * Get idDdqContrat.
      *
-     * @return \AppBundle\Entity\DdqRepartition|null
+     * @return \AppBundle\Entity\DdqContrat|null
      */
-    public function getIdDdqRepartition()
+    public function getIdDdqContrat()
     {
-        return $this->idDdqRepartition;
+        return $this->idDdqContrat;
     }
 
     /**
@@ -898,13 +890,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get idDdqHoraire.
+     * Get idDdqRepartition.
      *
-     * @return \AppBundle\Entity\DdqHoraire|null
+     * @return \AppBundle\Entity\DdqRepartition|null
      */
-    public function getIdDdqHoraire()
+    public function getIdDdqRepartition()
     {
-        return $this->idDdqHoraire;
+        return $this->idDdqRepartition;
     }
 
     /**
@@ -922,13 +914,13 @@ class DdqQuestionnaireTp
     }
 
     /**
-     * Get idDdqCampagne.
+     * Get idDdqHoraire.
      *
-     * @return \AppBundle\Entity\DdqCampagne|null
+     * @return \AppBundle\Entity\DdqHoraire|null
      */
-    public function getIdDdqCampagne()
+    public function getIdDdqHoraire()
     {
-        return $this->idDdqCampagne;
+        return $this->idDdqHoraire;
     }
 
     /**
@@ -943,5 +935,15 @@ class DdqQuestionnaireTp
         $this->idDdqCampagne = $idDdqCampagne;
 
         return $this;
+    }
+
+    /**
+     * Get idDdqCampagne.
+     *
+     * @return \AppBundle\Entity\DdqCampagne|null
+     */
+    public function getIdDdqCampagne()
+    {
+        return $this->idDdqCampagne;
     }
 }
