@@ -110,6 +110,7 @@ phpk_core:
               libelle: Résultats
             Rtt_global:
               libelle: Global
+              route: adminRTT
             Rtt_JourFixe39h00:
               libelle: 39h00 Jour fixe
             Rtt_quadrimestre39h00:

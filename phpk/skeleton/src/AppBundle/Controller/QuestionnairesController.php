@@ -86,8 +86,9 @@ class QuestionnairesController extends AbstractController
 
     public function getQuestionnaireRttAction($campagne, Request $request, \Swift_Mailer $mailer, ContactService $test)
     {
-        $toto = $test->getHappyMessage();
-        $this->addFlash('success', $toto);
+        /*   dump($request);
+           $toto = $test->getHappyMessage();
+           $this->addFlash('success', $toto);*/
         /* Identification de l'agent*/
 //        $nomium = $this->getUser()->getNom().'-'.$this->getUser()->getChrono();
 //        $agentRepo = $this->getDoctrine()->getManager()->getRepository(' AppBundle:Agent');

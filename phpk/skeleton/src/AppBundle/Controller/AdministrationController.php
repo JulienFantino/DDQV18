@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\DdqCampagne;
 use AppBundle\Repository\DdqCampagneRepository;
+use AppBundle\Table\TableMesCampagnes;
+use AppBundle\Table\TableRttAgent;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -159,5 +161,23 @@ class AdministrationController extends AbstractController
 
         return $this->render('AppBundle:Administration:SelectionCampagne.html.twig', array('formCampagne' => $form->createView(),
             'titre' => 'Clôture d\'une campagne'));
+    }
+
+    public function GetDataAgentRttAction()
+    {
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agent = $agentRepo->findOneByNomium($nomium);
+        $idAgent = $agent->getId();
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+        dump($qpRepo);
+        $tableau->getDataHandler()->setRepository($qpRepo)
+            ->setRepositoryMethod('findByMesCampagnes')
+            ->setRepositoryMethodParameters(array($idAgent));
+
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+
     }
 }
