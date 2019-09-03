@@ -163,7 +163,7 @@ class AdministrationController extends AbstractController
             'titre' => 'Clôture d\'une campagne'));
     }
 
-    public function GetDataAgentRttAction()
+    public function GetDataGlobalAgentRttAction()
     {
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
         $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
@@ -172,9 +172,99 @@ class AdministrationController extends AbstractController
         $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
 
         $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
-        dump($qpRepo);
+
         $tableau->getDataHandler()->setRepository($qpRepo)
-            ->setRepositoryMethod('findByMesCampagnes')
+            ->setRepositoryMethod('findAll')
+            ->setRepositoryMethodParameters(array($idAgent));
+
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+
+    }
+
+    public function GetData39h00FixeAgentRttAction()
+    {
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agent = $agentRepo->findOneByNomium($nomium);
+        $idAgent = $agent->getId();
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+
+        $tableau->getDataHandler()->setRepository($qpRepo)
+            ->setRepositoryMethod('findBy39hJoursFixes')
+            ->setRepositoryMethodParameters(array($idAgent));
+
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+
+    }
+
+    public function GetData39h00QuadrimestreAgentRttAction()
+    {
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agent = $agentRepo->findOneByNomium($nomium);
+        $idAgent = $agent->getId();
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+
+        $tableau->getDataHandler()->setRepository($qpRepo)
+            ->setRepositoryMethod('findBy39hQuadrimestre')
+            ->setRepositoryMethodParameters(array($idAgent));
+
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+
+    }
+
+    public function GetData37h00AgentRttAction()
+    {
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agent = $agentRepo->findOneByNomium($nomium);
+        $idAgent = $agent->getId();
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+
+        $tableau->getDataHandler()->setRepository($qpRepo)
+            ->setRepositoryMethod('findBy37h00')
+            ->setRepositoryMethodParameters(array($idAgent));
+
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+
+    }
+
+    public function GetData36h00AgentRttAction()
+    {
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agent = $agentRepo->findOneByNomium($nomium);
+        $idAgent = $agent->getId();
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+
+        $tableau->getDataHandler()->setRepository($qpRepo)
+            ->setRepositoryMethod('findBy36h00')
+            ->setRepositoryMethodParameters(array($idAgent));
+
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+
+    }
+
+    public function GetDataNonValideAgentRttAction()
+    {
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agent = $agentRepo->findOneByNomium($nomium);
+        $idAgent = $agent->getId();
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+
+        $tableau->getDataHandler()->setRepository($qpRepo)
+            ->setRepositoryMethod('findByNonValide')
             ->setRepositoryMethodParameters(array($idAgent));
 
         return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));

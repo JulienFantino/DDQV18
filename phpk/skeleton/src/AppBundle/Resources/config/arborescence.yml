@@ -110,17 +110,22 @@ phpk_core:
               libelle: Résultats
             Rtt_global:
               libelle: Global
-              route: adminRTT
+              route: adminRttGlobal
             Rtt_JourFixe39h00:
               libelle: 39h00 Jour fixe
+              route: adminRtt39h00Fixe
             Rtt_quadrimestre39h00:
               libelle: 39h00 quadrimestre
+              route: adminRtt39h00Quadrimestre
             Rtt_quadrimestre37h00:
               libelle: 37h00
+              route: adminRtt37h00
             Rtt_quadrimestre36h00:
               libelle: 36h00
+              route: adminRtt36h00
             Rtt_Non_Transmis:
               libelle: Non Transmis
+              route: adminRttNonValide
 
         Temps Partiel:
           libelle: Temps Partiel

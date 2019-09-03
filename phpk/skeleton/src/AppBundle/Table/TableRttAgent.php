@@ -40,15 +40,15 @@ class TableRttAgent extends TableGenerator
                 'decorator' => Decorator::DEFAUT
             ))
             ->addColumn(array(
-                'id' => 'Formule',
+                'id' => 'formule',
                 'name' => 'Formule',
                 'filtrable' => false,
                 'triable' => false,
                 'decorator' => Decorator::DEFAUT
             ))
             ->addColumn(array(
-                'id' => 'datefin',
-                'name' => 'Date de fin',
+                'id' => 'statut',
+                'name' => 'Statut',
                 'filtrable' => false,
                 'triable' => false,
                 'decorator' => Decorator::DEFAUT
@@ -64,7 +64,7 @@ class TableRttAgent extends TableGenerator
 
     public function getRows()
     {
-        /*       foreach ($this->getDataHandler()->getData() as $questionnaire) {
+        foreach ($this->getDataHandler()->getData() as $questionnaire) {
                  // Création de la cellule avec son contenu
                  $lien = new CellLink();
                  $lien->setText($questionnaire->getLibelle());
@@ -81,20 +81,21 @@ class TableRttAgent extends TableGenerator
                      $lien->setUrl($url);
                  } else {
                      $lien->setUrl('error');
-                 }
-                 $this->addRow(array(
+                 } /*
+                $lien->setUrl('toto');*/
+            $this->addRow(array(
                          // L'ordre de remplissage des colonnes est celui configuré dans le constructeur
                          'data' => array(
-                             $questionnaire->getIdDdqCampagne()->getLibelle(),
+                             $questionnaire->getIdAgent()->getNomium(),
                              $questionnaire->getStatut(),
-                             $questionnaire->getIdDdqCampagne()->getDatedebut()->format('d-m-Y'),
-                             $questionnaire->getIdDdqCampagne()->getDatefin()->format('d-m-Y'),
+                             $questionnaire->getFormule(),
+                             $questionnaire->getReprisetp(),
                              $lien
                          )
                      )
                  );
              }
-             return $this->rows;*/
+        return $this->rows;
     }
     //put your code here
 }

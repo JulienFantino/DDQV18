@@ -103,4 +103,46 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
         $query->setParameter('idCampagne', $idCampagne);
         return $query->getSingleScalarResult();
     }
+
+    public function findAll()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q ');
+        return $query->getResult();
+    }
+
+    public function findBy39hJoursFixes()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=2 and q.formule= true');
+        return $query->getResult();
+    }
+
+    public function findBy39hQuadrimestre()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=2 and q.formule= false');
+        return $query->getResult();
+    }
+
+    public function findBy37h00()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=3 and q.formule= false');
+        return $query->getResult();
+    }
+
+    public function findBy36h00()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=4 and q.formule= false');
+        return $query->getResult();
+    }
+
+    public function findByNonValide()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q  WHERE q.statut <> \'ValidénN2\'');
+        return $query->getResult();
+    }
 }

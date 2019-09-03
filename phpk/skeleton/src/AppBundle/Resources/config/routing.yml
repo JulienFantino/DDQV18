@@ -192,11 +192,34 @@ user_park:
     { _controller: AppBundle:GestionUtilisateur:UserParking,idCampagne:112}
   requirements:
     idCampagne: '\d+'
-adminRTT:
+adminRttGlobal:
   path: /AdminRttAll
   defaults:
-    _controller: AppBundle:Administration:GetDataAgentRtt
+    _controller: AppBundle:Administration:GetDataGlobalAgentRtt
+adminRtt39h00Fixe:
+  path: /AdminRtt39h00Fixe
+  defaults:
+    _controller: AppBundle:Administration:GetData39h00FixeAgentRtt
 
+adminRtt39h00Quadrimestre:
+  path: /AdminRtt39h00Quadrimestre
+  defaults:
+    _controller: AppBundle:Administration:GetData39h00QuadrimestreAgentRtt
+
+adminRtt37h00:
+  path: /AdminRtt37h00
+  defaults:
+    _controller: AppBundle:Administration:GetData37h00AgentRtt
+
+adminRtt36h00:
+  path: /AdminRtt36h00
+  defaults:
+    _controller: AppBundle:Administration:GetData36h00AgentRtt
+
+adminRttNonValide:
+  path: /AdminRttNonValide
+  defaults:
+    _controller: AppBundle:Administration:GetDataNonValideAgentRtt
 anr_test:
   path: /anr
   defaults: { _controller: 'AppBundle:Anr:anr' }
