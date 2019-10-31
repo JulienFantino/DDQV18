@@ -106,43 +106,68 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
 
     public function findAll()
     {
+        $query0 = $this->_em->createQuery(
+            'SELECT MAX(c.idDdqCampagne) FROM AppBundle:DdqQuestionnaireRtt c');
+        $parameters = ($query0->getResult()[0]);
         $query = $this->_em->createQuery(
-            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q ');
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqCampagne = :IdCampagneEnCours');
+        $query->setParameter('IdCampagneEnCours', $parameters);
         return $query->getResult();
     }
 
     public function findBy39hJoursFixes()
     {
+        $query0 = $this->_em->createQuery(
+            'SELECT MAX(c.idDdqCampagne) FROM AppBundle:DdqQuestionnaireRtt c');
+        $parameters = ($query0->getResult()[0]);
         $query = $this->_em->createQuery(
-            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=2 and q.formule= true');
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=2 and q.formule= true AND q.idDdqCampagne = :IdCampagneEnCours');
+        $query->setParameter('IdCampagneEnCours', $parameters);
         return $query->getResult();
     }
 
     public function findBy39hQuadrimestre()
     {
+        $query0 = $this->_em->createQuery(
+            'SELECT MAX(c.idDdqCampagne) FROM AppBundle:DdqQuestionnaireRtt c');
+        $parameters = ($query0->getResult()[0]);
         $query = $this->_em->createQuery(
-            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=2 and q.formule= false');
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=2 and q.formule= false AND q.idDdqCampagne = :IdCampagneEnCours');
+        $query->setParameter('IdCampagneEnCours', $parameters);
         return $query->getResult();
     }
 
     public function findBy37h00()
     {
+        $query0 = $this->_em->createQuery(
+            'SELECT MAX(c.idDdqCampagne) FROM AppBundle:DdqQuestionnaireRtt c');
+        $parameters = ($query0->getResult()[0]);
         $query = $this->_em->createQuery(
-            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=3 and q.formule= false');
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=3 and q.formule= false AND q.idDdqCampagne = :IdCampagneEnCours ');
+        $query->setParameter('IdCampagneEnCours', $parameters);
         return $query->getResult();
     }
 
     public function findBy36h00()
     {
+        $query0 = $this->_em->createQuery(
+            'SELECT MAX(c.idDdqCampagne) FROM AppBundle:DdqQuestionnaireRtt c');
+        $parameters = ($query0->getResult()[0]);
         $query = $this->_em->createQuery(
-            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=4 and q.formule= false');
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q WHERE q.idDdqContrat=4 and q.formule= false AND q.idDdqCampagne = :IdCampagneEnCours ');
+        $query->setParameter('IdCampagneEnCours', $parameters);
         return $query->getResult();
     }
 
     public function findByNonValide()
     {
+        $query0 = $this->_em->createQuery(
+            'SELECT MAX(c.idDdqCampagne) FROM AppBundle:DdqQuestionnaireRtt c');
+        $parameters = ($query0->getResult()[0]);
+        // dump($parameters);
         $query = $this->_em->createQuery(
-            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q  WHERE q.statut <> \'ValidénN2\'');
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q  WHERE q.statut <> \'validé N+2\' AND q.idDdqCampagne = :IdCampagneEnCours ');
+        $query->setParameter('IdCampagneEnCours', $parameters);
         return $query->getResult();
     }
 }

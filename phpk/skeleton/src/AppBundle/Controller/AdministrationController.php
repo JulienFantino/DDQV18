@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdministrationController extends AbstractController
 {
+
     public function nouvelleCampagneAction(Request $request)
     {
         /* Création d'une entité agent ou récupération d'une existante */

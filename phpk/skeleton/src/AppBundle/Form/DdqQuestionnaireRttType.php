@@ -34,7 +34,7 @@ class DdqQuestionnaireRttType extends AbstractType
 
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
                     array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
-                        'required' => true,
+                        'required' => false,
 
                     )
                 );
@@ -51,7 +51,7 @@ class DdqQuestionnaireRttType extends AbstractType
 //                ));    
 //
             } //pour les tests
-            elseif ($EtapeQuestionnaire == "etape1") {
+            elseif ($EtapeQuestionnaire == "nouveau") {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
                     array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
@@ -276,6 +276,40 @@ class DdqQuestionnaireRttType extends AbstractType
                             'disabled' => true))
                     ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array(
                         'label' => 'Signature',
+                        'required' => true));
+
+            } elseif ($EtapeQuestionnaire == "etape5" && $formuleQuestionnaire == false && $contrat == '2') {
+                $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
+                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                        'required' => false,
+                        'disabled' => true
+                    ))
+                    ->add('idDdqContrat', EntityType::class, array(
+                        'class' => 'AppBundle:DdqContrat',
+                        'choice_label' => 'nbheures',
+                        'label' => 'Contrat : Heures Hebdo',
+                        'required' => true,
+                        'disabled' => true,
+                        'query_builder' => function (DdqContratRepository $repo) {
+                            return $repo->getByTempsPartielQueryBuilder(false);
+                        }
+                    ))
+                    ->add('formule', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                        array('choices' => array(' Deuxième Formule : Gestion au quadrimestre' => false),
+                            'expanded' => true,
+                            'multiple' => false,
+                            'disabled' => true,
+                            'required' => true
+                        ))
+                    ->add('datemodif', 'Symfony\Component\Form\Extension\Core\Type\DateType',
+                        array(
+                            'widget' => 'single_text',
+                            'format' => 'dd/MM/yyyy',
+                            'data' => new \DateTime(),
+                            'disabled' => true))
+                    ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array(
+                        'label' => 'Signature',
+                        'value' => true,
                         'required' => true));
 
             } elseif ($EtapeQuestionnaire == "etape6" && $reprisetp == true) {

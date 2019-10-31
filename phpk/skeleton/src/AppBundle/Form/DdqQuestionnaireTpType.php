@@ -6,6 +6,10 @@ use AppBundle\Repository\DdqContratRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 
 class DdqQuestionnaireTpType extends AbstractType
 {
@@ -14,8 +18,14 @@ class DdqQuestionnaireTpType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('dateenfant1', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $form = $event->getForm();
+            $data = $event->getData();
+            ($contrat = $data->getIdDdqContrat()->getId());
+            ($EtapeQuestionnaire = $data->getStatut());
+            dump($nbdemijournée = $data->getIdDdqRepartition());
+
+            $form->add('dateenfant1', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
             ->add('dateenfant2', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
             ->add('dateenfant3', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
             ->add('dateenfant4', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
@@ -34,20 +44,20 @@ class DdqQuestionnaireTpType extends AbstractType
                     return $repo->getByTempsPartielQueryBuilder(true);
                 }
             ))
-            ->add('lundim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'required' => false))
-            ->add('lundiam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'required' => false))
-            ->add('mardim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'required' => false))
-            ->add('mardiam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'required' => false))
-            ->add('mercredim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'required' => false))
-            ->add('mercrediam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'required' => false))
-            ->add('jeudim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'required' => false))
-            ->add('jeudiam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'required' => false))
-            ->add('vendredim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'required' => false))
-            ->add('vendrediam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'required' => false))
+                ->add('lundim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
+                ->add('lundiam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false))
+                ->add('mardim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
+                ->add('mardiam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false))
+                ->add('mercredim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
+                ->add('mercrediam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false))
+                ->add('jeudim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
+                ->add('jeudiam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false))
+                ->add('vendredim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
+                ->add('vendrediam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false))
             ->add('datemodif', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy', 'data' => new \DateTime(), 'disabled' => true))
-            ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Signature'));
+                ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Signature', 'value' => 'toto', 'required' => true));
+        });
     }
-
     /**
      * {@inheritdoc}
      */

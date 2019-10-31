@@ -35,39 +35,11 @@ CNAMTS\DDQ\Bundle\Entity\DdqQuestionnaireParking:
           message: "Vous devez signer le formulaire afin de le soumettre"
 CNAMTS\DDQ\Bundle\Entity\DdqQuestionnaireRTT:
   properties:
-
-    idDdqContrat:
-      - NotBlank:
-          message: "Veuillez choisir votre contrat temps plein"
-      - NotNull:
-          message: "Vous devez choisir un type de contrat"
-    reprisetp:
-      - NotBlank:
-          message: "Veuillez choisir votre contrat temps plein"
-      - NotNull:
-          message: "Vous devez choisir un type de contrat"
-    formule:
-      - NotBlank:
-          message: "Veuillez choisir votre contrat temps plein"
-      - NotNull:
-          message: "Vous devez choisir un type de contrat"
-
-    formule1s:
-      - NotBlank:
-          message: "Veuillez choisir votre contrat temps plein"
-      - NotNull:
-          message: "Vous devez choisir un type de contrat"
-
-    formule1j:
-      - NotBlank:
-          message: "Veuillez choisir votre contrat temps plein"
-      - NotNull:
-          message: "Vous devez choisir un type de contrat"
-
-
-
     signature:
-      - NotBlank:
-          message: "Vous devez signer le formulaire afin de le soumettre"
       - NotNull:
-          message: "Vous devez choisir un type de contrat"
+          message: "Vous devez cochez cette case"
+CNAMTS\DDQ\Bundle\Entity\DdqQuestionnaireTp:
+  properties:
+    signature:
+      - NotNull:
+          message: "Vous devez cochez cette case"

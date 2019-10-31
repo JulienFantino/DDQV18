@@ -10,7 +10,7 @@
         <strong>Nom :</strong> {{ agent.nom }}</br>
         <strong>Prénom :</strong> {{ agent.prenom }}</br>
         <strong>Service :</strong> {{ agent.nomEntite }}</br>
-        <strong>Qualification :</strong> {{ agent.libelleemploi }}</br>
+        <strong>Qualification :</strong>
     </div>
     <div class="zone-info">
         <h3>ENFANTS A CHARGE :</h3>
@@ -57,21 +57,8 @@
             <h3>Choix du contrat :</h3>
             <p>{{ form_widget(form.idDdqContrat) }}</p>
         </div>
-        <div class="section">
-            <h3> Vous pouvez selectionner {{ form_widget(form.idDdqContrat) }}</h3>
-            </br></br>
-            <div>{{ form_widget(form.lundim) }} {{ form_widget(form.lundiam) }}</div>
-            <div>{{ form_widget(form.mardim) }} {{ form_widget(form.mardiam) }}</div>
-            <div>{{ form_widget(form.mercredim) }} {{ form_widget(form.mercrediam) }}</div>
-            <div>{{ form_widget(form.jeudim) }} {{ form_widget(form.jeudiam) }}</div>
-            <div>{{ form_widget(form.vendredim) }} {{ form_widget(form.vendrediam) }}</div>
-        </div>
+
     </div>
-    <div class="zone-info">Fait à {{ agent.idsite.ville }} le {{ form_widget(form.datemodif) }}</div>
-    <div class="zone-info"><strong>{{ agent.prenom }} {{ agent.nom }}</strong></div>
-    <div class='section'>
-        <div>
-            <script></script>{{ form_widget(form.signature) }}</div>
-    </div>
+
     {{ form_end(form) }}
 {% endblock %}

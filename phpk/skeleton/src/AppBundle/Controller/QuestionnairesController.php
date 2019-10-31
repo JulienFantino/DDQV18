@@ -104,6 +104,7 @@ class QuestionnairesController extends AbstractController
         $contratRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqContrat');
         $contrats = $contratRepo->findByTempsPlein();
         ($formule = $qrtt->getFormule());
+        $signature = $qrtt->getSignature();
         /* Création du formulaire */
         $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt);
         //
@@ -117,10 +118,12 @@ class QuestionnairesController extends AbstractController
                     'collection' => array(
                         'annuler' => array(
                             'label' => 'Annuler',
+                            'formnovalidate' => false,
                             'predefined' => Bouton::PREDEFINED_RETABLIR,
                         ),
                         'ajouter' => array(
                             'label' => 'Suivant',
+                            'formnovalidate' => false,
                             'predefined' => Bouton::PREDEFINED_VALIDER,
                         ),
                     ),
@@ -137,7 +140,7 @@ class QuestionnairesController extends AbstractController
             //dump ($data = $form->getData());
             //$em = $this->getDoctrine()->getManager();
 
-            if ($qrtt->getStatut() == 'etape1' && $qrtt->getRepriseTp() == true) {
+            if ($qrtt->getStatut() == 'nouveau' && $qrtt->getRepriseTp() == true) {
 
                 try {
                     $em = $this->getDoctrine()->getManager();
@@ -191,7 +194,7 @@ class QuestionnairesController extends AbstractController
                     $this->notification('Une erreur s\'est produite. Votre demande n\'a pas pu être enregistrée', 'error');
                     return $this->render('DDQ001Bundle:Default:notification.html.twig');
                 }
-            } elseif ($qrtt->getStatut() == 'etape1' && $qrtt->getRepriseTp() == false) {
+            } elseif ($qrtt->getStatut() == 'nouveau' && $qrtt->getRepriseTp() == false) {
 
 
                 try {
@@ -231,7 +234,7 @@ class QuestionnairesController extends AbstractController
 
             } elseif ($qrtt->getStatut() == 'etape3' && $formule == false) {
                 $em = $this->getDoctrine()->getManager();
-                $qrtt->setStatut('etape4');
+                $qrtt->setStatut('etape5');
                 $em->persist($qrtt);
                 $em->flush();
                 return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
@@ -296,7 +299,7 @@ class QuestionnairesController extends AbstractController
 
         }
         //CONSTRUCTION  DES VUES SELON L'ETAPE
-        if ($qrtt->getStatut() == 'etape1') {
+        if ($qrtt->getStatut() == 'nouveau') {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRtt.html.twig', array(
                 'agent' => $agent,
                 'campagne' => $campagne,
@@ -323,8 +326,17 @@ class QuestionnairesController extends AbstractController
                 'form' => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape4') {
+        } elseif ($qrtt->getStatut() == 'etape4' && $qrtt->getFormule() == true) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape4.html.twig', array(
+                'agent' => $agent,
+                'campagne' => $campagne,
+                'questionnaire' => $qrtt,
+                'contrats' => $contrats,
+                'form' => $form->createView()
+            ));
+
+        } elseif ($qrtt->getStatut() == 'etape4' && $qrtt->getFormule() == false) {
+            return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape4Quadrimestre.html.twig', array(
                 'agent' => $agent,
                 'campagne' => $campagne,
                 'questionnaire' => $qrtt,
@@ -378,7 +390,7 @@ class QuestionnairesController extends AbstractController
             ));
 
         } elseif ($qrtt->getStatut() == 'validé N+2') {
-            return $this->render('AppBundle:Questionnaires:QuestionnaireRttEtapeTransmission.html.twig', array(
+            return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtapeTransmission.html.twig', array(
                 'agent' => $agent,
                 'campagne' => $campagne,
                 'questionnaire' => $qrtt,
@@ -387,7 +399,7 @@ class QuestionnairesController extends AbstractController
             ));
 
         } else {
-            return $this->render('AppBundle:Questionnaires:QuestionnaireRttEtapeTransmission.html.twig', array(
+            return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtapeTransmission.html.twig', array(
                 'agent' => $agent,
                 'campagne' => $campagne,
                 'questionnaire' => $qrtt,
@@ -436,6 +448,7 @@ class QuestionnairesController extends AbstractController
                         ),
                         'ajouter' => array(
                             'label' => 'Ajouter',
+                            'formnovalidate' => false,
                             'predefined' => Bouton::PREDEFINED_VALIDER,
                             'type' => Bouton::TYPE_SUBMIT,
                         ),
