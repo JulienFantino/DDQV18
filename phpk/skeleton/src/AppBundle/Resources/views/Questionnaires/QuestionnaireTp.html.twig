@@ -3,6 +3,20 @@
 
 {% block body %}
     <h1>Demande de travail à temps partiel choisi</h1>
+    {{ phpk('bouton',{
+        predefined: 'question',
+        text: 'Question',
+        questiontitle: 'Question Mathématiques. Un indice chez vous..',
+        questiontext: 'Combien font 6x7 ?',
+        questionvalue: '42 !',
+        questioncallback: 'testQuestion'
+    }) }}
+
+    <script type='text/javascript'>
+        function testQuestion(reponse) {
+            alert('Vous avez répondu : ' + reponse);
+        }
+    </script>
     {{ form_start(form) }}
     {{ form_errors(form) }}
     <div class="zone-info">
@@ -27,6 +41,7 @@
     <div class="section">
         <h3>MOTIF :</h3></br>
         <div>{{ form_widget(form.motif) }}</div>
+
     </div>
 
     <div class="col1-2">
@@ -56,7 +71,18 @@
         <div class="section">
             <h3>Choix du contrat :</h3>
             <p>{{ form_widget(form.idDdqContrat) }}</p>
+            <h3>Horraire du contrat :</h3>
+            <p>{{ horraire }}</p>
+            <p>{#{ form_widget(form.idDdqRepartition) }}#}</p>
+            {#    <h3>Choix de la repartition :</h3>#}
+
+            <p>
+                {#{form_widget(form.idDdqRepartition) }#######}</p>
+
+
         </div>
+
+
         <div class="section">
             <h3> Vous pouvez selectionner {{ form_widget(form.idDdqContrat) }}</h3>
             </br></br>
@@ -67,6 +93,7 @@
             <div>{{ form_widget(form.vendredim) }} {{ form_widget(form.vendrediam) }}</div>
         </div>
     </div>
+
     <div class="zone-info">Fait à {{ agent.idsite.ville }} le {{ form_widget(form.datemodif) }}</div>
     <div class="zone-info"><strong>{{ agent.prenom }} {{ agent.nom }}</strong></div>
     <div class='section'>

@@ -32,14 +32,14 @@ class DdqContrat
     /**
      * @var string|null
      *
-     * @ORM\Column(name="nbheures", type="string", length=8, nullable=true)
+     * @ORM\Column(name="nbheures", type="string", length=50, nullable=true)
      */
     private $nbheures;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="horairecontractuel", type="string", length=8, nullable=true)
+     * @ORM\Column(name="horairecontractuel", type="string", length=50, nullable=true)
      */
     private $horairecontractuel;
 
@@ -125,4 +125,90 @@ class DdqContrat
     {
         return $this->horairecontractuel;
     }
+///AJOUT POUR LA REPARTITION
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="nbjours", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $nbjours;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbdemiesjournees", type="integer", nullable=true)
+     */
+    private $nbdemiesjournees;
+
+
+    /**
+     * Set nbjours.
+     *
+     * @param float $nbjours
+     *
+     * @return DdqRepartition
+     */
+    public function setNbjours($nbjours)
+    {
+        $this->nbjours = $nbjours;
+
+        return $this;
+    }
+
+    /**
+     * Get nbjours.
+     *
+     * @return float
+     */
+    public function getNbjours()
+    {
+        return $this->nbjours;
+    }
+
+    /**
+     * Set nbdemiesjournees.
+     *
+     * @param int $nbdemiesjournees
+     *
+     * @return DdqRepartition
+     */
+    public function setNbdemiesjournees($nbdemiesjournees)
+    {
+        $this->nbdemiesjournees = $nbdemiesjournees;
+
+        return $this;
+    }
+
+    /**
+     * Get nbdemiesjournees.
+     *
+     * @return int
+     */
+    public function getNbdemiesjournees()
+    {
+        return $this->nbdemiesjournees;
+    }
+
+    //AJOUT POUR L'HORRAIRE
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="horrairecontrat", type="string", length=50, nullable=true)
+     */
+    private $horairecontrat;
+
+    public function sethorairecontrat($horairecontrat)
+    {
+        $this->horairecontrat = $horairecontrat;
+
+        return $this;
+    }
+
+    public function gethorairecontrat()
+    {
+        return $this->horairecontrat;
+    }
+
 }

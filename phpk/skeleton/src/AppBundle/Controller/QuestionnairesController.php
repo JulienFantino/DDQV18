@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\ContactService;
-
+use AppBundle\Entity\DdqRepartition;
 
 class QuestionnairesController extends AbstractController
 {
@@ -413,14 +413,30 @@ class QuestionnairesController extends AbstractController
     public function getQuestionnaireTpAction($campagne, Request $request, \Swift_Mailer $mailer)
     {
         /* Identification de l'agent*/
+
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
         $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
         /*Recup du questionnaire */
+        $repartationRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
         $qtpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireTp');
         $qtp = $qtpRepo->findOneByAgentByCampagne($agent, $campagne);
+
         /*********************************création des boutons du formulaire********************************************/
+
+        // dump   ($form->get('lundim')->getAttributes('attributes'));
+        ($contratID = ($qtp->getidddqContrat()->getid()));
+        // $repartitionContratRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqContratRepartition');
+        //$qtpContratRepartition =  $repartitionContratRepo->findOneByContrat($contratID);
+        //($repartitionContrat= $qtpContratRepartition->getIdDdqRepartition()->getId());
+        $repartitionRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqRepartition');
+        //(  $qtpRepartition =   $repartitionRepo ->findOneByRepartitionContrat($repartitionContrat));
+        //  dump($repartition= $qtpRepartition->getId());
+        dump($contratHoraire = ($qtp->getidddqContrat()->gethorairecontrat()));
+        //$itemreference =$this->getDoctrine()->getManager()->getReference('AppBundle\Entity\DdqRepartition', $repartition);
+        //dump($itemreference);
+
 //        $boutonValider = new Bouton();
 //        $boutonValider->setText('Valider');
 //        $boutonValider->setPredefined(Bouton::PREDEFINED_VALIDER);
@@ -432,6 +448,18 @@ class QuestionnairesController extends AbstractController
         /************************************************************************************************************************/
         /* Création du formulaire */
         $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireTpType', $qtp);
+        // $RepartitionRepo= $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqContratRepartition');
+        //dump( $Repartion = $RepartitionRepo->findByRepartition($contratID));
+        /*    $form ->add('idDdqRepartition', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+                'class' => 'AppBundle:DdqRepartition',
+                'choice_label' => 'repartition',
+                'label' => 'Repartition contrat : ',
+                'placeholder' => '',
+                'query_builder' => function (DdqRepartitionRepository $repo) {
+                    return $repo->findByRepartition($repo);
+                    // return $repo->findByRepartitionQueryBuilder(0);
+
+                }));*/
 
         if ($qtp->getStatut() !== 'validé N+1' && $qtp->getStatut() !== 'validé N+2') {
             /** Ajout d'un seul bouton au formulaire */
@@ -455,10 +483,23 @@ class QuestionnairesController extends AbstractController
                     ),
                 ));
             if ($form->handleRequest($request)->isValid()) {
+                //  dump( $test=($form->get('lundim')->get('value')) +($form->get('lundim')->get('value')));
+//dump ($form->get('lundim')->get('value'));
+                ($qtp->getlundim());
+                ($qtp->getlundiam());
 
+                // $itemType = $em->getReference('AppBundle\Entity\DdqRepartition',  $itemreference);
+                //$qtp->setIdDdqRepartition($itemreference);
+
+                ($test = 5 + 3);
+                $nbdemijournee = $qtp->getIdDdqRepartition()->getNbdemiesjournees();
+                if ($test == $nbdemijournee) {
+                    $this->notification('Merci, les demi-journées sont ok', 'success');
+                }
                 $em = $this->getDoctrine()->getManager();
 
                 try {
+                    //$qtp->setIdDdqRepartition(  $qtpRepartition);
                     $qtp->setStatut('modifiable');
                     $em->persist($qtp);
                     $em->flush();
@@ -514,6 +555,7 @@ class QuestionnairesController extends AbstractController
         $year = date('Y');
         return $this->render('AppBundle:Questionnaires:QuestionnaireTp.html.twig', array(
             'agent' => $agent,
+            'horraire' => $contratHoraire,
             'questionnaire' => $qtp,
             'year' => $year,
             'form' => $form->createView()

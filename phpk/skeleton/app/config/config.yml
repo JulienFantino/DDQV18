@@ -15,7 +15,6 @@ framework:
   csrf_protection: null
   validation:
     enabled: true
-    enable_annotations: false
   templating:
     engines: [twig]
   default_locale: '%locale%'
