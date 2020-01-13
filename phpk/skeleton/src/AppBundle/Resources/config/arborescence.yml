@@ -18,7 +18,6 @@ phpk_core:
           libelle: Temps Partiel
           habilitations: [ DDQ_CONSULTE ]
         Télétravail:
-          route: campagnes_tp
           libelle: Télétravail
           habilitations: [DDQ_CONSULTE]
     Historique:
@@ -35,7 +34,6 @@ phpk_core:
           route: historique_tp
           libelle: Temps Partiel
         Télétravail:
-          route: campagnes_tp
           libelle: Télétravail
 
     Validations:

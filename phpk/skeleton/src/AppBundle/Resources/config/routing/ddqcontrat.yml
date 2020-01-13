@@ -1,0 +1,24 @@
+ddqcontrat_index:
+  path:     /
+  defaults: { _controller: "AppBundle:DdqContrat:index" }
+  methods:  GET
+
+ddqcontrat_show:
+  path:     /{id}/show
+  defaults: { _controller: "AppBundle:DdqContrat:show" }
+  methods:  GET
+
+ddqcontrat_new:
+  path:     /new
+  defaults: { _controller: "AppBundle:DdqContrat:new" }
+  methods:  [GET, POST]
+
+ddqcontrat_edit:
+  path:     /{id}/edit
+  defaults: { _controller: "AppBundle:DdqContrat:edit" }
+  methods:  [GET, POST]
+
+ddqcontrat_delete:
+  path:     /{id}/delete
+  defaults: { _controller: "AppBundle:DdqContrat:delete" }
+  methods:  DELETE

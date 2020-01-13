@@ -128,9 +128,9 @@ class ValidationController extends AbstractController
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
+                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     /* ligne à supprimer */
-                    ->setTo('julien;fantino@cpam-ain.cnamts.fr')
+                    ->setTo('julien.fantino@assurance-maladie.fr')
                     /* ligne à décommenter */
 //                    ->setTo($agent->getMail())
                     ->setBody(
@@ -149,7 +149,7 @@ class ValidationController extends AbstractController
                 $dirBranche = $agentRepo->findOneBy(array('sigleent' => $branche));
 
                 $mailToDirBranche = (new \Swift_Message('DDQ001 - Notification - ' . $qrtt->getLibelle() . ' à valider'))
-                    ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
+                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     ->setTo($dirBranche->getMail())
                     ->setBody(
                         $this->renderView('Emails/NotificationValider.html.twig', array(
@@ -223,9 +223,9 @@ class ValidationController extends AbstractController
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
+                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     /* ligne à supprimer */
-                    ->setTo('julien.fantino@cpam-ain.cnamts.fr')
+                    ->setTo('julien.fantino@assurance-maladie.fr')
                     /* ligne à décommenter */
 //                    ->setTo($agent->getMail())
                     ->setBody(
@@ -303,9 +303,9 @@ class ValidationController extends AbstractController
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
+                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     /* ligne à supprimer */
-                    ->setTo('julien.fantinot@cpam-ain.cnamts.fr')
+                    ->setTo('julien.fantino@assurance-maladie.fr')
                     /* ligne à décommenter */
 //                    ->setTo($agent->getMail())
                     ->setBody(
@@ -321,21 +321,27 @@ class ValidationController extends AbstractController
                 $sigleent = explode("/", $agent->getSigleent());
                 $branche = '/' . $sigleent[1] . '/' . $sigleent[2];
                 // recup du directeur de branche
-                $dirBranche = $agentRepo->findOneBy(array('sigleent' => $branche));
+                $dirBranche = $agentRepo->findBy(array('sigleent' => $branche));
+                foreach ($dirBranche as $dirBranches) {
+                    dump($dirBranches->getMail());
+                    $mailToDirBranche = (new \Swift_Message('DDQ001 - Notification - ' . $qtp->getLibelle() . ' à valider'))
+                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                        ->setTo('julien.fantino@assurance-maladie.fr')
+                        //  ->setTo($dirBranches->getMail())
+                        ->setBody(
+                            $this->renderView('Emails/NotificationValider.html.twig', array(
+                                'questionnaire' => $qtp,
+                                'agent' => $agent
+                            )),
+                            'text/html'
+                        );
+                    /*** envoi des mails ***/
+                    $mailer->send($mailToAgent);
+//               $mailer->send($mailToDirBranche);
 
-                $mailToDirBranche = (new \Swift_Message('DDQ001 - Notification - ' . $qtp->getLibelle() . ' à valider'))
-                    ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
-                    ->setTo($dirBranche->getMail())
-                    ->setBody(
-                        $this->renderView('Emails/NotificationValider.html.twig', array(
-                            'questionnaire' => $qtp,
-                            'agent' => $agent
-                        )),
-                        'text/html'
-                    );
-                /*** envoi des mails ***/
-                $mailer->send($mailToAgent);
-//                $mailer->send($mailToDirBranche);
+                }
+
+
 
                 $this->notification('Merci, votre validation pour la Demande de temps partiel de ' . $agent->getPrenom() . ' ' . $agent->getNom() . ' a bien été enregistrée.', 'success');
                 return $this->redirectToRoute('liste_questionnaires_tp');
@@ -399,9 +405,9 @@ class ValidationController extends AbstractController
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
+                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     /* ligne à supprimer */
-                    ->setTo('julien.fantino@cpam-ain.cnamts.fr')
+                    ->setTo('julien.fantino@assurance-maladie.fr')
                     /* ligne à décommenter */
 //                    ->setTo($agent->getMail())
                     ->setBody(

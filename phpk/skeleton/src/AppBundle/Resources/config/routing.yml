@@ -1,3 +1,7 @@
+app_ddqcontrat:
+  resource: "@AppBundle/Resources/config/routing/ddqcontrat.yml"
+  prefix:   /ddqcontrat
+
 app_index:
   path: /
   defaults:

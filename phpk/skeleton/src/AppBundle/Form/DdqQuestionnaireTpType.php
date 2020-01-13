@@ -30,29 +30,31 @@ class DdqQuestionnaireTpType extends AbstractType
             // dump($nbdemijournée = $data->getIdDdqRepartition());
             //  dump($nbdemijournée = $data->getIdDdqRepartition()->getNbjours());
             //  dump($nbdemijournée = $data->getIdDdqRepartition()->getNbdemiesjournees());
-            if ($EtapeQuestionnaire == 'modifiable') {
+
                 $form->add('dateenfant1', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
                     ->add('dateenfant2', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
                     ->add('dateenfant3', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
                     ->add('dateenfant4', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy'))
                     ->add('motif', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array('attr' => array('placeholder' => 'Expliquez votre demande de contrat à temps partiel. 255 caractères max...')));
-            }
-            if ($EtapeQuestionnaire == 'modifiable') {
+
+
+            if ($EtapeQuestionnaire == 'etape5' || $EtapeQuestionnaire == 'etape4' || $EtapeQuestionnaire == 'etape3' || $EtapeQuestionnaire == 'modifiable' || $EtapeQuestionnaire == 'validé N+1' || $EtapeQuestionnaire == 'validé N+2') {
                 $form->add('lundi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Lundi', 'required' => false))
                     ->add('mardi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Mardi', 'required' => false))
                     ->add('mercredi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Mercredi', 'required' => false))
                     ->add('jeudi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Jeudi', 'required' => false))
                     ->add('vendredi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Vendredi', 'required' => false));
             }
-            if ($EtapeQuestionnaire == 'modifiable') {
+
+            if ($EtapeQuestionnaire == 'etape5' || $EtapeQuestionnaire == 'etape4' || $EtapeQuestionnaire == 'etape3' || $EtapeQuestionnaire == 'etape2' || $EtapeQuestionnaire == 'modifiable' || $EtapeQuestionnaire == 'validé N+1' || $EtapeQuestionnaire == 'validé N+2') {
                 $form->add('idDdqContrat', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-                'class' => 'AppBundle:DdqContrat',
-                'choice_label' => 'nbheures',
-                'label' => 'Contrat : Heures Hebdo',
-                'placeholder' => '',
-                'query_builder' => function (DdqContratRepository $repo) {
-                    return $repo->getByTempsPartielQueryBuilder(true);
-                }
+                    'class' => 'AppBundle:DdqContrat',
+                    'choice_label' => 'nbheures',
+                    'label' => 'Contrat : Heures Hebdo',
+
+                    'query_builder' => function (DdqContratRepository $repo) {
+                        return $repo->getByTempsPartielQueryBuilder(true);
+                    }
                 ), array(
                     'class' => 'AppBundle:DdqContrat',
                     'choice_label' => 'horairecontrat',
@@ -64,48 +66,8 @@ class DdqQuestionnaireTpType extends AbstractType
                 ));
             }
 
-            ####REPARTITION###
-            if ($EtapeQuestionnaire == 'modifiable') {
 
-                /*         $form ->add('idDdqRepartition', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-                             'class' => 'AppBundle:DdqContrat',
-                             'choice_label' => 'nbjours',
-                             'label' => 'Contrat : Nombre de jours',
-                             'placeholder' => '',
-                             'query_builder' => function (DdqContratRepository $repo) {
-
-                                 return $repo->getByTempsPartielQueryBuilder(true);
-                             }
-                         ));*/
-
-//                $form ->add('idDdqContrat', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-//                    'class' => 'AppBundle:DdqRepartition',
-//                    'choice_label' => 'nbjours',
-//                    'label' => 'Contrat : Heures Hebdo',
-//                    'placeholder' => '',
-//                    'query_builder' => function (DdqContratRepartitionRepository $repo) {
-//                        $data = $repo->getData();
-//                        ($contrat = $data->getIdDdqContrat()->getId());
-//                        return $repo->findByRepartition($contrat);
-//                    }
-//                ));
-
-                /*  $form ->add('idDdqRepartition', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-                      'class' => 'AppBundle:DdqRepartition',
-                      'choice_label' => 'repartition',
-                      'label' => 'Repartition contrat : ',
-                      'placeholder' => '',
-                      'query_builder' => function (DdqRepartitionRepository $repo) {
-                          return $repo->createQueryBuilder('s')
-                              ->select('s.id');
-                          // return $repo->findByRepartitionQueryBuilder(0);
-
-                      }
-                  ));*/
-
-                //  $form->add('idDdqRepartition', 'Symfony\Component\Form\Extension\Core\Type\IntegerType',(array('label'=>'COUCOU')));
-            }
-            if ($EtapeQuestionnaire == 'modifiable') {
+            if ($EtapeQuestionnaire == 'etape5' || $EtapeQuestionnaire == 'etape4' || $EtapeQuestionnaire == 'modifiable' || $EtapeQuestionnaire == 'validé N+1' || $EtapeQuestionnaire == 'validé N+2') {
                 $form->add('lundim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
                     ->add('lundiam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false))
                     ->add('mardim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
@@ -115,10 +77,13 @@ class DdqQuestionnaireTpType extends AbstractType
                     ->add('jeudim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
                     ->add('jeudiam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false))
                     ->add('vendredim', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Matin', 'value' => 1, 'required' => false))
-                    ->add('vendrediam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false))
-                    ->add('datemodif', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy', 'data' => new \DateTime(), 'disabled' => true))
-                    ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Signature', 'value' => 'toto', 'required' => true));
+                    ->add('vendrediam', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Après-midi', 'value' => 1, 'required' => false));
 
+
+            }
+            if ($EtapeQuestionnaire == 'etape5' || $EtapeQuestionnaire == 'modifiable' || $EtapeQuestionnaire == 'validé N+1' || $EtapeQuestionnaire == 'validé N+2') {
+                $form->add('datemodif', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy', 'data' => new \DateTime(), 'disabled' => true))
+                    ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Signature', 'value' => 'toto', 'required' => true));
             }
         });
     }

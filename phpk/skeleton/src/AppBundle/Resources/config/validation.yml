@@ -40,6 +40,8 @@ CNAMTS\DDQ\Bundle\Entity\DdqQuestionnaireRTT:
           message: "Vous devez cochez cette case"
 CNAMTS\DDQ\Bundle\Entity\DdqQuestionnaireTp:
   properties:
+    idDdqContrat:
+      -NotNull: "Vous devez renseigner votre contrat"
     signature:
       - NotNull:
           message: "Vous devez cochez cette case"

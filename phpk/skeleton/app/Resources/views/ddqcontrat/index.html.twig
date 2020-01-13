@@ -1,0 +1,46 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Ddqcontrats list</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Tempspartiel</th>
+            <th>Libellé</th>
+            <th>Horairecontractuel</th>
+            <th>Nbjours</th>
+            <th>Nbdemiesjournees</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ddqContrat in ddqContrats %}
+            <tr>
+                <td>{% if ddqContrat.tempspartiel %}Oui{% else %}Non{% endif %}</td>
+                <td>{{ ddqContrat.nbheures }}</td>
+                <td>{{ ddqContrat.horairecontractuel }}</td>
+                <td>{{ ddqContrat.nbjours }}</td>
+                <td>{{ ddqContrat.nbdemiesjournees }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ddqcontrat_show', { 'id': ddqContrat.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ddqcontrat_edit', { 'id': ddqContrat.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ddqcontrat_new') }}">Create a new ddqContrat</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -4,13 +4,12 @@
 {% block body %}
     <h1>Demande de travail à temps partiel choisi</h1>
     {{ form_start(form) }}
-    {{ form_errors(form) }}
     <div class="zone-info">
         <strong>N° Agent :</strong> {{ agent.nomium }}</br>
         <strong>Nom :</strong> {{ agent.nom }}</br>
         <strong>Prénom :</strong> {{ agent.prenom }}</br>
         <strong>Service :</strong> {{ agent.nomEntite }}</br>
-        <strong>Qualification :</strong>
+        <strong>Qualification :</strong> {{ agent.libelleemploi }}</br>
     </div>
     <div class="zone-info">
         <h3>ENFANTS A CHARGE :</h3>
@@ -28,20 +27,20 @@
         <h3>MOTIF :</h3></br>
         <div>{{ form_widget(form.motif) }}</div>
     </div>
-
+    <div class="section">
+        <div class="zone-info">
+            <h3>Choix du contrat :</h3>
+        </div>
+        <p>{{ form_widget(form.idDdqContrat) }}</p>
+        <div class="zone-info">
+            <h3>Horraire du contrat :</h3></div>
+        <p>{{ horraire }}</p>
+    </div>
     <div class="col1-2">
-        <div class="zone-info">
-            <h3>PERIODE DU CONTRAT</h3>
-            <p>Période réglementaire de conclusion</p>
-        </div>
 
-        <div class="zone-info">
-            <h3>HORAIRE HEBDOMADAIRE SOUHAITE</h3>
-            <p>Conformément aux types de contrats prévus</p>
-        </div>
         <div class="section">
-            <h3>REPARTITION HEBDOMADAIRE SOUHAITEE</h3>
-            <p>Conformément aux différentes répartitions prévues</p>
+            <div class="zone-info"><h3>REPARTITION HEBDOMADAIRE SOUHAITEE</h3>
+                <p>Conformément aux différentes répartitions prévues</p></div>
             <div>{{ form_widget(form.lundi) }}</div>
             <div>{{ form_widget(form.mardi) }}</div>
             <div>{{ form_widget(form.mercredi) }}</div>
@@ -49,16 +48,13 @@
             <div>{{ form_widget(form.vendredi) }}</div>
         </div>
     </div>
+
     <div class="col2-2">
         <div class="zone-info">
-            <h3>Du 1er Octobre {{ year }} au 30 Septembre {{ year+1 }}</h3>
+            <h3>Choix Horraire</h3>
         </div>
         <div class="section">
-            <h3>Choix du contrat :</h3>
-            <p>{{ form_widget(form.idDdqContrat) }}</p>
-        </div>
-        <div class="section">
-            </br></br>
+
             <div>{{ form_widget(form.lundim) }} {{ form_widget(form.lundiam) }}</div>
             <div>{{ form_widget(form.mardim) }} {{ form_widget(form.mardiam) }}</div>
             <div>{{ form_widget(form.mercredim) }} {{ form_widget(form.mercrediam) }}</div>
@@ -66,6 +62,6 @@
             <div>{{ form_widget(form.vendredim) }} {{ form_widget(form.vendrediam) }}</div>
         </div>
     </div>
-
+    <p> Merci de bien cocher le nombre de demis journées exactes</p>
     {{ form_end(form) }}
 {% endblock %}
