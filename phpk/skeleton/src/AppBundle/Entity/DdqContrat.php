@@ -32,7 +32,7 @@ class DdqContrat
     /**
      * @var string|null
      *
-     * @ORM\Column(name="nbheures", type="string", length=50, nullable=true)
+     * @ORM\Column(name="nbheures", type="string", length=250, nullable=true)
      */
     private $nbheures;
 
@@ -42,7 +42,12 @@ class DdqContrat
      * @ORM\Column(name="horairecontractuel", type="string", length=50, nullable=true)
      */
     private $horairecontractuel;
-
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="actif", type="boolean", nullable=true)
+     */
+    private $actif;
 
     /**
      * Get id.
@@ -54,6 +59,29 @@ class DdqContrat
         return $this->id;
     }
 
+    /**
+     * Set actif.
+     *
+     * @param bool|null $actif
+     *
+     * @return DdqContrat
+     */
+    public function setActif($actif = null)
+    {
+        $this->actif = $actif;
+
+        return $this;
+    }
+
+    /**
+     * Get actif.
+     *
+     * @return bool|null
+     */
+    public function getActif()
+    {
+        return $this->actif;
+    }
     /**
      * Set tempspartiel.
      *

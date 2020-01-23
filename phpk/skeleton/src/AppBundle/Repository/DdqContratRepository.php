@@ -34,4 +34,12 @@ class DdqContratRepository extends \Doctrine\ORM\EntityRepository implements Rep
             . 'WHERE c.tempspartiel = false');
         return $query->getResult();
     }
+
+    public function findByTempsPartiel()
+    {
+        $query = $this->_em->createQuery(
+            'SELECT c FROM AppBundle:DdqContrat c '
+            . 'WHERE c.tempspartiel = true');
+        return $query->getResult();
+    }
 }

@@ -1,8 +1,8 @@
 parameters:
   bundle.name: AppBundle
-  name: 'DDQ'
+  name: 'Campagne RH'
   version: '5'
-  description: 'Dématerialisation des questionnaires RH'
+  description: 'Applicatif de dématérialisation des processus RH'
   indicationLogo: 'CPAM DE L''AIN'
   assistance: 'infolocale.cpam-ain@assurance-maladie.fr'
   secret: 3064cd8809ae6e4eb114b0d17f7ece07

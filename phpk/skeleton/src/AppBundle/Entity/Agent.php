@@ -334,6 +334,12 @@ class Agent
      * })
      */
     private $idSite;
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(name="placeparking", type="boolean", nullable=true)
+     */
+    private $placeparking;
 
 
     /**
@@ -1376,5 +1382,29 @@ class Agent
     public function getIdSite()
     {
         return $this->idSite;
+    }
+
+    /**
+     * Set placeparking.
+     *
+     * @param string $placeparking
+     *
+     * @return Agent
+     */
+    public function setPlaceparking($placeparking)
+    {
+        $this->placeparking = $placeparking;
+
+        return $this;
+    }
+
+    /**
+     * Get placeparking.
+     *
+     * @return string
+     */
+    public function getPlaceparking()
+    {
+        return $this->placeparking;
     }
 }

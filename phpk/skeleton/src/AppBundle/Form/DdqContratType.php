@@ -5,6 +5,12 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+
 
 class DdqContratType extends AbstractType
 {
@@ -14,9 +20,12 @@ class DdqContratType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('tempspartiel')
-            ->add('nbheures')
-            ->add('horairecontractuel')
-            ->add('nbjours')->add('nbdemiesjournees');
+            ->add('nbheures', TextareaType::class, array('label' => 'Libellé Contrat',
+                'required' => true,
+                'disabled' => false
+            ))
+            ->add('horairecontractuel', TextareaType::class)
+            ->add('nbjours', TextareaType::class)->add('nbdemiesjournees', TextareaType::class);
     }
 
     /**

@@ -239,7 +239,66 @@ class DdqQuestionnaireTp
      * })
      */
     private $idDdqCampagne;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaireValideurN1", type="string", length=255, nullable=true)
+     */
+    private $commentaireValideurN1;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaireValideurN2", type="string", length=255, nullable=true)
+     */
+    private $commentaireValideurN2;
 
+    /**
+     * Set commentaireValideurN1.
+     *
+     * @param string $commentaireValideurN1
+     *
+     * @return DdqQuestionnaireTp
+     */
+    public function setcommentaireValideurN1($commentaireValideurN1)
+    {
+        $this->commentaireValideurN1 = $commentaireValideurN1;
+
+        return $this;
+    }
+
+    /**
+     * Get CommentaireValideurN1.
+     *
+     * @return string
+     */
+    public function getCommentaireValideurN1()
+    {
+        return $this->commentaireValideurN1;
+    }
+
+    /**
+     * Set commentaireValideurN2.
+     *
+     * @param string $commentaireValideurN2
+     *
+     * @return DdqQuestionnaireTp
+     */
+    public function setcommentaireValideurN2($commentaireValideurN2)
+    {
+        $this->commentaireValideurN2 = $commentaireValideurN2;
+
+        return $this;
+    }
+
+    /**
+     * Get CommentaireValideurN2.
+     *
+     * @return string
+     */
+    public function getCommentaireValideurN2()
+    {
+        return $this->commentaireValideurN2;
+    }
 
     /**
      * Get id.

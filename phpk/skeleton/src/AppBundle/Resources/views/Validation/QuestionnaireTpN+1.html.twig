@@ -74,11 +74,11 @@
     <div class="zone-info"><strong>Avis du responsable de service :</strong></div>
     <div class="section">
         {% if questionnaire.statut == 'validé N+1' %}
-            <input type="checkbox" checked="checked" disabled="true"> Accord</br>
-            <input type="checkbox" disabled="true"> Refus
+            <input type="checkbox" checked="checked" disabled="true"> Avis favorable</br>
+            <input type="checkbox" disabled="true"> Avis défavorable
         {% elseif questionnaire.statut == 'invalidé N+1' %}
-            <input type="checkbox" disabled="true"> Accord</br>
-            <input type="checkbox" checked="checked" disabled="true"> Refus
+            <input type="checkbox" disabled="true"> Avis favorable</br>
+            <input type="checkbox" checked="checked" disabled="true"> Avis défavorable
         {% else %}
             !!! Erreur !!!
         {% endif %}

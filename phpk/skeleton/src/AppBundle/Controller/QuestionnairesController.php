@@ -434,6 +434,8 @@ class QuestionnairesController extends AbstractController
         $idAgent = $agent->getId();
         /*Recup du questionnaire */
         $repartationRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $contratRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqContrat');
+        $contrats = $contratRepo->findByTempsPartiel();
         $qtpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireTp');
         $qtp = $qtpRepo->findOneByAgentByCampagne($agent, $campagne);
 
@@ -454,11 +456,64 @@ class QuestionnairesController extends AbstractController
         $vendrediAm = 0;
         $year = date('Y');
         $EtapeQuestionnaire = $qtp->getStatut();
+        /* Varibales de vérifications  des jours */
+        if ($qtp->getLundi()) {
+            $lundi = 1;
+        }
+        if ($qtp->getMardi()) {
+            $mardi = 1;
+        }
+        if ($qtp->getMercredi()) {
+            $mercredi = 1;
+        }
+        if ($qtp->getJeudi()) {
+            $jeudi = 1;
+        }
+        if ($qtp->getVendredi()) {
+            $vendredi = 1;
+        }
+        /* Varibales de vérifications  des demis journées matin */
+        if ($qtp->getLundiM()) {
+            $lundiM = 1;
+        }
+        if ($qtp->getMardiM()) {
+            $mardiM = 1;
+        }
+        if ($qtp->getMercrediM()) {
+            $mercrediM = 1;
+        }
+        if ($qtp->getJeudiM()) {
+            $jeudiM = 1;
+        }
+        if ($qtp->getVendrediM()) {
+            $vendrediM = 1;
+        }
+        /* Varibales de vérifications  des demis journées Après midi */
+        if ($qtp->getLundiAm()) {
+            $lundiAm = 1;
+        }
+        if ($qtp->getMardiAm()) {
+            $mardiAm = 1;
+        }
+        if ($qtp->getMercrediAm()) {
+            $mercrediAm = 1;
+        }
+        if ($qtp->getJeudiAm()) {
+            $jeudiAm = 1;
+        }
+        if ($qtp->getVendrediAm()) {
+            $vendrediAm = 1;
+        }
+
+        /* Somme des varibale  de vérifications pour comparaison avec ce que l'on a choisi en contrat */
+        $nbDemiJoursVerif = 0;
+        $nbDemiJoursVerif = $lundiM + $lundiAm + $mardiM + $mardiAm + $mercrediM + $mercrediAm + $jeudiM + $jeudiAm + $vendrediM + $vendrediAm;
+        $nbJoursVerif = $lundi + $mardi + $mercredi + $jeudi + $vendredi;
         /*********************************création des boutons du formulaire********************************************/
 
 
         ($contratID = ($qtp->getidddqContrat()->getid()));
-        dump($contratHoraire = ($qtp->getidddqContrat()->gethorairecontrat()));
+        ($contratHoraire = ($qtp->getidddqContrat()->gethorairecontrat()));
         /************************************************************************************************************************/
         /* Création du formulaire */
         $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireTpType', $qtp);
@@ -466,58 +521,7 @@ class QuestionnairesController extends AbstractController
         if ($qtp->getStatut() !== 'validé N+1' && $qtp->getStatut() !== 'validé N+2') {
             /** Ajout d'un seul bouton au formulaire */
             /************************************************************************************************************************/
-            /* Varibales de vérifications  des jours */
-            if ($qtp->getLundi()) {
-                $lundi = 1;
-            }
-            if ($qtp->getMardi()) {
-                $mardi = 1;
-            }
-            if ($qtp->getMercredi()) {
-                $mercredi = 1;
-            }
-            if ($qtp->getJeudi()) {
-                $jeudi = 1;
-            }
-            if ($qtp->getVendredi()) {
-                $vendredi = 1;
-            }
-            /* Varibales de vérifications  des demis journées matin */
-            if ($qtp->getLundiM()) {
-                $lundiM = 1;
-            }
-            if ($qtp->getMardiM()) {
-                $mardiM = 1;
-            }
-            if ($qtp->getMercrediM()) {
-                $mercrediM = 1;
-            }
-            if ($qtp->getJeudiM()) {
-                $jeudiM = 1;
-            }
-            if ($qtp->getVendrediM()) {
-                $vendrediM = 1;
-            }
-            /* Varibales de vérifications  des demis journées Après midi */
-            if ($qtp->getLundiAm()) {
-                $lundiAm = 1;
-            }
-            if ($qtp->getMardiAm()) {
-                $mardiAm = 1;
-            }
-            if ($qtp->getMercrediAm()) {
-                $mercrediAm = 1;
-            }
-            if ($qtp->getJeudiAm()) {
-                $jeudiAm = 1;
-            }
-            if ($qtp->getVendrediAm()) {
-                $vendrediAm = 1;
-            }
-            /* Somme des varibale  de vérifications pour comparaison avec ce que l'on a choisi en contrat */
-            $nbDemiJoursVerif = 0;
-            $nbDemiJoursVerif = $lundiM + $lundiAm + $mardiM + $mardiAm + $mercrediM + $mercrediAm + $jeudiM + $jeudiAm + $vendrediM + $vendrediAm;
-            $nbJoursVerif = $lundi + $mardi + $mercredi + $jeudi + $vendredi;
+
 
             $form->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
                 'collection' => array(
@@ -534,174 +538,182 @@ class QuestionnairesController extends AbstractController
                     ),
                 ),
             ));
-            if ($form->handleRequest($request)->isValid() && $form->isSubmitted()) {
-
-                if ($EtapeQuestionnaire == 'nouveau' || $EtapeQuestionnaire == 'invalidé N+1' || $EtapeQuestionnaire == 'invalidé N+2') {
-                    $em = $this->getDoctrine()->getManager();
-                    $qtp->setStatut('etape2');
-                    $em->persist($qtp);
-                    $em->flush();
-                } elseif ($EtapeQuestionnaire == 'etape2' && $qtp->getMotif() != '') {
-                    $em = $this->getDoctrine()->getManager();
-                    $qtp->setStatut('etape3');
-                    $em->persist($qtp);
-                    $em->flush();
-
-                } elseif ($EtapeQuestionnaire == 'etape3' && $qtp->getlundiam()) {
-                    $nbjours = $qtp->getIdDdqContrat()->getNbjours();
-                    $nbJoursInteger = (int)$nbjours;
-                    ($nbdemijournee = $qtp->getIdDdqContrat()->getNbdemiesjournees());
-                    if ($nbJoursVerif != $nbJoursInteger) {
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($qtp);
-                        $em->flush();
-                        $this->notification('Merci, le nombre de jours sélectionnés n\'est pas correct', 'error');
-                        return $this->render('AppBundle:Questionnaires\TP:QuestionnaireTPEtape3.html.twig', array(
-                            'agent' => $agent,
-                            'horraire' => $contratHoraire,
-                            'questionnaire' => $qtp,
-                            'year' => $year,
-                            'form' => $form->createView()
-                        ));
-                    } else {
-                        $em = $this->getDoctrine()->getManager();
-                        $qtp->setStatut('etape4');
-                        $em->persist($qtp);
-                        $em->flush();
-                    }
-                } elseif ($EtapeQuestionnaire == 'etape4') {
-                    ($nbdemijournee = $qtp->getIdDdqContrat()->getNbdemiesjournees());
-                    if ($nbDemiJoursVerif != $nbdemijournee) {
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($qtp);
-                        $em->flush();
-                        $this->notification('Merci de renseigner correctement le nombre de demi-journées', 'error');
-                        return $this->render('AppBundle:Questionnaires\TP:QuestionnaireTPEtape4.html.twig', array(
-                            'agent' => $agent,
-                            'horraire' => $contratHoraire,
-                            'questionnaire' => $qtp,
-                            'year' => $year,
-                            'form' => $form->createView()
-                        ));
-                    } else {
-                        $em = $this->getDoctrine()->getManager();
-                        $qtp->setStatut('etape5');
-                        $em->persist($qtp);
-                        $em->flush();
-                    }
-                } elseif ($EtapeQuestionnaire == 'etape5' and $qtp->getSignature() == true) {
-                    try {
-                        $em = $this->getDoctrine()->getManager();
-                        //$qtp->setIdDdqRepartition(  $qtpRepartition);
-                        $qtp->setStatut('modifiable');
-                        $em->persist($qtp);
-                        $em->flush();
-                        /******** Envoi des notifications par mail *********************/
-                        //création d'un objet transport
-                        $transport = new \Swift_SmtpTransport();
-                        //création d'un objet mailer
-                        $mailer = (new \Swift_Mailer($transport));
-                        /******** mail à destination de l'agent ****************/
-                        $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Ne pas répondre'))
-                            ->setFrom('ne-pas-repondre@assurance-maladie.fr')
-                            ->setTo($agent->getMail())
-                            ->setBody(
-                                $this->renderView('Emails/NotificationSoumission.html.twig', array(
-                                    'questionnaire' => $qtp,
-                                    'agent' => $agent
-                                )),
-                                'text/html'
-                            );
-                        /******** mail à destination du responsable de service ****************/
-                        /*** on recup le mail du responsable de service ***/
-                        $respId = $agent->getIdresponsable();
-
-                        $mailToResponsableService = (new \Swift_Message('DDQ - Notification - ' . $qtp->getLibelle() . ' à valider'))
-                            ->setFrom('ne-pas-repondre@assurance-maladie.fr')
-                            // il faudra préciser le bon mail ici
-                            ->setTo($agentRepo->find($respId)->getMail())
-                            ->setBody(
-                                $this->renderView('Emails/NotificationValider.html.twig', array(
-                                    'questionnaire' => $qtp,
-                                    'agent' => $agent
-                                )),
-                                'text/html'
-                            );
-
-                        $mailer->send($mailToAgent);
-                        //  dump($mailToResponsableService);
-                        //$mailer->send($mailToResponsableService);
-                        /*****************************************************************************/
-                        $this->notification('Merci, votre demande a bien été enregistrée', 'success');
-                        return $this->redirectToRoute('campagnes_tp');
-                    } catch (Exception $e) {
-                        $this->notification('Une erreur s\'est produite. Votre demande n\'a pas pu être enregistrée', 'error');
-                        return $this->render('AppBundle:Default:notification.html.twig');
-                    }
-                }
-
-
-            }
-############################ NAVIGATION DU FORMULAIRE ############################################
-            if ($EtapeQuestionnaire == 'nouveau' || $EtapeQuestionnaire == 'invalidé N+1' || $EtapeQuestionnaire == 'invalidé N+2') {
-                dump('NAVetape1');
-                $year = date('Y');
-                return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape1.html.twig', array(
-                    'agent' => $agent,
-                    'horraire' => $contratHoraire,
-                    'questionnaire' => $qtp,
-                    'year' => $year,
-                    'form' => $form->createView()
-                ));
-            } elseif ($EtapeQuestionnaire == 'etape2') {
-                dump('NAVetape2');
-                $year = date('Y');
-                return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape2.html.twig', array(
-                    'agent' => $agent,
-                    'horraire' => $contratHoraire,
-                    'questionnaire' => $qtp,
-                    'year' => $year,
-                    'form' => $form->createView()
-                ));
-
-            } elseif ($EtapeQuestionnaire == 'etape3') {
-                dump('NAVetape3');
-                $year = date('Y');
-                return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape3.html.twig', array(
-                    'agent' => $agent,
-                    'horraire' => $contratHoraire,
-                    'questionnaire' => $qtp,
-                    'year' => $year,
-                    'form' => $form->createView()
-                ));
-
-            } elseif ($EtapeQuestionnaire == 'etape4') {
-                dump('NAVetape4');
-                $year = date('Y');
-                return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape4.html.twig', array(
-                    'agent' => $agent,
-                    'horraire' => $contratHoraire,
-                    'questionnaire' => $qtp,
-                    'year' => $year,
-                    'form' => $form->createView()
-                ));
-
-            } else {
-
-                $year = date('Y');
-                return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTp.html.twig', array(
-                    'agent' => $agent,
-                    'horraire' => $contratHoraire,
-                    'questionnaire' => $qtp,
-                    'year' => $year,
-                    'form' => $form->createView()
-                ));
-            }
-
         } else {
             /* Création du formulaire */
             $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireTpType', $qtp, array('disabled' => true));
         }
+        if ($form->handleRequest($request)->isValid() && $form->isSubmitted()) {
+
+            if (($EtapeQuestionnaire == 'nouveau' || $EtapeQuestionnaire == 'invalidé N+1' || $EtapeQuestionnaire == 'invalidé N+2') && $qtp->getMotif() != '') {
+                $em = $this->getDoctrine()->getManager();
+                $qtp->setStatut('etape2');
+                $em->persist($qtp);
+                $em->flush();
+                return $this->redirectToRoute('questionnaire_tp', ['campagne' => $campagne]);
+            } elseif ($EtapeQuestionnaire == 'etape2' && $qtp->getMotif() != '') {
+                $em = $this->getDoctrine()->getManager();
+                $qtp->setStatut('etape3');
+                $em->persist($qtp);
+                $em->flush();
+                return $this->redirectToRoute('questionnaire_tp', ['campagne' => $campagne]);
+            } elseif ($EtapeQuestionnaire == 'etape3' && $contratID != '') {
+                $nbjours = $qtp->getIdDdqContrat()->getNbjours();
+                $nbJoursInteger = (int)$nbjours;
+                ($nbdemijournee = $qtp->getIdDdqContrat()->getNbdemiesjournees());
+                if ($nbJoursVerif != $nbJoursInteger) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($qtp);
+                    $em->flush();
+                    $this->notification('Merci, le nombre de jours sélectionnés n\'est pas correct', 'error');
+                    return $this->render('AppBundle:Questionnaires\TP:QuestionnaireTPEtape3.html.twig', array(
+                        'agent' => $agent,
+                        'horraire' => $contratHoraire,
+                        'questionnaire' => $qtp,
+                        'year' => $year,
+                        'form' => $form->createView()
+                    ));
+                } else {
+                    $em = $this->getDoctrine()->getManager();
+                    $qtp->setStatut('etape4');
+                    $em->persist($qtp);
+                    $em->flush();
+                    return $this->redirectToRoute('questionnaire_tp', ['campagne' => $campagne]);
+                }
+            } elseif ($EtapeQuestionnaire == 'etape4' && $nbJoursVerif != 0) {
+                ($nbdemijournee = $qtp->getIdDdqContrat()->getNbdemiesjournees());
+                if ($nbDemiJoursVerif != $nbdemijournee) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($qtp);
+                    $em->flush();
+                    $this->notification('Merci de renseigner correctement le nombre de demi-journées', 'error');
+                    return $this->render('AppBundle:Questionnaires\TP:QuestionnaireTPEtape4.html.twig', array(
+                        'agent' => $agent,
+                        'horraire' => $contratHoraire,
+                        'questionnaire' => $qtp,
+                        'year' => $year,
+                        'form' => $form->createView()
+                    ));
+                } else {
+                    $em = $this->getDoctrine()->getManager();
+                    $qtp->setStatut('etape5');
+                    $em->persist($qtp);
+                    $em->flush();
+                    return $this->redirectToRoute('questionnaire_tp', ['campagne' => $campagne]);
+                }
+            } elseif ($EtapeQuestionnaire == 'etape5' and $qtp->getSignature() == true) {
+                try {
+                    $em = $this->getDoctrine()->getManager();
+                    //$qtp->setIdDdqRepartition(  $qtpRepartition);
+                    $qtp->setStatut('modifiable');
+                    $em->persist($qtp);
+                    $em->flush();
+                    /******** Envoi des notifications par mail *********************/
+                    //création d'un objet transport
+                    $transport = new \Swift_SmtpTransport();
+                    //création d'un objet mailer
+                    $mailer = (new \Swift_Mailer($transport));
+                    /******** mail à destination de l'agent ****************/
+                    $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Ne pas répondre'))
+                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                        ->setTo($agent->getMail())
+                        ->setBody(
+                            $this->renderView('Emails/NotificationSoumission.html.twig', array(
+                                'questionnaire' => $qtp,
+                                'agent' => $agent
+                            )),
+                            'text/html'
+                        );
+                    /******** mail à destination du responsable de service ****************/
+                    /*** on recup le mail du responsable de service ***/
+                    $respId = $agent->getIdresponsable();
+
+                    $mailToResponsableService = (new \Swift_Message('DDQ - Notification - ' . $qtp->getLibelle() . ' à valider'))
+                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                        // il faudra préciser le bon mail ici
+                        ->setTo($agentRepo->find($respId)->getMail())
+                        ->setBody(
+                            $this->renderView('Emails/NotificationValider.html.twig', array(
+                                'questionnaire' => $qtp,
+                                'agent' => $agent
+                            )),
+                            'text/html'
+                        );
+
+                    $mailer->send($mailToAgent);
+                    //  dump($mailToResponsableService);
+                    //$mailer->send($mailToResponsableService);
+                    /*****************************************************************************/
+                    $this->notification('Merci, votre demande a bien été enregistrée', 'success');
+                    return $this->redirectToRoute('campagnes_tp');
+                } catch (Exception $e) {
+                    $this->notification('Une erreur s\'est produite. Votre demande n\'a pas pu être enregistrée', 'error');
+                    return $this->render('AppBundle:Default:notification.html.twig');
+                }
+            }
+
+
+        }
+############################ NAVIGATION DU FORMULAIRE ############################################
+        if ($EtapeQuestionnaire == 'nouveau' || $EtapeQuestionnaire == 'invalidé N+1' || $EtapeQuestionnaire == 'invalidé N+2') {
+
+            $year = date('Y');
+            return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape1.html.twig', array(
+                'agent' => $agent,
+                'horraire' => $contratHoraire,
+                'questionnaire' => $qtp,
+                'contrats' => $contrats,
+                'year' => $year,
+                'form' => $form->createView()
+            ));
+        } elseif ($EtapeQuestionnaire == 'etape2') {
+
+            $year = date('Y');
+            return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape2.html.twig', array(
+                'agent' => $agent,
+                'horraire' => $contratHoraire,
+                'questionnaire' => $qtp,
+                'year' => $year,
+                'contrats' => $contrats,
+                'form' => $form->createView()
+            ));
+
+        } elseif ($EtapeQuestionnaire == 'etape3') {
+
+            $year = date('Y');
+            return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape3.html.twig', array(
+                'agent' => $agent,
+                'horraire' => $contratHoraire,
+                'questionnaire' => $qtp,
+                'year' => $year,
+                'contrats' => $contrats,
+                'form' => $form->createView()
+            ));
+
+        } elseif ($EtapeQuestionnaire == 'etape4') {
+
+            $year = date('Y');
+            return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape4.html.twig', array(
+                'agent' => $agent,
+                'horraire' => $contratHoraire,
+                'questionnaire' => $qtp,
+                'year' => $year,
+                'contrats' => $contrats,
+                'form' => $form->createView()
+            ));
+
+        } else {
+
+            $year = date('Y');
+            return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTp.html.twig', array(
+                'agent' => $agent,
+                'horraire' => $contratHoraire,
+                'questionnaire' => $qtp,
+                'year' => $year,
+                'form' => $form->createView()
+            ));
+        }
+
+    }
 
 
         /* Recup de l'a date du jour'année en cours
@@ -713,6 +725,6 @@ class QuestionnairesController extends AbstractController
             'year' => $year,
             'form' => $form->createView()
         ));*/
-    }
+
 
 }

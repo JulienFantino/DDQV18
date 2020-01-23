@@ -58,7 +58,7 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
             'SELECT q FROM AppBundle:DdqQuestionnaireRtt q '
             . 'JOIN q.idAgent a '
             . 'WHERE a.nomentabrege = :nomentabrege '
-            . 'AND q.statut = \'modifiable\'');
+            . 'AND q.statut = \'etape6\'');
         $query->setParameter('nomentabrege', $parameters[0]);
         return $query->getResult();
     }

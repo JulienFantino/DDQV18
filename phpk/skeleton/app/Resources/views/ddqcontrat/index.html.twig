@@ -2,45 +2,116 @@
 {% from "PHPKTemplateBundle::import.html.twig" import phpk %}
 
 {% block body %}
-    <h1>Ddqcontrats list</h1>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Tempspartiel</th>
-            <th>Libellé</th>
-            <th>Horairecontractuel</th>
-            <th>Nbjours</th>
-            <th>Nbdemiesjournees</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for ddqContrat in ddqContrats %}
-            <tr>
-                <td>{% if ddqContrat.tempspartiel %}Oui{% else %}Non{% endif %}</td>
-                <td>{{ ddqContrat.nbheures }}</td>
-                <td>{{ ddqContrat.horairecontractuel }}</td>
-                <td>{{ ddqContrat.nbjours }}</td>
-                <td>{{ ddqContrat.nbdemiesjournees }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('ddqcontrat_show', { 'id': ddqContrat.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('ddqcontrat_edit', { 'id': ddqContrat.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+    <h1>Liste des contrats</h1>
     <ul>
         <li>
-            <a href="{{ path('ddqcontrat_new') }}">Create a new ddqContrat</a>
+
+            {{ phpk('bouton', { label: 'Ajouter un nouveau contrat', image: 'creer',url:'new' }) }}
         </li>
     </ul>
+    <div class="tab-box">
+
+        <div class="tab-interpage">
+            <div class="resultat">
+                &nbsp;
+            </div>
+
+
+            <input type="hidden" id="phpk_table[tableau_5e1f1f2e29bae][pageSize]"
+                   name="phpk_table[tableau_5e1f1f2e29bae][pageSize]" value="20">
+        </div>
+        <div class="tab-body">
+            <div class="center">
+                <table class="phpk_table">
+
+                    <thead>
+                    <tr>
+                        <th scope="col" class="
+                                        phpk_decorator_text
+
+                                        tri
+                                        ">Tempspartiel
+                        </th>
+                        <th scope="col" class="
+                                        phpk_decorator_text
+
+                                        tri
+                                        "> Libellé
+                        </th>
+                        <th scope="col" class="
+                                        phpk_decorator_text
+
+                                        tri
+                                        ">Horairecontractuel
+                        </th>
+                        <th scope="col" class="
+                                        phpk_decorator_text
+
+                                        tri
+                                        ">Nbjours
+                        </th>
+                        <th scope="col" class="
+                                        phpk_decorator_text
+
+                                        tri
+                                        ">Nbdemiesjournees
+                        </th>
+                        <th scope="col" class="
+                                        phpk_decorator_text
+
+                                        tri
+                                        ">Actions
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tbody>
+
+                    <input type="hidden" name="phpk_table[tableau_5e1f1f2e29bae][type]"
+                           value="AppBundle\Table\TableMesCampagnes">
+                    <input type="hidden" name="phpk_table[tableau_5e1f1f2e29bae][tri][colonne]"
+                           id="phpk_table[tableau_5e1f1f2e29bae][tri][colonne]" value="">
+                    <input type="hidden" name="phpk_table[tableau_5e1f1f2e29bae][tri][sens]"
+                           id="phpk_table[tableau_5e1f1f2e29bae][tri][sens]" value="">
+                    <input type="hidden" name="phpk_table[tableau_5e1f1f2e29bae][page]"
+                           id="phpk_table[tableau_5e1f1f2e29bae][page]" value="1">
+                    <input type="hidden" name="phpk_table[tableau_5e1f1f2e29bae][filtered]"
+                           id="phpk_table[tableau_5e1f1f2e29bae][filtered]" value="">
+
+
+                    </form>
+
+
+                    {% for ddqContrat in ddqContrats %}
+                        <tr>
+                            <td>{% if ddqContrat.tempspartiel %}Oui{% else %}Non{% endif %}</td>
+                            <td>{{ ddqContrat.nbheures }}</td>
+                            <td>{{ ddqContrat.horairecontractuel }}</td>
+                            <td>{{ ddqContrat.nbjours }}</td>
+                            <td>{{ ddqContrat.nbdemiesjournees }}</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        {{ phpk('bouton', { label: 'Modifier', image: 'modifier',url:path('ddqcontrat_edit', { 'id': ddqContrat.id })}) }}
+                                    </li>
+                                    <li>
+                                        {{ phpk('bouton', { label: 'Afficher', image: 'afficher',url:path('ddqcontrat_show', { 'id': ddqContrat.id })}) }}
+
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="tab-footer"></div>
+
+                <div class="tab-interpage">
+                    <div class="resultat">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

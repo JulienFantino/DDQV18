@@ -2,15 +2,17 @@
 {% from "PHPKTemplateBundle::import.html.twig" import phpk %}
 {% block body %}
     <h1>Ddqcontrat creation</h1>
-
+    <div class="zone-info">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Create"/>
+        {{ phpk('bouton', { label: 'Ajouter', image: 'ajouter',value:'Ajouter',type:'submit' }) }}
+
     {{ form_end(form) }}
 
     <ul>
         <li>
-            <a href="{{ path('ddqcontrat_index') }}">Back to the list</a>
+            <a href="{{ path('ddqcontrat_index') }}">Retour à la liste</a>
         </li>
     </ul>
+    </div>
 {% endblock %}

@@ -95,7 +95,7 @@ class ValidationController extends AbstractController
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->add('avis', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
-                'choices' => array('Accord' => true, 'Refus' => false),
+                'choices' => array('Avis Favorable' => true, 'Avis Défavorable' => false),
                 'choices_as_values' => true,
                 'expanded' => true,
                 'multiple' => false
@@ -190,7 +190,7 @@ class ValidationController extends AbstractController
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->add('avis', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
-                'choices' => array('Accord' => true, 'Refus' => false),
+                'choices' => array('Avis Favorable' => true, 'Avis Défavorable' => false),
                 'choices_as_values' => true,
                 'expanded' => true,
                 'multiple' => false
@@ -269,7 +269,7 @@ class ValidationController extends AbstractController
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->add('avis', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
-                'choices' => array('Accord' => true, 'Refus' => false),
+                'choices' => array('Avis Favorable' => true, 'Avis Défavorable' => false),
                 'choices_as_values' => true,
                 'expanded' => true,
                 'multiple' => false
