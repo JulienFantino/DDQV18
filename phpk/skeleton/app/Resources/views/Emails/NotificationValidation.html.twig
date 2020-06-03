@@ -18,13 +18,65 @@
         Le service Ressources Humaines reste à votre disposition pour toute question.
         .</p>
 {% elseif statut == 'validé N+1' %}
-    <p>Votre demande a été validée par votre chef de service.</p>
+    <p>Bonjour,
+        Le manager émet un avis favorable concernant votre choix de formule RTT.
+        Votre demande est actuellement en attente de validation auprès de la Direction.
+        Cordialement,
+        Le service des Ressources Humaines.
+    </p>
 {% elseif statut == 'invalidé N+1' %}
-    <p>Votre demande a été invalidée par votre chef de service.</p>
+    <p>Bonjour,
+        Le manager émet un avis défavorable concernant votre choix de formule RTT.
+        Nous vous invitons à revoir avec lui et à reformuler votre demande.
+        Cordialement,
+        Le service des Ressources Humaines.
+    </p>
 {% elseif statut == 'validé N+2' %}
-    <p>Votre demande a été validée par votre directeur/directrice de branche.</p>
+    <p>Bonjour,</p><p>
+    La direction valide votre choix de formule RTT.</p>
+    <p>
+        Cordialement,
+        Le service des Ressources Humaines.
+        .</p>
 {% elseif statut == 'invalidé N+2' %}
-    <p>Votre demande a été invalidée par votre directeur/directrice de branche.</p>
+    <p>Bonjour,
+        La direction refuse votre choix de formule RTT.
+        Nous vous invitons à revoir votre manager et à reformuler votre demande.
+        Cordialement,
+        Le service des Ressources Humaines.
+    </p>
+{% elseif statut == 'validé N+1' %}
+    <p>Bonjour,
+        Le manager émet un avis favorable à votre demande de temps de partiel.
+        Votre demande est actuellement en attente de validation auprès de la Direction.
+        Cordialement,
+        Le service des Ressources Humaines.
+    </p>
+{% elseif statut == 'invalidé N+1' %}
+    <p>Bonjour,
+        Le manager émet un avis défavorable à votre demande de temps de partiel.
+        Nous vous invitons à revoir avec lui et à reformuler votre demande.
+        Cordialement,
+        Le service des Ressources Humaines.
+
+    </p>
+{% elseif statut == 'validé N+2' %}
+    <p>Bonjour,
+        La direction valide votre demande de temps de partiel.
+        Votre nouveau contrat vous sera transmis prochainement. Pensez bien à remettre un exemplaire dûment signé au
+        service ressources humaines.
+        Cordialement,
+        Le service des Ressources Humaines.
+
+        .</p>
+{% elseif statut == 'invalidé N+2' %}
+    <p>Bonjour,
+        La direction refuse votre demande de temps de partiel.
+        Nous vous invitons à revoir votre manager et à reformuler votre demande.
+        Cordialement,
+        Le service des Ressources Humaines.
+
+    </p>
 {% else %}
     <p>!!! Erreur !!!</p>
 {% endif %}
