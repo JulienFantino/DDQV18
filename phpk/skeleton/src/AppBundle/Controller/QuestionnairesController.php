@@ -149,6 +149,7 @@ class QuestionnairesController extends AbstractController
 
                 try {
                     $em = $this->getDoctrine()->getManager();
+                                       // $qrtt->setIdDdqContrat(24);
                     $qrtt->setStatut('etape6');
                     $qrtt->setSignature(true);
                     $em->persist($qrtt);
@@ -542,6 +543,7 @@ class QuestionnairesController extends AbstractController
             /* Création du formulaire */
             $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireTpType', $qtp, array('disabled' => true));
         }
+
         if ($form->handleRequest($request)->isValid() && $form->isSubmitted()) {
 
             if (($EtapeQuestionnaire == 'nouveau' || $EtapeQuestionnaire == 'invalidé N+1' || $EtapeQuestionnaire == 'invalidé N+2') && $qtp->getMotif() != '') {
@@ -560,6 +562,7 @@ class QuestionnairesController extends AbstractController
                 $nbjours = $qtp->getIdDdqContrat()->getNbjours();
                 $nbJoursInteger = (int)$nbjours;
                 ($nbdemijournee = $qtp->getIdDdqContrat()->getNbdemiesjournees());
+                dump($nbJoursVerif);
                 if ($nbJoursVerif != $nbJoursInteger) {
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($qtp);

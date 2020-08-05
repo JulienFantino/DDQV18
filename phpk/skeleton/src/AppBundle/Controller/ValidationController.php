@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Repository\DdqContratRepository;
+use AppBundle\Repository\DdqQuestionnaireTpRepository;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -85,7 +87,9 @@ class ValidationController extends AbstractController
     {
         /* Récup du questionnaire */
         $qrttRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
         $qrtt = $qrttRepo->find($idQuestionnaire);
+        // dump ($qrtt);
         /* Récup du Repo Agent */
         $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
         /* Récup de l'agent concerné */
@@ -130,9 +134,9 @@ class ValidationController extends AbstractController
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
                     ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     /* ligne à supprimer */
-                    ->setTo('julien.fantino@assurance-maladie.fr')
+                    //   ->setTo('julien.fantino@assurance-maladie.fr')
                     /* ligne à décommenter */
-//                    ->setTo($agent->getMail())
+                    ->setTo($agent->getMail())
                     ->setBody(
                         $this->renderView('Emails/NotificationValidation.html.twig', array(
                             'questionnaire' => $qrtt,
@@ -150,7 +154,8 @@ class ValidationController extends AbstractController
 
                 $mailToDirBranche = (new \Swift_Message('DDQ001 - Notification - ' . $qrtt->getLibelle() . ' à valider'))
                     ->setFrom('ne-pas-repondre@assurance-maladie.fr')
-                    ->setTo($dirBranche->getMail())
+                    // ->setTo($dirBranche->getMail())
+                    ->setTo('')
                     ->setBody(
                         $this->renderView('Emails/NotificationValider.html.twig', array(
                             'questionnaire' => $qrtt,
@@ -160,7 +165,7 @@ class ValidationController extends AbstractController
                     );
                 /*** envoi des mails ***/
                 $mailer->send($mailToAgent);
-//                $mailer->send($mailToDirBranche);
+                $mailer->send($mailToDirBranche);
 
                 $this->notification('Merci, votre validation pour la Demande de ' . $agent->getPrenom() . ' ' . $agent->getNom() . ' pour le choix de formule RTT a bien été enregistrée.', 'success');
                 return $this->redirectToRoute('liste_questionnaires_rtt');
@@ -169,13 +174,22 @@ class ValidationController extends AbstractController
                 return $this->render('AppBundle:Default:notification.html.twig');
             }
         }
+        if ($qrtt->getRepriseTp() == true) {
+            return $this->render('AppBundle:Validation:QuestionnaireRtt2.html.twig', array(
+                'agent' => $agent,
+                'questionnaire' => $qrtt,
+                'form' => $form->createView(),
+                'validForm' => $validForm->createView()
+            ));
+        } else {
+            return $this->render('AppBundle:Validation:QuestionnaireRtt.html.twig', array(
+                'agent' => $agent,
+                'questionnaire' => $qrtt,
+                'form' => $form->createView(),
+                'validForm' => $validForm->createView()
+            ));
+        }
 
-        return $this->render('AppBundle:Validation:QuestionnaireRtt.html.twig', array(
-            'agent' => $agent,
-            'questionnaire' => $qrtt,
-            'form' => $form->createView(),
-            'validForm' => $validForm->createView()
-        ));
     }
 
     public function validationRttN1Action($idQuestionnaire, Request $request)
@@ -225,9 +239,9 @@ class ValidationController extends AbstractController
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
                     ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     /* ligne à supprimer */
-                    ->setTo('julien.fantino@assurance-maladie.fr')
+                    ->setTo('campagne-rh-valideur-rtt-n2.cpam-ain@assurance-maladie.fr')
                     /* ligne à décommenter */
-//                    ->setTo($agent->getMail())
+                    ->setTo($agent->getMail())
                     ->setBody(
                         $this->renderView('Emails/NotificationValidation.html.twig', array(
                             'questionnaire' => $qrtt,
@@ -272,8 +286,25 @@ class ValidationController extends AbstractController
                 'choices' => array('Avis Favorable' => true, 'Avis Défavorable' => false),
                 'choices_as_values' => true,
                 'expanded' => true,
-                'multiple' => false
+                'multiple' => false,
+                'required' => true
+
             ))
+            ->add('CommentaireValideurN1', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
+                'class' => 'AppBundle:DdqQuestionnaireTp',
+                'choice_label' => 'CommentaireValideurN1',
+                'label' => 'Contrat : Heures Hebdo',
+
+                'query_builder' => function (DdqQuestionnaireTpRepository $repo) {
+                    $qtpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireTp');
+                    $qtp = $qtpRepo->find('1176');
+                    $agent = '0292677931118200017';
+                    return $repo->findOneByAgentCommentaire($agent);
+                }
+            ))
+            ->add('CommentaireValideurN1TEST', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
+                'attr' => array('placeholder' => 'Expliquez votre choix si nécessaire. 255 caractères max...')
+            , 'required' => false))
             ->add('bouton', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
                 'predefined' => Bouton::PREDEFINED_VALIDER,
                 'label' => 'Valider',
@@ -342,7 +373,6 @@ class ValidationController extends AbstractController
                 }
 
 
-
                 $this->notification('Merci, votre validation pour la Demande de temps partiel de ' . $agent->getPrenom() . ' ' . $agent->getNom() . ' a bien été enregistrée.', 'success');
                 return $this->redirectToRoute('liste_questionnaires_tp');
             } catch (Exception $e) {
@@ -380,6 +410,9 @@ class ValidationController extends AbstractController
                 'expanded' => true,
                 'multiple' => false
             ))
+            ->add('CommentaireValideurN2', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
+                'attr' => array('placeholder' => 'Expliquez votre choix si nécessaire. 255 caractères max...')
+            , 'required' => false))
             ->add('bouton', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
                 'predefined' => Bouton::PREDEFINED_VALIDER,
                 'label' => 'Valider',

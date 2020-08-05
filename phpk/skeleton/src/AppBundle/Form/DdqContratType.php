@@ -25,7 +25,8 @@ class DdqContratType extends AbstractType
                 'disabled' => false
             ))
             ->add('horairecontractuel', TextareaType::class)
-            ->add('nbjours', TextareaType::class)->add('nbdemiesjournees', TextareaType::class);
+            ->add('nbjours', TextareaType::class)->add('nbdemiesjournees', TextareaType::class)
+            ->add('actif', CheckboxType::class);
     }
 
     /**

@@ -82,12 +82,14 @@
         {% else %}
             !!! Erreur !!!
         {% endif %}
+        <div>{{ form_widget(form.CommentaireValideurN1) }}</div>
     </div>
     <div class="zone-info"><strong>Avis du directeur de branche :</strong></div>
     <div class="section">
         {{ form_start(validForm) }}
         {{ form_errors(validForm) }}
         <div>{{ form_widget(validForm.avis) }}</div>
+        <div>{{ form_widget(form.CommentaireValideurN2) }}</div>
         {{ form_end(validForm) }}
     </div>
     {{ form_end(form) }}

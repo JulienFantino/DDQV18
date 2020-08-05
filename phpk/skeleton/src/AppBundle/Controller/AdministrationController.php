@@ -12,19 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 class AdministrationController extends AbstractController
 {
 
-    public function nouvelleCampagneAction(Request $request)
+    public function nouvelleCampagneAction(Request $request, \Swift_Mailer $mailer)
     {
         /* Création d'une entité agent ou récupération d'une existante */
         $campagne = new DdqCampagne();
 
-//        $boutonValider = new Bouton();
-//        $boutonValider->setText('Valider');
-//        $boutonValider->setPredefined(Bouton::PREDEFINED_VALIDER);
-//        $boutonValider->setType(Bouton::TYPE_SUBMIT);
-//        $boutonRetablir = new Bouton();
-//        $boutonRetablir->setText('Rétablir');
-//        $boutonRetablir->setPredefined(Bouton::PREDEFINED_RETABLIR);
-//        $boutonRetablir->setType(Bouton::TYPE_RESET);
 
         $form = $this->get('form.factory')->create('AppBundle\Form\DdqCampagneType', $campagne);
 
@@ -54,14 +46,14 @@ class AdministrationController extends AbstractController
 
                 /******** Envoi d'une notification par mail *********************/
                 //création d'un objet transport
-                $transport = new \Swift_SmtpTransport();
+                //  $transport = new \Swift_SmtpTransport();
                 //création d'un objet mailer
-                $mailer = (new \Swift_Mailer($transport));
+                //  $mailer = (new \Swift_Mailer($transport));
 
-                $mail = (new \Swift_Message('DDQ001 - Notification - Nouvelle Campagne - Ne pas répondre'))
+                $mail = (new \Swift_Message('CampagneRH - Notification - Nouvelle Campagne - Ne pas répondre'))
                     ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     /*** set l'adresse à 'tous' ***/
-                    ->setTo('julien.fantino@assurance-maladie.fr')
+                    ->setTo('ressourceshumaines.cpam-ain@assurance-maladie.fr')
                     ->setBody(
                         $this->renderView('Emails/NotificationCreationCampagne.html.twig', array('campagne' => $campagne)),
                         'text/html'
@@ -78,7 +70,7 @@ class AdministrationController extends AbstractController
         return $this->render('AppBundle:Administration:NouvelleCampagne.html.twig', array('formCampagne' => $form->createView()));
     }
 
-    public function clotureCampagneAction(Request $request)
+    public function clotureCampagneAction(Request $request, \Swift_Mailer $mailer)
     {
 
         $campagne = new DdqCampagne();
@@ -145,7 +137,7 @@ class AdministrationController extends AbstractController
                     ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
                     /*** set l'adresse à 'tous' ***/
                     //    ->setTo($agent->getMail())
-                    ->setTo('julien.fantino@cpam-ain.cnamts.fr')
+                    ->setTo('ressourceshumaines.cpam-ain@assurance-maladie.fr')
                     ->setBody(
                         $this->renderView('Emails/NotificationClotureCampagne.html.twig', array('campagne' => $campagne)),
                         'text/html'

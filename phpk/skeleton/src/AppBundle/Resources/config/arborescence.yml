@@ -12,11 +12,11 @@ phpk_core:
         RTT:
           route: campagnes_rtt
           libelle: RTT
-          habilitations: [DDQ_CONSULTE]
+          habilitations: [DDQ_ADMIN]
         Temps Partiel:
           route: campagnes_tp
           libelle: Temps Partiel
-          habilitations: [ DDQ_CONSULTE ]
+          habilitations: [ DDQ_ADMIN ]
     #        Télétravail:
     #          libelle: Télétravail
     #          habilitations: [DDQ_CONSULTE]
@@ -27,12 +27,18 @@ phpk_core:
         Parking:
           route: historique_parking
           libelle: Parking
+          habilitations: [DDQ_CONSULTE]
+
         RTT:
           route: historique_rtt
           libelle: RTT
+          habilitations: [ DDQ_ADMIN ]
+
         Temps Partiel:
           route: historique_tp
           libelle: Temps Partiel
+          habilitations: [ DDQ_ADMIN ]
+
     #        Télétravail:
     #          libelle: Télétravail
 
@@ -52,9 +58,23 @@ phpk_core:
               libelle: Niveau 1
               habilitations: [DDQ_VAL_RTT1]
             Niveau 2:
-              route: liste_questionnaires_rttN+1
+              #route: liste_questionnaires_rttN+1
               libelle: Niveau 2
               habilitations: [DDQ_VAL_RTT2]
+              fils:
+                Rtt_global:
+                  libelle: Global
+                  route: liste_questionnaires_rttN+1
+                Branche Resssource:
+                  libelle: Branche ressources
+                Branche PS:
+                  libelle: Branche santé et affaires juridiques
+                Branche Production:
+                  libelle: Branche production et relation client
+                Branche Financiere et comptable:
+                  libelle: Branche financière et comptable
+                Direction Generale:
+                  libelle: Branche Direction Générale
         Temps Partiel:
           libelle: Temps Partiel
           fils:
@@ -66,6 +86,7 @@ phpk_core:
               route: liste_questionnaires_tpN+1
               libelle: Niveau 2
               habilitations: [DDQ_VAL_TP2]
+
     Administration:
       libelle: Administration
       habilitations: [ DDQ_ADMIN ]

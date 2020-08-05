@@ -30,6 +30,33 @@ class DdqQuestionnaireTpRepository extends \Doctrine\ORM\EntityRepository implem
         return $query->getSingleResult();
     }
 
+    public function findOneByAgentCommentaire($agent)
+    {
+        $query0 = $this->_em->createQuery(
+            'SELECT MAX(c.idDdqCampagne) FROM AppBundle:DdqQuestionnaireTp c');
+        $parameters = ($query0->getResult()[0][1]);
+        dump($parameters);
+        /*dump($agent);*/
+
+        $query = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireTp q '
+            . 'JOIN q.idDdqCampagne c '
+            . 'WHERE c.id = :campagne '
+            . 'AND q.idAgent = :idAgent');
+
+        $query->setParameter('campagne', $parameters);
+        $requete = $query;
+        dump($requete);
+        $query->setParameter('idAgent', $agent);
+        $requete1 = $query;
+        dump($requete1);
+        $resultat = $query->getSingleResult();
+        dump($resultat);
+        return $resultat;
+
+
+    }
+
     public function findByMesCampagnes(array $parameters)
     {
         $query = $this->_em->createQuery(

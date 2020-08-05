@@ -85,6 +85,14 @@ class DdqQuestionnaireTpType extends AbstractType
                 $form->add('datemodif', 'Symfony\Component\Form\Extension\Core\Type\DateType', array('widget' => 'single_text', 'format' => 'dd/MM/yyyy', 'data' => new \DateTime(), 'disabled' => true))
                     ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Signature', 'value' => 'toto', 'required' => true));
             }
+            /*if ($EtapeQuestionnaire == 'modifiable' || $EtapeQuestionnaire == 'validé N+1') {
+                $form->add('CommentaireValideurN1', 'Symfony\Component\Form\Extension\Core\Type\TextAreaType', array('label' => 'commentaire'));
+
+            }*/
+            if ($EtapeQuestionnaire == 'validé N+1' || $EtapeQuestionnaire == 'validé N+2') {
+                $form->add('CommentaireValideurN2', 'Symfony\Component\Form\Extension\Core\Type\TextAreaType', array('label' => 'commentaire'));
+            }
+
         });
     }
     /**
