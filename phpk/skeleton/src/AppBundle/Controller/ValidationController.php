@@ -127,6 +127,11 @@ class ValidationController extends AbstractController
 //                    $qrtt->setStatut('modifiable');
                 } else {
                     $qrtt->setStatut('invalidé N+1');
+                    $qrtt->setFormule(null);
+                    $qrtt->setFormule1J(null);
+                    $qrtt->setFormule1S(null);
+                    $qrtt->setReprisetp(null);
+                    $qrtt->setSignature(null);
                 }
                 $em->persist($qrtt);
                 $em->flush();
@@ -155,7 +160,7 @@ class ValidationController extends AbstractController
                 $mailToDirBranche = (new \Swift_Message('DDQ001 - Notification - ' . $qrtt->getLibelle() . ' à valider'))
                     ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     // ->setTo($dirBranche->getMail())
-                    ->setTo('')
+                    ->setTo('campagne-rh-valideur-rtt-n2.cpam-ain@assurance-maladie.fr')
                     ->setBody(
                         $this->renderView('Emails/NotificationValider.html.twig', array(
                             'questionnaire' => $qrtt,
@@ -230,8 +235,14 @@ class ValidationController extends AbstractController
 
                 if ($data['avis']) {
                     $qrtt->setStatut('validé N+2');
+
                 } else {
                     $qrtt->setStatut('invalidé N+2');
+                    $qrtt->setFormule(null);
+                    $qrtt->setFormule1J(null);
+                    $qrtt->setFormule1S(null);
+                    $qrtt->setReprisetp(null);
+                    $qrtt->setSignature(null);
                 }
                 $em->persist($qrtt);
                 $em->flush();
@@ -239,7 +250,7 @@ class ValidationController extends AbstractController
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
                     ->setFrom('ne-pas-repondre@assurance-maladie.fr')
                     /* ligne à supprimer */
-                    ->setTo('campagne-rh-valideur-rtt-n2.cpam-ain@assurance-maladie.fr')
+                    // ->setTo('ressourceshumaines.cpam-ain@assurance-maladie.fr')
                     /* ligne à décommenter */
                     ->setTo($agent->getMail())
                     ->setBody(
@@ -268,6 +279,7 @@ class ValidationController extends AbstractController
             'validForm' => $validForm->createView()
         ));
     }
+
 
     public function validationTpAction($idQuestionnaire, Request $request)
     {
@@ -327,6 +339,7 @@ class ValidationController extends AbstractController
 
                 if ($data['avis']) {
                     $qtp->setStatut('validé N+1');
+
                 } else {
                     $qtp->setStatut('invalidé N+1');
                 }

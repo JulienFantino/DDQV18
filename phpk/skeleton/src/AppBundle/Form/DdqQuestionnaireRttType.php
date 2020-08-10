@@ -51,7 +51,7 @@ class DdqQuestionnaireRttType extends AbstractType
 //                ));    
 //
             } //pour les tests
-            elseif ($EtapeQuestionnaire == "nouveau") {
+            elseif ($EtapeQuestionnaire == "nouveau" || $EtapeQuestionnaire == "invalidé N+1" || $EtapeQuestionnaire == "invalidé N+2") {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
                     array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
@@ -329,7 +329,7 @@ class DdqQuestionnaireRttType extends AbstractType
                         'disabled' => true,
                         'required' => true));
 
-            } elseif ($EtapeQuestionnaire == "etape6" && $reprisetp == 'false') {
+            } elseif ($EtapeQuestionnaire == "etape6" && $reprisetp == false) {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
                     array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
@@ -382,7 +382,61 @@ class DdqQuestionnaireRttType extends AbstractType
                         'disabled' => true,
                         'required' => true));
 
-            } else {
+            } /*elseif ($etapeQuestionnaire="invalidé N+2" or $etapeQuestionnaire = "invalidé N+1" )
+            {
+                $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
+                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                        'required' => false,
+                        'disabled' => false
+
+                    )
+                );
+                $form->add('idDdqContrat', EntityType::class, array(
+                    'class' => 'AppBundle:DdqContrat',
+                    'choice_label' => 'nbheures',
+                    'label' => 'Contrat : Heures Hebdo',
+                    'required' => false,
+                    'disabled' => false,
+                    'query_builder' => function (DdqContratRepository $repo) {
+                        return $repo->getByTempsPartielQueryBuilder(false);
+                    }
+                ));
+                $form->add('formule', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                    array('choices' => array('Première Formule = Jour fixe' => true, ' Deuxième Formule : Gestion au quadrimestre' => false),
+                        'expanded' => true,
+                        'multiple' => false,
+                        'disabled' => false,
+                        'required' => true
+                    ))
+                    ->add('formule1s', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                        array(
+                            'choices' => array('Semaine 1' => true, 'Semaine 2' => false),
+                            'choices_as_values' => true,
+                            'expanded' => true,
+                            'multiple' => false,
+                            'disabled' => false,
+                            'required' => true
+                        )
+                    )
+                    ->add('formule1j', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                        array(
+                            'choices' => array('Lundi' => 'Lundi', 'Mercredi' => 'Mercredi', 'Vendredi' => 'Vendredi'),
+                            'choices_as_values' => true,
+                            'expanded' => true,
+                            'multiple' => false,
+                            'disabled' => false,
+
+                            'required' => true
+                        )
+                    )
+                    ->add('datemodif', 'Symfony\Component\Form\Extension\Core\Type\DateType',
+                        array('widget' => 'single_text', 'format' => 'dd/MM/yyyy', 'data' => new \DateTime(), 'disabled' => true))
+                    ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array(
+                        'label' => 'Signature',
+                        'disabled' => false,
+                        'required' => true));
+            }*/
+            else {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
                     array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
@@ -395,7 +449,7 @@ class DdqQuestionnaireRttType extends AbstractType
                     'choice_label' => 'nbheures',
                     'label' => 'Contrat : Heures Hebdo',
                     'required' => false,
-                    'disabled' => true,
+                    'disabled' => false,
                     'query_builder' => function (DdqContratRepository $repo) {
                         return $repo->getByTempsPartielQueryBuilder(false);
                     }
@@ -404,7 +458,7 @@ class DdqQuestionnaireRttType extends AbstractType
                     array('choices' => array('Première Formule = Jour fixe' => true, ' Deuxième Formule : Gestion au quadrimestre' => false),
                         'expanded' => true,
                         'multiple' => false,
-                        'disabled' => true,
+                        'disabled' => false,
                         'required' => true
                     ))
                     ->add('formule1s', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
@@ -413,7 +467,7 @@ class DdqQuestionnaireRttType extends AbstractType
                             'choices_as_values' => true,
                             'expanded' => true,
                             'multiple' => false,
-                            'disabled' => true,
+                            'disabled' => false,
                             'required' => true
                         )
                     )
@@ -423,16 +477,16 @@ class DdqQuestionnaireRttType extends AbstractType
                             'choices_as_values' => true,
                             'expanded' => true,
                             'multiple' => false,
-                            'disabled' => true,
+                            'disabled' => false,
 
                             'required' => true
                         )
                     )
                     ->add('datemodif', 'Symfony\Component\Form\Extension\Core\Type\DateType',
-                        array('widget' => 'single_text', 'format' => 'dd/MM/yyyy', 'data' => new \DateTime(), 'disabled' => true))
+                        array('widget' => 'single_text', 'format' => 'dd/MM/yyyy', 'data' => new \DateTime(), 'disabled' => false))
                     ->add('signature', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array(
                         'label' => 'Signature',
-                        'disabled' => true,
+                        'disabled' => false,
                         'required' => true));
 
             }

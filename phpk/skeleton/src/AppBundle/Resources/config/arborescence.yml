@@ -12,7 +12,7 @@ phpk_core:
         RTT:
           route: campagnes_rtt
           libelle: RTT
-          habilitations: [DDQ_ADMIN]
+          habilitations: [ DDQ_ADMIN ]
         Temps Partiel:
           route: campagnes_tp
           libelle: Temps Partiel
@@ -67,6 +67,7 @@ phpk_core:
                   route: liste_questionnaires_rttN+1
                 Branche Resssource:
                   libelle: Branche ressources
+                  route: liste_questionnaires_rttN+1_branche_ressources
                 Branche PS:
                   libelle: Branche santé et affaires juridiques
                 Branche Production:

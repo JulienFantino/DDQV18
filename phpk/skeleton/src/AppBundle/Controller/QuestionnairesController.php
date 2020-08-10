@@ -106,9 +106,9 @@ class QuestionnairesController extends AbstractController
         /* Recup des contrats temps plein */
         $contratRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqContrat');
         $contrats = $contratRepo->findByTempsPlein();
-        dump($formule = $qrtt->getFormule());
-        dump($formule1j = $qrtt->getFormule1j());
-        dump($qrtt->getStatut());
+        $formule = $qrtt->getFormule();
+        $formule1j = $qrtt->getFormule1j();
+        $qrtt->getStatut();
         $signature = $qrtt->getSignature();
         /* Création du formulaire */
         $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt);
@@ -116,7 +116,7 @@ class QuestionnairesController extends AbstractController
         // dump($qrtt);
         ($data = $form->getData());
 
-        if ($qrtt->getStatut() !== 'validé N+1' && $qrtt->getStatut() !== 'validé N+2') {
+        if ($qrtt->getStatut() !== 'validé N+1' && $qrtt->getStatut() !== 'validé N+2' && $qrtt->getStatut() !== 'etape6') {
             /** Ajout d'un seul bouton au formulaire */
 
             $form->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
@@ -138,6 +138,23 @@ class QuestionnairesController extends AbstractController
         } elseif ($qrtt->getStatut() == 'validé N+1' && $qrtt->getStatut() == 'validé N+2') {
             /* Création du formulaire */
             $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
+        } elseif ($qrtt->getStatut() == 'etape5') {
+            $form->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
+                    'collection' => array(
+                        'annuler' => array(
+                            'label' => 'Annuler',
+                            'formnovalidate' => false,
+                            'predefined' => Bouton::PREDEFINED_RETABLIR,
+                        ),
+                        'ajouter' => array(
+                            'label' => 'Terminé',
+                            'formnovalidate' => false,
+                            'predefined' => Bouton::PREDEFINED_VALIDER,
+                        ),
+                    ),
+                )
+            );
+
         }
 
 
@@ -145,11 +162,11 @@ class QuestionnairesController extends AbstractController
             //dump ($data = $form->getData());
             //$em = $this->getDoctrine()->getManager();
 
-            if ($qrtt->getStatut() == 'nouveau' && $qrtt->getRepriseTp() == true) {
+            if (($qrtt->getStatut() == 'nouveau' || $qrtt->getStatut() == 'invalidé N+1' || $qrtt->getStatut() == 'invalidé N+2') && $qrtt->getRepriseTp() == true) {
 
                 try {
                     $em = $this->getDoctrine()->getManager();
-                                       // $qrtt->setIdDdqContrat(24);
+                    // $qrtt->setIdDdqContrat(24);
                     $qrtt->setStatut('etape6');
                     $qrtt->setSignature(true);
                     $em->persist($qrtt);
@@ -200,7 +217,7 @@ class QuestionnairesController extends AbstractController
                     $this->notification('Une erreur s\'est produite. Votre demande n\'a pas pu être enregistrée', 'error');
                     return $this->render('DDQ001Bundle:Default:notification.html.twig');
                 }
-            } elseif ($qrtt->getStatut() == 'nouveau' && $qrtt->getRepriseTp() == false) {
+            } elseif (($qrtt->getStatut() == 'nouveau' || $qrtt->getStatut() == 'invalidé N+1' || $qrtt->getStatut() == 'invalidé N+2') && $qrtt->getRepriseTp() == false) {
 
 
                 try {
@@ -311,7 +328,6 @@ class QuestionnairesController extends AbstractController
 
 
             }
-
         }
         //CONSTRUCTION  DES VUES SELON L'ETAPE
         if ($qrtt->getStatut() == 'nouveau') {
@@ -404,6 +420,15 @@ class QuestionnairesController extends AbstractController
                 'form' => $form->createView()
             ));
 
+        } elseif ($qrtt->getStatut() == 'invalidé N+1') {
+            return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRtt.html.twig', array(
+                'agent' => $agent,
+                'campagne' => $campagne,
+                'questionnaire' => $qrtt,
+                'contrats' => $contrats,
+                'form' => $form->createView()
+            ));
+
         } elseif ($qrtt->getStatut() == 'validé N+2') {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtapeTransmission.html.twig', array(
                 'agent' => $agent,
@@ -413,6 +438,14 @@ class QuestionnairesController extends AbstractController
                 'form' => $form->createView()
             ));
 
+        } elseif ($qrtt->getStatut() == 'invalidé N+2') {
+            return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRtt.html.twig', array(
+                'agent' => $agent,
+                'campagne' => $campagne,
+                'questionnaire' => $qrtt,
+                'contrats' => $contrats,
+                'form' => $form->createView()
+            ));
         } else {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtapeTransmission.html.twig', array(
                 'agent' => $agent,

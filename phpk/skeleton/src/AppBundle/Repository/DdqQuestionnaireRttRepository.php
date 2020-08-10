@@ -65,13 +65,91 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
 
     public function findByQuestionnairesRemplisN1(array $parameters)
     {
+        /*
+        Ancienne Requête
         $query = $this->_em->createQuery(
             'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
             . 'JOIN q.idAgent a '
             . 'WHERE a.sigleent LIKE :sigleent '
-            . 'AND q.statut = \'validé N+1\'');
-        $query->setParameter('sigleent', $parameters[0] . '%');
+            . 'AND q.statut = \'validé N+1\'');*/
+        $query = $this->_em->createQuery(
+            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE  q.statut = \'validé N+1\'');
+        //   $query->setParameter('sigleent', $parameters[0] . '%');
+        dump($parameters[0]);
+        dump($query->getResult());
         return $query->getResult();
+    }
+
+    public function findByQuestionnairesRemplisN1BrancheRessources(array $parameters)
+    {
+
+        //$sigleent =substr($parameters[0],0 ,11);
+        $sigleent = '/DIR/SD-ADM';
+        $query1 = $this->_em->createQuery(
+            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.sigleent LIKE :sigleent '
+            . 'AND q.statut = \'validé N+1\'');
+        $query1->setParameter('sigleent', $sigleent . '%');
+        return $query1->getResult();
+    }
+
+    public function findByQuestionnairesRemplisN1BrancheSante(array $parameters)
+    {
+
+        $sigleent = '/DIR/DA';
+        $query1 = $this->_em->createQuery(
+            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.sigleent LIKE :sigleent '
+            . 'AND q.statut = \'validé N+1\'');
+        $query1->setParameter('sigleent', $sigleent . '%');
+        //  dump($query1->getResult());
+        return $query1->getResult();
+    }
+
+    public function findByQuestionnairesRemplisN1BrancheProduction(array $parameters)
+    {
+
+        $sigleent = '/DIR/DA-PROD';
+        $query1 = $this->_em->createQuery(
+            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.sigleent LIKE :sigleent '
+            . 'AND q.statut = \'validé N+1\'');
+        $query1->setParameter('sigleent', $sigleent . '%');
+        dump($query1->getResult());
+        return $query1->getResult();
+    }
+
+    public function findByQuestionnairesRemplisN1BrancheFinance(array $parameters)
+    {
+
+        $sigleent = '/DIR/DIR-FIIN-COMPTA';
+        $query1 = $this->_em->createQuery(
+            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.sigleent LIKE :sigleent '
+            . 'AND q.statut = \'validé N+1\'');
+        $query1->setParameter('sigleent', $sigleent . '%');
+        //  dump($query1->getResult());
+        return $query1->getResult();
+    }
+
+    public function findByQuestionnairesRemplisN1BrancheDirection(array $parameters)
+    {
+
+        $sigleent = "/DIR/DIRECTION";
+        $query1 = $this->_em->createQuery(
+            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.sigleent LIKE :sigleent '
+            . 'AND q.statut = \'validé N+1\'');
+        $query1->setParameter('sigleent', '%' . $sigleent . '%');
+        //  dump($query1->getResult());
+        return $query1->getResult();
     }
 
     public function countByNbTotal($idCampagne)

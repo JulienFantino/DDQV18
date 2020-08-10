@@ -53,6 +53,44 @@ class ListeController extends AbstractController
         return $this->render('AppBundle:Liste:Questionnaires.html.twig', array('tabQuestionnaires' => $tableau));
     }
 
+    public function getListeRttRemplisN1BrancheRessourceAction()
+    {
+        /*** il faut ajouter un getUser pour authentifier le valideur **/
+        /*** ensuite ajouter à la méthode getQuestionnairesRemplis le paramètre idAgent **/
+        /*** de cette manière on précisera dans la requête qu on veut uniquement la liste des agent de la branche du valideur **/
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $valideur = $repository->findOneByNomium($nomium);
+
+        $qrttRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableReponses());
+        $tableau->getDataHandler()->setRepository($qrttRepo)
+            ->setRepositoryMethod('findByQuestionnairesRemplisN1BrancheRessources')
+            ->setRepositoryMethodParameters(array($valideur->getSigleent()));
+
+        return $this->render('AppBundle:Liste:Questionnaires.html.twig', array('tabQuestionnaires' => $tableau));
+    }
+
+    public function getListeRttRemplisN1BrancheSanteAction()
+    {
+        /*** il faut ajouter un getUser pour authentifier le valideur **/
+        /*** ensuite ajouter à la méthode getQuestionnairesRemplis le paramètre idAgent **/
+        /*** de cette manière on précisera dans la requête qu on veut uniquement la liste des agent de la branche du valideur **/
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $valideur = $repository->findOneByNomium($nomium);
+
+        $qrttRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableReponses());
+        $tableau->getDataHandler()->setRepository($qrttRepo)
+            ->setRepositoryMethod('findByQuestionnairesRemplisN1BrancheSante')
+            ->setRepositoryMethodParameters(array($valideur->getSigleent()));
+
+        return $this->render('AppBundle:Liste:Questionnaires.html.twig', array('tabQuestionnaires' => $tableau));
+    }
+
     public function getListeTpRemplisAction()
     {
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
