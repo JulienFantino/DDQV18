@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Table\TableMesCampagnes;
+use AppBundle\Table\TableMonHistorique;
 
 class MonHistoriqueController extends AbstractController
 {
@@ -14,12 +15,12 @@ class MonHistoriqueController extends AbstractController
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
         $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireParking');
-        $tableau = $this->get('phpk_core.tableau')->get(new TableMesCampagnes());
+        $tableau = $this->get('phpk_core.tableau')->get(new TableMonHistorique());
         $tableau->getDataHandler()->setRepository($qpRepo)
             ->setRepositoryMethod('findByMesCampagnesTerminees')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render('AppBundle:MonHistorique:MesCampagnesParkingHistorique.html.twig', array('agent' => $agent, 'tabAgentQuestionnaireHistorique' => $tableau));
     }
 
     public function getHistoriqueRttAction()

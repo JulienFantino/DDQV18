@@ -15,7 +15,7 @@ class MesCampagnesController extends AbstractController
         $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireParking');
 
         $tableau = $this->get('phpk_core.tableau')->get(new TableMesCampagnes());
-        dump($qpRepo);
+      // dump($qpRepo);
         $tableau->getDataHandler()->setRepository($qpRepo)
             ->setRepositoryMethod('findByMesCampagnes')
             ->setRepositoryMethodParameters(array($idAgent));

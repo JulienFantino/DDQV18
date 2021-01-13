@@ -42,11 +42,20 @@ questionnaire_parking:
   path: /questionnaire_parking/{campagne}
   defaults:
     _controller: AppBundle:Questionnaires:getQuestionnaireParking
-
+questionnaire_parking_historique:
+  path: /questionnaire_parking_historique/{campagne}
+  defaults:
+    _controller: AppBundle:Questionnaires:getQuestionnaireParkingHistorique
 questionnaire_rtt:
   path: /questionnaire_rtt/{campagne}
   defaults:
     _controller: AppBundle:Questionnaires:getQuestionnaireRtt
+quetionnaire_rttN+1:
+  path: /quetionnaire_rttN+1/{idQuestionnaire}
+  defaults:
+    _controller: AppBundle:Administration:ConsultationRttN1
+  requirements:
+    idQuestionnaire: '\d+'
 questionnaire_rtt1:
   path: /questionnaire_rtt1/{campagne}
   defaults:
@@ -98,6 +107,22 @@ liste_questionnaires_rttN+1_branche_ressources:
   path: /liste_questionnaires_rttN+1_branche_ressource
   defaults:
     _controller: AppBundle:Liste:getListeRttRemplisN1BrancheRessource
+liste_questionnaires_rttN+1_branche_sante:
+  path: /liste_questionnaires_rttN+1_branche_sante
+  defaults:
+    _controller: AppBundle:Liste:getListeRttRemplisN1BrancheSante
+liste_questionnaires_rttN+1_branche_prod:
+  path: /liste_questionnaires_rttN+1_branche_production
+  defaults:
+    _controller: AppBundle:Liste:getListeRttRemplisN1BrancheProd
+liste_questionnaires_rttN+1_branche_financiere:
+  path: /liste_questionnaires_rttN+1_branche_financiere
+  defaults:
+    _controller: AppBundle:Liste:getListeRttRemplisN1BrancheFinanciere
+liste_questionnaires_rttN+1_branche_direction:
+  path: /liste_questionnaires_rttN+1_branche_direction
+  defaults:
+    _controller: AppBundle:Liste:getListeRttRemplisN1BrancheDirection
 liste_questionnaires_tp:
   path: /liste_questionnaires_tp
   defaults:
@@ -238,3 +263,10 @@ anr_agent:
 anr_update_anr:
   path: /update_anr
   defaults: { _controller: 'AppBundle:AnrUpdate:persist' }
+
+greve_agent:
+  path: /greve_agent
+  defaults:
+    #_controller: AppBundle:Administration:GetDataNonValideAgentRtt
+    _controller: AppBundle:Recensement:GetAgent
+

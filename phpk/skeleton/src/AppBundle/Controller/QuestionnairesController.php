@@ -19,6 +19,8 @@ class QuestionnairesController extends AbstractController
         $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
         $agent = $agentRepo->findOneByNomium($nomium);
         /*Recup du questionnaire */
+        // $campagne =$this->get->getStatut();
+        // dump($campagne);
         $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireParking');
         $qp = $qpRepo->findOneByAgentByCampagne($agent, $campagne);
         if ($qp->getStatut() !== 'validé' && $qp->getStatut() !== 'invalidé') {
@@ -79,6 +81,32 @@ class QuestionnairesController extends AbstractController
             /* Création du formulaire */
             $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp, array('disabled' => true));
         }
+
+        return $this->render('AppBundle:Questionnaires:QuestionnaireParking.html.twig', array(
+            'agent' => $agent,
+            'questionnaire' => $qp,
+            'form' => $form->createView()
+        ));
+    }
+
+    public function getQuestionnaireParkingHistoriqueAction($campagne, Request $request)
+    {
+        /* Identification de l'agent*/
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agent = $agentRepo->findOneByNomium($nomium);
+        /*Recup du questionnaire */
+        // $campagne =$this->get->getStatut();
+        // dump($campagne);
+        $CamapgneRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $CamapgneStatut = $CamapgneRepo->findOneByNomium($nomium);
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireParking');
+        $qp = $qpRepo->findOneByAgentByCampagne($agent, $campagne);
+
+
+        /* Création du formulaire */
+        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp, array('disabled' => true));
+
 
         return $this->render('AppBundle:Questionnaires:QuestionnaireParking.html.twig', array(
             'agent' => $agent,
@@ -233,7 +261,7 @@ class QuestionnairesController extends AbstractController
 
             } elseif ($qrtt->getStatut() == 'etape2' && $contrats != 2) {
                 $em = $this->getDoctrine()->getManager();
-                $qrtt->setFormule(false);
+                // $qrtt->setFormule(false);
 
                 $qrtt->setDatemodif($this->date = new \Datetime());
                 $qrtt->setStatut('etape3');
@@ -250,28 +278,23 @@ class QuestionnairesController extends AbstractController
                 return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
 
 
-            } elseif ($qrtt->getStatut() == 'etape3' && $formule == true) {
+            } elseif ($qrtt->getStatut() == 'etape3') {
                 $em = $this->getDoctrine()->getManager();
                 $qrtt->setStatut('etape4');
                 $em->persist($qrtt);
                 $em->flush();
                 return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
 
-            } elseif ($qrtt->getStatut() == 'etape3' && $formule == false) {
+            } elseif ($qrtt->getStatut() == 'etape4' && $formule == false) {
                 $em = $this->getDoctrine()->getManager();
+                //dump($formule);
+                //var_dump('toto');
                 $qrtt->setStatut('etape5');
                 $em->persist($qrtt);
                 $em->flush();
                 return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
 
             } elseif ($qrtt->getStatut() == 'etape4' && $formule == true) {
-                $em = $this->getDoctrine()->getManager();
-                $qrtt->setStatut('etape5');
-                $em->persist($qrtt);
-                $em->flush();
-                return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
-
-            } elseif ($qrtt->getStatut() == 'etape4' && $formule == false) {
                 $em = $this->getDoctrine()->getManager();
                 $qrtt->setStatut('etape5');
                 $em->persist($qrtt);

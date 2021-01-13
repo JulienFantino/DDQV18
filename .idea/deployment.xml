@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="PROD">
+  <component name="PublishConfigData" autoUpload="Always" serverName="DDQV9">
     <serverData>
+      <paths name="DDQV9">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/DDQV9/phpk/skeleton/" local="$PROJECT_DIR$/../CAMPAGNE_RG_GDG" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="PROD">
         <serverdata>
           <mappings>

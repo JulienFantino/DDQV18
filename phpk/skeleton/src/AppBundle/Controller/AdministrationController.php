@@ -46,14 +46,16 @@ class AdministrationController extends AbstractController
 
                 /******** Envoi d'une notification par mail *********************/
                 //création d'un objet transport
-                //  $transport = new \Swift_SmtpTransport();
+                $transport = new \Swift_SmtpTransport();
                 //création d'un objet mailer
-                //  $mailer = (new \Swift_Mailer($transport));
-
+                $mailer = (new \Swift_Mailer($transport));
+                //$correspondant = 'julien.fantino@assurance-maladie.fr';
+                $correspondant = 'tous-cpam011.cpam-ain@assurance-maladie.fr';
                 $mail = (new \Swift_Message('CampagneRH - Notification - Nouvelle Campagne - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
-                    /*** set l'adresse à 'tous' ***/
-                    ->setTo('ressourceshumaines.cpam-ain@assurance-maladie.fr')
+                    //->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    ->setFrom('serveur-web.cpam-ain@assurance-maladie.fr')
+                    ///*** set l'adresse à 'tous' ***/
+                    ->setTo($correspondant)
                     ->setBody(
                         $this->renderView('Emails/NotificationCreationCampagne.html.twig', array('campagne' => $campagne)),
                         'text/html'
@@ -137,7 +139,7 @@ class AdministrationController extends AbstractController
                     ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
                     /*** set l'adresse à 'tous' ***/
                     //    ->setTo($agent->getMail())
-                    ->setTo('ressourceshumaines.cpam-ain@assurance-maladie.fr')
+                    ->setTo('tous-capm011.cpam-ain@assurance-maladie.fr')
                     ->setBody(
                         $this->renderView('Emails/NotificationClotureCampagne.html.twig', array('campagne' => $campagne)),
                         'text/html'
@@ -170,7 +172,7 @@ class AdministrationController extends AbstractController
             ->setRepositoryMethod('findAll')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
 
     }
 
@@ -188,7 +190,7 @@ class AdministrationController extends AbstractController
             ->setRepositoryMethod('findBy39hJoursFixes')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
 
     }
 
@@ -206,7 +208,7 @@ class AdministrationController extends AbstractController
             ->setRepositoryMethod('findBy39hQuadrimestre')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
 
     }
 
@@ -224,7 +226,7 @@ class AdministrationController extends AbstractController
             ->setRepositoryMethod('findBy37h00')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
 
     }
 
@@ -242,7 +244,7 @@ class AdministrationController extends AbstractController
             ->setRepositoryMethod('findBy36h00')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
 
     }
 
@@ -260,7 +262,27 @@ class AdministrationController extends AbstractController
             ->setRepositoryMethod('findByNonValide')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesParking.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
 
+    }
+
+    public function ConsultationRttN1Action($idQuestionnaire, Request $request)
+    {
+        /* Récup du questionnaire */
+        $qrttRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+        $qrtt = $qrttRepo->find($idQuestionnaire);
+        /* Récup de l'agent concerné */
+        $agent = $qrtt->getIdAgent();
+        /* Création du formulaire */
+        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
+        /* Création formulaire de validation/invalidation */
+        $validForm = $this->createFormBuilder()
+            ->getForm();
+        return $this->render('AppBundle:Administration:consultation_questionnaire.html.twig', array(
+            'agent' => $agent,
+            'questionnaire' => $qrtt,
+            'form' => $form->createView(),
+            'validForm' => $validForm->createView()
+        ));
     }
 }

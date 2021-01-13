@@ -53,13 +53,33 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
     }
 
     public function findByQuestionnairesRemplis(array $parameters)
-    {
+    { /*$test='DREVET ESTELLE';
+ $testidresponsable ='0254977931118200017'
+        $query1 = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.nomresponsable = :nomentabrege '
+            . 'AND q.statut = \'etape6\'');
+        $query1->setParameter('nomentabrege', $test);
+        $query1->getResult();
+       // dump($query1->getResult());
+
         $query = $this->_em->createQuery(
             'SELECT q FROM AppBundle:DdqQuestionnaireRtt q '
             . 'JOIN q.idAgent a '
             . 'WHERE a.nomentabrege = :nomentabrege '
             . 'AND q.statut = \'etape6\'');
         $query->setParameter('nomentabrege', $parameters[0]);
+        */
+
+        $query = $this->_em->createQuery(
+            'SELECT q FROM AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.idresponsable = :nomresponsable '
+            . 'AND q.statut = \'etape6\'');
+        //OR q.statut = \'validé N+1\''
+        $query->setParameter('nomresponsable', $parameters[0]);
+        //dump($parameters[0]);
         return $query->getResult();
     }
 
@@ -77,8 +97,8 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
             . 'JOIN q.idAgent a '
             . 'WHERE  q.statut = \'validé N+1\'');
         //   $query->setParameter('sigleent', $parameters[0] . '%');
-        dump($parameters[0]);
-        dump($query->getResult());
+        // dump($parameters[0]);
+        //dump($query->getResult());
         return $query->getResult();
     }
 
@@ -99,7 +119,21 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
     public function findByQuestionnairesRemplisN1BrancheSante(array $parameters)
     {
 
-        $sigleent = '/DIR/DA';
+        $sigleent = '/DIR/DA/';
+        $query1 = $this->_em->createQuery(
+            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.sigleent LIKE :sigleent '
+            . 'AND q.statut = \'validé N+1\'');
+        $query1->setParameter('sigleent', '%' . $sigleent . '%');
+        //  dump($query1->getResult());
+        return $query1->getResult();
+    }
+
+    public function findByQuestionnairesRemplisN1BrancheProd(array $parameters)
+    {
+
+        $sigleent = '/DIR/DA-PROD/';
         $query1 = $this->_em->createQuery(
             'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
             . 'JOIN q.idAgent a '
@@ -107,20 +141,6 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
             . 'AND q.statut = \'validé N+1\'');
         $query1->setParameter('sigleent', $sigleent . '%');
         //  dump($query1->getResult());
-        return $query1->getResult();
-    }
-
-    public function findByQuestionnairesRemplisN1BrancheProduction(array $parameters)
-    {
-
-        $sigleent = '/DIR/DA-PROD';
-        $query1 = $this->_em->createQuery(
-            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
-            . 'JOIN q.idAgent a '
-            . 'WHERE a.sigleent LIKE :sigleent '
-            . 'AND q.statut = \'validé N+1\'');
-        $query1->setParameter('sigleent', $sigleent . '%');
-        dump($query1->getResult());
         return $query1->getResult();
     }
 
@@ -141,13 +161,28 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
     public function findByQuestionnairesRemplisN1BrancheDirection(array $parameters)
     {
 
-        $sigleent = "/DIR/DIRECTION";
+        // $query1->setParameter('sigleent1', '%' . $sigleent1 . '%');
+        // $query1->setParameter('sigleent2', '%' . $sigleent2 . '%');
+        // $query1->setParameter('sigleent3', '%' . $sigleent3 . '%');
+        //$query1->setParameter('sigleent4', '%' . $sigleent4 . '%');
+
+
+        $sigleent = "/DIR/SD-ADM";
+        $sigleent2 = '/DIR/DA';
+        $sigleent3 = '/DIR/DA-PROD';
+        $sigleent4 = '/DIR/DIR-FIIN-COMPTA';
         $query1 = $this->_em->createQuery(
             'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
             . 'JOIN q.idAgent a '
-            . 'WHERE a.sigleent LIKE :sigleent '
+            . 'WHERE a.sigleent NOT LIKE :sigleent '
+            . 'AND a.sigleent NOT LIKE :sigleent2 '
+            . 'AND a.sigleent NOT LIKE :sigleent3 '
+            . 'AND a.sigleent NOT LIKE :sigleent4 '
             . 'AND q.statut = \'validé N+1\'');
         $query1->setParameter('sigleent', '%' . $sigleent . '%');
+        $query1->setParameter('sigleent2', '%' . $sigleent2 . '%');
+        $query1->setParameter('sigleent3', '%' . $sigleent3 . '%');
+        $query1->setParameter('sigleent4', '%' . $sigleent4 . '%');
         //  dump($query1->getResult());
         return $query1->getResult();
     }

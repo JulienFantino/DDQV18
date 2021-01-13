@@ -12,7 +12,7 @@ phpk_core:
         RTT:
           route: campagnes_rtt
           libelle: RTT
-          habilitations: [ DDQ_ADMIN ]
+          habilitations: [ DDQ_CONSULTE ]
         Temps Partiel:
           route: campagnes_tp
           libelle: Temps Partiel
@@ -32,7 +32,7 @@ phpk_core:
         RTT:
           route: historique_rtt
           libelle: RTT
-          habilitations: [ DDQ_ADMIN ]
+          habilitations: [ DDQ_CONSULTE ]
 
         Temps Partiel:
           route: historique_tp
@@ -50,6 +50,10 @@ phpk_core:
           habilitations: [DDQ_VAL_PARK]
           route: liste_questionnaires_parking
           libelle: Parking
+        Rencessement RH:
+          habilitations: [DDQ_RRH]
+          route: greve_agent
+          libelle: Recenssement RH
         RTT:
           libelle: RTT
           fils:
@@ -68,14 +72,18 @@ phpk_core:
                 Branche Resssource:
                   libelle: Branche ressources
                   route: liste_questionnaires_rttN+1_branche_ressources
-                Branche PS:
+                Branche Sante:
                   libelle: Branche santé et affaires juridiques
+                  route: liste_questionnaires_rttN+1_branche_sante
                 Branche Production:
                   libelle: Branche production et relation client
+                  route: liste_questionnaires_rttN+1_branche_prod
                 Branche Financiere et comptable:
                   libelle: Branche financière et comptable
+                  route: liste_questionnaires_rttN+1_branche_financiere
                 Direction Generale:
                   libelle: Branche Direction Générale
+                  route: liste_questionnaires_rttN+1_branche_direction
         Temps Partiel:
           libelle: Temps Partiel
           fils:
