@@ -27,7 +27,7 @@ class GestionUtilisateurController extends AbstractController
     {
 
         $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireParking');
-        $idCampagne = 43;
+        //$idCampagne = 43;
 
         $tableau = $this->get('phpk_core.tableau')->get(new TableAgentParking());
         $tableau->getDataHandler()->setRepository($qpRepo)
@@ -86,8 +86,8 @@ class GestionUtilisateurController extends AbstractController
 
             try {
                 $data = $form->getData();
-                $idCampagne = $data['libelle']->getId();
-                return $this->redirectToRoute('resultats_parking_campagne', array('idCampagne' => $idCampagne));
+                $idCampagnes = $data['libelle']->getId();
+                return $this->redirectToRoute('resultats_parking_campagne', array('idCampagne' => $idCampagnes));
             } catch (Exception $e) {
                 $this->notification('Une erreur s\'est produite. La campagne n\'a pas pu être sélectionnée', 'error');
                 return $this->render(' AppBundle:Default:index.html.twig');
