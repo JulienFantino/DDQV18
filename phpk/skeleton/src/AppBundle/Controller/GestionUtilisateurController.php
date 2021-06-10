@@ -13,7 +13,7 @@ use AppBundle\Entity\DdqCampagne;
 use AppBundle\Table\TableAgentParking;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
-
+use Exception;
 /**
  * Description of GestionUtilisateurController
  *
