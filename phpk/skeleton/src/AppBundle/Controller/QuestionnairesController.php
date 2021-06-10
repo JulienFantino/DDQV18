@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\ContactService;
 use AppBundle\Entity\DdqRepartition;
-
+use Exception;
 class QuestionnairesController extends AbstractController
 {
     public function getQuestionnaireParkingAction($campagne, Request $request, \Swift_Mailer $mailer)
