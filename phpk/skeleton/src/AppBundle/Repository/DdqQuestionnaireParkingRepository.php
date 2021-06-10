@@ -122,8 +122,7 @@ class DdqQuestionnaireParkingRepository extends \Doctrine\ORM\EntityRepository i
     public function findByCampagnesUtilisateur($idCampagne)
     {
         $sql = 'SELECT agent.Nomium AS nomium ORDER BYagent.Nomium ';
-        $idCampagne = 43;
-        $query = $this->_em->createQuery(
+          $query = $this->_em->createQuery(
             'SELECT q  FROM AppBundle:DdqQuestionnaireParking q '
             . 'WHERE q.idDdqCampagne = :campagne '
             . 'AND q.statut = \'modifiable\' '
