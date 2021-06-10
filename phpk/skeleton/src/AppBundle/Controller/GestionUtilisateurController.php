@@ -27,7 +27,7 @@ class GestionUtilisateurController extends AbstractController
     {
 
         $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireParking');
-        //$idCampagne = 43;
+        $idCampagne = 43;
 
         $tableau = $this->get('phpk_core.tableau')->get(new TableAgentParking());
         $tableau->getDataHandler()->setRepository($qpRepo)
