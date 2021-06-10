@@ -670,7 +670,7 @@ class QuestionnairesController extends AbstractController
                     //création d'un objet transport
                     $transport = new \Swift_SmtpTransport();
                     //création d'un objet mailer
-                    $mailer = (new \Swift_Mailer($transport));
+                    $mailers = (new \Swift_Mailer($transport));
                     /******** mail à destination de l'agent ****************/
                     $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Ne pas répondre'))
                         ->setFrom('ne-pas-repondre@assurance-maladie.fr')
@@ -698,7 +698,7 @@ class QuestionnairesController extends AbstractController
                             'text/html'
                         );
 
-                    $mailer->send($mailToAgent);
+                    $mailers->send($mailToAgent);
                     //  dump($mailToResponsableService);
                     //$mailer->send($mailToResponsableService);
                     /*****************************************************************************/
