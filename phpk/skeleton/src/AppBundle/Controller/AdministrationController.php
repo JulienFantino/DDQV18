@@ -48,7 +48,7 @@ class AdministrationController extends AbstractController
                 //création d'un objet transport
                 $transport = new \Swift_SmtpTransport();
                 //création d'un objet mailer
-                $mailer = (new \Swift_Mailer($transport));
+                $mailers = (new \Swift_Mailer($transport));
                 //$correspondant = 'julien.fantino@assurance-maladie.fr';
                 $correspondant = 'tous-cpam011.cpam-ain@assurance-maladie.fr';
                 $mail = (new \Swift_Message('CampagneRH - Notification - Nouvelle Campagne - Ne pas répondre'))
@@ -60,7 +60,7 @@ class AdministrationController extends AbstractController
                         $this->renderView('Emails/NotificationCreationCampagne.html.twig', array('campagne' => $campagne)),
                         'text/html'
                     );
-                $mailer->send($mail);
+                $mailers->send($mail);
                 /*****************************************************************************/
                 $this->notification('Merci, votre nouvelle campagne a bien été créée', 'success');
                 return $this->render('AppBundle:Default:notification.html.twig');
@@ -133,7 +133,7 @@ class AdministrationController extends AbstractController
                 //création d'un objet transport
                 $transport = new \Swift_SmtpTransport();
                 //création d'un objet mailer
-                $mailer = (new \Swift_Mailer($transport));
+                $mailers = (new \Swift_Mailer($transport));
 
                 $mail = (new \Swift_Message('DDQ001 - Notification - Clôture Campagne - Ne pas répondre'))
                     ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
@@ -144,7 +144,7 @@ class AdministrationController extends AbstractController
                         $this->renderView('Emails/NotificationClotureCampagne.html.twig', array('campagne' => $campagne)),
                         'text/html'
                     );
-                $mailer->send($mail);
+                $mailers->send($mail);
                 /*****************************************************************************/
                 $this->notification('Merci, la campagne a bien été clôturée', 'success');
                 return $this->render('AppBundle:Default:notification.html.twig');
