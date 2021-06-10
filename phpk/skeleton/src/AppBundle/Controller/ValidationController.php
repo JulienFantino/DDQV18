@@ -6,7 +6,7 @@ use AppBundle\Repository\DdqContratRepository;
 use AppBundle\Repository\DdqQuestionnaireTpRepository;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
-
+use Exception;
 class ValidationController extends AbstractController
 {
     public function validationParkingAction($idQuestionnaire, Request $request)
