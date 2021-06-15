@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SPLITTER_PROPORTION" value="0.26202533" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d1775b31-87f8-4ca0-979d-edde80fbb67e" name="Default Changelist" comment="Code quality1">
+      <change beforePath="$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Controller/AdministrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Controller/AdministrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Controller/QuestionnairesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Controller/QuestionnairesController.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable path="composer" />
+    </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1Q2mjFXdzGfdmc6XpbROvhcdLeB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="AutoIdentifyTypo3Version" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="Project Files" />
+    <property name="TYPO3AuthorEmailAddress" value="myname@example.org" />
+    <property name="TYPO3AuthorName" value="My Name" />
+    <property name="TYPO3PathToExtensionDomainModels" value="Classes/Domain/Model/" />
+    <property name="TYPO3PathToLocalExtensions" value="typo3conf/ext/" />
+    <property name="TYPO3PathToSystemExtensions" value="typo3/sysext/" />
+    <property name="TYPO3ProjectConfigured" value="true" />
+    <property name="TYPO3Version" value="None" />
+    <property name="TYPO3XliffLanguages" value="af:Afrikaans;&#10;ar:Arabic;&#10;bs:Bosnian;&#10;bg:Bulgarian;&#10;ca:Catalan;&#10;ch:Chinese (Simpl.);&#10;cs:Czech;&#10;da:Danish;&#10;de:German;&#10;el:Greek;&#10;eo:Esperanto;&#10;es:Spanish;&#10;et:Estonian;&#10;eu:Basque;&#10;fa:Persian;&#10;fi:Finnish;&#10;fo:Faroese;&#10;fr:French;&#10;fr_CA:French (Canada);&#10;gl:Galician;&#10;he:Hebrew;&#10;hi:Hindi;&#10;hr:Croatian;&#10;hu:Hungarian;&#10;is:Icelandic;&#10;it:Italian;&#10;ja:Japanese;&#10;ka:Georgian;&#10;kl:Greenlandic;&#10;km:Khmer;&#10;ko:Korean;&#10;lt:Lithuanian;&#10;lv:Latvian;&#10;ms:Malay;&#10;nl:Dutch;&#10;no:Norwegian;&#10;pl:Polish;&#10;pt:Portuguese;&#10;pt_BR:Brazilian Portuguese;&#10;ro:Romanian;&#10;ru:Russian;&#10;sk:Slovak;&#10;sl:Slovenian;&#10;sq:Albanian;&#10;sr:Serbian;&#10;sv:Swedish;&#10;th:Thai;&#10;tr:Turkish;&#10;uk:Ukrainian;&#10;vi:Vietnamese;&#10;zh:Chinese (Trad.)" />
+    <property name="TYPO3XliffPathToExtensionLanguageFiles" value="Resources/Private/Language/" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="com.jetbrains.php.refactoring.introduce.introduceConstant.PhpClassConstantInplaceIntroducer.lastSelectedVisibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\FANTINO-02926\PhpstormProjects\TEST\phpk\skeleton\src\AppBundle\Entity" />
+      <recent name="C:\Users\FANTINO-02926\PhpstormProjects\TEST\phpk\skeleton\src\AppBundle\Resources\views" />
+      <recent name="C:\Users\FANTINO-02926\PhpstormProjects\TEST\phpk\skeleton\src\AppBundle\Resources\views\Questionnaires\TP" />
+      <recent name="C:\Users\FANTINO-02926\PhpstormProjects\TEST\phpk\skeleton\src\AppBundle\Resources\views\Questionnaires\RTT" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\FANTINO-02926\PhpstormProjects\TEST\phpk\skeleton\src\AppBundle\Resources\views\MonHistorique" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d1775b31-87f8-4ca0-979d-edde80fbb67e" name="Default Changelist" comment="" />
+      <created>1562664352857</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1562664352857</updated>
+      <workItem from="1562664354518" duration="4741000" />
+      <workItem from="1562674055437" duration="3434000" />
+      <workItem from="1562679228103" duration="16527000" />
+      <workItem from="1563174781295" duration="17630000" />
+      <workItem from="1563434479578" duration="5878000" />
+      <workItem from="1563794040323" duration="1193000" />
+      <workItem from="1563863766827" duration="1903000" />
+      <workItem from="1563949447170" duration="1431000" />
+      <workItem from="1564125240397" duration="1138000" />
+      <workItem from="1564142319773" duration="2057000" />
+      <workItem from="1564385531532" duration="591000" />
+      <workItem from="1564468312823" duration="23569000" />
+      <workItem from="1564644364810" duration="8921000" />
+      <workItem from="1564661047514" duration="6104000" />
+      <workItem from="1564725109874" duration="12454000" />
+      <workItem from="1564988171265" duration="10226000" />
+      <workItem from="1565069831842" duration="2125000" />
+      <workItem from="1565249022608" duration="7827000" />
+      <workItem from="1565331935286" duration="10279000" />
+      <workItem from="1565357123751" duration="1553000" />
+      <workItem from="1565359997598" duration="293000" />
+      <workItem from="1565596436883" duration="13016000" />
+      <workItem from="1565621168523" duration="1245000" />
+      <workItem from="1566198215017" duration="2532000" />
+      <workItem from="1566289995245" duration="1389000" />
+      <workItem from="1566467289646" duration="2665000" />
+      <workItem from="1566801643814" duration="1188000" />
+      <workItem from="1566977313516" duration="706000" />
+      <workItem from="1567065441204" duration="2474000" />
+      <workItem from="1567145489236" duration="1208000" />
+      <workItem from="1567488707083" duration="1775000" />
+      <workItem from="1567493386848" duration="602000" />
+      <workItem from="1567495215879" duration="13639000" />
+      <workItem from="1567580812545" duration="16135000" />
+      <workItem from="1567664500483" duration="10939000" />
+      <workItem from="1568268131471" duration="2632000" />
+      <workItem from="1568356974405" duration="5014000" />
+      <workItem from="1569930689540" duration="6203000" />
+      <workItem from="1569996595297" duration="10121000" />
+      <workItem from="1570082541502" duration="2267000" />
+      <workItem from="1570437311169" duration="3358000" />
+      <workItem from="1571745350656" duration="6645000" />
+      <workItem from="1571816464958" duration="6174000" />
+      <workItem from="1571835885248" duration="6754000" />
+      <workItem from="1571898789748" duration="980000" />
+      <workItem from="1571900610309" duration="8362000" />
+      <workItem from="1572248056628" duration="4059000" />
+      <workItem from="1572418632926" duration="1984000" />
+      <workItem from="1572503660376" duration="13299000" />
+      <workItem from="1572852691273" duration="12896000" />
+      <workItem from="1572935061563" duration="5768000" />
+      <workItem from="1573024274711" duration="16454000" />
+      <workItem from="1573112590319" duration="11104000" />
+      <workItem from="1574239190031" duration="1898000" />
+      <workItem from="1574322321447" duration="16788000" />
+      <workItem from="1574418319558" duration="1944000" />
+      <workItem from="1574665310161" duration="650000" />
+      <workItem from="1574666906560" duration="3693000" />
+      <workItem from="1574678677003" duration="1499000" />
+      <workItem from="1574684776131" duration="1059000" />
+      <workItem from="1574750883736" duration="3376000" />
+      <workItem from="1574772146589" duration="1608000" />
+      <workItem from="1574777326641" duration="4078000" />
+      <workItem from="1574952002393" duration="2240000" />
+      <workItem from="1575014428135" duration="619000" />
+      <workItem from="1575377552670" duration="5718000" />
+      <workItem from="1575443878108" duration="939000" />
+      <workItem from="1575450626912" duration="7518000" />
+      <workItem from="1575463969518" duration="8801000" />
+      <workItem from="1575553621902" duration="3189000" />
+      <workItem from="1575618081682" duration="3026000" />
+      <workItem from="1575625343894" duration="2814000" />
+      <workItem from="1575635188320" duration="756000" />
+      <workItem from="1575641248533" duration="594000" />
+      <workItem from="1576228994027" duration="4707000" />
+      <workItem from="1576492173926" duration="4212000" />
+      <workItem from="1576502259222" duration="3634000" />
+      <workItem from="1576748795181" duration="761000" />
+      <workItem from="1576762954727" duration="2309000" />
+      <workItem from="1577698648567" duration="4644000" />
+      <workItem from="1577783121178" duration="592000" />
+      <workItem from="1577958204482" duration="577000" />
+      <workItem from="1577961231588" duration="1470000" />
+      <workItem from="1577968083332" duration="14973000" />
+      <workItem from="1578034032677" duration="746000" />
+      <workItem from="1578291701608" duration="75000" />
+      <workItem from="1578296974560" duration="4729000" />
+      <workItem from="1578314570122" duration="3146000" />
+      <workItem from="1578385499525" duration="7148000" />
+      <workItem from="1578909446719" duration="755000" />
+      <workItem from="1578912753422" duration="4858000" />
+      <workItem from="1578932654199" duration="839000" />
+      <workItem from="1578989565376" duration="2009000" />
+      <workItem from="1579072487497" duration="829000" />
+      <workItem from="1579089330467" duration="4988000" />
+      <workItem from="1579158376530" duration="8812000" />
+      <workItem from="1579502513692" duration="7489000" />
+      <workItem from="1579520705681" duration="1207000" />
+      <workItem from="1579525488024" duration="11560000" />
+      <workItem from="1579769854010" duration="7037000" />
+      <workItem from="1579871038749" duration="1161000" />
+      <workItem from="1580201613244" duration="572000" />
+      <workItem from="1580719212029" duration="9049000" />
+      <workItem from="1580735433151" duration="1140000" />
+      <workItem from="1580738187741" duration="122000" />
+      <workItem from="1580739044530" duration="11000" />
+      <workItem from="1580739922162" duration="516000" />
+      <workItem from="1580743981716" duration="45000" />
+      <workItem from="1580745066841" duration="64000" />
+      <workItem from="1580745726226" duration="787000" />
+      <workItem from="1591085658393" duration="33000" />
+      <workItem from="1591085899032" duration="1135000" />
+      <workItem from="1591090437097" duration="7000" />
+      <workItem from="1591091754438" duration="4000" />
+      <workItem from="1591092781834" duration="32000" />
+      <workItem from="1591094771066" duration="438000" />
+      <workItem from="1591095675319" duration="1288000" />
+      <workItem from="1591108063314" duration="686000" />
+      <workItem from="1591167567088" duration="1349000" />
+      <workItem from="1591174598707" duration="13010000" />
+      <workItem from="1591256560107" duration="2321000" />
+      <workItem from="1591339961716" duration="3070000" />
+      <workItem from="1591344638294" duration="1009000" />
+      <workItem from="1591359440993" duration="693000" />
+      <workItem from="1591360459205" duration="2522000" />
+      <workItem from="1591596628671" duration="1027000" />
+      <workItem from="1591597961053" duration="3331000" />
+      <workItem from="1591620339530" duration="1303000" />
+      <workItem from="1591692315686" duration="3862000" />
+      <workItem from="1591771873594" duration="13941000" />
+      <workItem from="1593768225395" duration="780000" />
+      <workItem from="1596526950277" duration="367000" />
+      <workItem from="1596527461256" duration="8111000" />
+      <workItem from="1596549812112" duration="628000" />
+      <workItem from="1596619352893" duration="56000" />
+      <workItem from="1596619430190" duration="256000" />
+      <workItem from="1596619722122" duration="62000" />
+      <workItem from="1596619800670" duration="504000" />
+      <workItem from="1596620437712" duration="77000" />
+      <workItem from="1596620643821" duration="103000" />
+      <workItem from="1596621530859" duration="1947000" />
+      <workItem from="1596629636403" duration="4265000" />
+      <workItem from="1596695009795" duration="12600000" />
+      <workItem from="1596810832090" duration="607000" />
+      <workItem from="1597042894685" duration="8142000" />
+      <workItem from="1597054530335" duration="401000" />
+      <workItem from="1597059112476" duration="9623000" />
+      <workItem from="1597126018811" duration="11976000" />
+      <workItem from="1597212170493" duration="8025000" />
+      <workItem from="1597299088435" duration="6751000" />
+      <workItem from="1597382417287" duration="598000" />
+      <workItem from="1597648069839" duration="76000" />
+      <workItem from="1597648353692" duration="598000" />
+      <workItem from="1597736833122" duration="611000" />
+      <workItem from="1597737907341" duration="1658000" />
+      <workItem from="1597821923142" duration="1823000" />
+      <workItem from="1597843639600" duration="745000" />
+      <workItem from="1597909808175" duration="599000" />
+      <workItem from="1598018465093" duration="1197000" />
+      <workItem from="1598513000723" duration="484000" />
+      <workItem from="1598593596106" duration="599000" />
+      <workItem from="1598960236763" duration="1088000" />
+      <workItem from="1599136299173" duration="2820000" />
+      <workItem from="1599201587402" duration="7065000" />
+      <workItem from="1599217337687" duration="3747000" />
+      <workItem from="1599488010899" duration="935000" />
+      <workItem from="1599547511783" duration="3047000" />
+      <workItem from="1599729723138" duration="6347000" />
+      <workItem from="1599815866638" duration="3608000" />
+      <workItem from="1601278570319" duration="4376000" />
+      <workItem from="1601540119359" duration="598000" />
+      <workItem from="1601622399562" duration="3041000" />
+      <workItem from="1602075702861" duration="1243000" />
+      <workItem from="1602482496918" duration="2208000" />
+      <workItem from="1602507646808" duration="201000" />
+      <workItem from="1602507871972" duration="2452000" />
+      <workItem from="1602661750203" duration="7835000" />
+      <workItem from="1603186317731" duration="2564000" />
+      <workItem from="1604654262818" duration="1196000" />
+      <workItem from="1604658350756" duration="1195000" />
+      <workItem from="1605770334303" duration="2258000" />
+      <workItem from="1605860661462" duration="303000" />
+      <workItem from="1606750846351" duration="489000" />
+      <workItem from="1607071141510" duration="1938000" />
+      <workItem from="1607086957694" duration="12000" />
+      <workItem from="1607087073145" duration="1001000" />
+      <workItem from="1607090254718" duration="661000" />
+      <workItem from="1607935614207" duration="1950000" />
+      <workItem from="1607957663877" duration="820000" />
+      <workItem from="1608027954681" duration="12000" />
+      <workItem from="1608028526157" duration="2285000" />
+      <workItem from="1608048517246" duration="1197000" />
+      <workItem from="1608802340106" duration="740000" />
+      <workItem from="1610530103706" duration="3156000" />
+      <workItem from="1610693512940" duration="3347000" />
+      <workItem from="1610957751163" duration="1732000" />
+      <workItem from="1612793532886" duration="1368000" />
+      <workItem from="1613032555485" duration="478000" />
+      <workItem from="1613136798363" duration="1197000" />
+      <workItem from="1623067447124" duration="10091000" />
+      <workItem from="1623143360675" duration="2685000" />
+      <workItem from="1623155117460" duration="5642000" />
+      <workItem from="1623223062172" duration="1811000" />
+      <workItem from="1623314244111" duration="7624000" />
+      <workItem from="1623739314898" duration="6004000" />
+      <workItem from="1623756593650" duration="7499000" />
+    </task>
+    <task id="LOCAL-00001" summary=" &#10; DDQ MODULE RTT CLIENT">
+      <created>1565358244698</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1565358244698</updated>
+    </task>
+    <task id="LOCAL-00002" summary=" &#10;Correction : use Doctrine\ORM\Mapping as ORM; =&gt; considérer à tord comme nerver use.. Sans ça l'annotation ne fonctionne pas">
+      <created>1565597055134</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1565597055134</updated>
+    </task>
+    <task id="LOCAL-00003" summary=" &#10;Ajout du service mailing en remplacement de l'instanciation d'ojet swiftmail et transport&#10;Arboressence des vues RTT ADMIN">
+      <created>1565620195085</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1565620195085</updated>
+    </task>
+    <task id="LOCAL-00004" summary=" &#10;Ajout du service mailing en remplacement de l'instanciation d'ojet swiftmail et transport&#10;Arboressence des vues RTT ADMIN">
+      <created>1565620346246</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1565620346246</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Création du tableau RTT Administration sans les données">
+      <created>1567495933674</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1567495933674</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Création du tableau RTT Administration avec les données:&#10;Etat global Ok&#10;Etat 39h00 Jour fixe Ok&#10;Etat 39h00 Quadrimestre OK&#10;Etat 37h00 Ok&#10;Etat 36h00 Ok&#10;Etat Non Valide N+2 OK&#10;&#10;paramétrage routing et arboressence &#10;paramétrage des méthod find dans le repositry DDQrtt">
+      <created>1567519960966</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1567519960966</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Création du tableau RTT Administration sans les données">
+      <created>1572512892865</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1572512892865</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Module temps partiel Client">
+      <created>1575469060212</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1575469060212</updated>
+    </task>
+    <task id="LOCAL-00009" summary="MODULE  TEMPS PARTIEL">
+      <created>1578915124006</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1578915124006</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Modifications réunion Séverine">
+      <created>1579790093780</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1579790093780</updated>
+    </task>
+    <task id="LOCAL-00011" summary="modification des modèles de mails">
+      <created>1591177889928</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1591177889929</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Ajout des paramètres de test du module rtt.&#10;Modification du mécanisme de validation n+2&#10;Ajout des vues pour les différentes branches RTT">
+      <created>1596624242625</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1596624242625</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Création du tableau RTT Administration sans les données">
+      <created>1597061687462</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1597061687462</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Création du module GDG">
+      <created>1623767871011</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1623767871011</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Code quality1">
+      <created>1623771930013</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1623771930013</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value=" &#10; DDQ MODULE RTT CLIENT" />
+    <MESSAGE value=" &#10;Correction : use Doctrine\ORM\Mapping as ORM; =&gt; considérer à tord comme nerver use.. Sans ça l'annotation ne fonctionne pas" />
+    <MESSAGE value=" &#10;Ajout du service mailing en remplacement de l'instanciation d'ojet swiftmail et transport&#10;Arboressence des vues RTT ADMIN" />
+    <MESSAGE value="supression session files" />
+    <MESSAGE value="Création du tableau RTT Administration avec les données:&#10;Etat global Ok&#10;Etat 39h00 Jour fixe Ok&#10;Etat 39h00 Quadrimestre OK&#10;Etat 37h00 Ok&#10;Etat 36h00 Ok&#10;Etat Non Valide N+2 OK&#10;&#10;paramétrage routing et arboressence &#10;paramétrage des méthod find dans le repositry DDQrtt" />
+    <MESSAGE value="Module temps partiel Client" />
+    <MESSAGE value="MODULE  TEMPS PARTIEL" />
+    <MESSAGE value="Modifications réunion Séverine" />
+    <MESSAGE value="modification des modèles de mails" />
+    <MESSAGE value="Ajout des paramètres de test du module rtt.&#10;Modification du mécanisme de validation n+2&#10;Ajout des vues pour les différentes branches RTT" />
+    <MESSAGE value="Création du tableau RTT Administration sans les données" />
+    <MESSAGE value="Création du module GDG" />
+    <MESSAGE value="Code quality1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code quality1" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+</project>
