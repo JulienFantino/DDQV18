@@ -33,7 +33,7 @@ class DdqQuestionnaireRttType extends AbstractType
             if ($EtapeQuestionnaire == "nouveau" || $EtapeQuestionnaire == 'modifiable') {
 
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
 
                     )
@@ -53,7 +53,7 @@ class DdqQuestionnaireRttType extends AbstractType
             } //pour les tests
             elseif ($EtapeQuestionnaire == "nouveau" || $EtapeQuestionnaire == "invalidé N+1" || $EtapeQuestionnaire == "invalidé N+2") {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => false
                     )
@@ -61,7 +61,7 @@ class DdqQuestionnaireRttType extends AbstractType
             } ##########################################################
             elseif ($EtapeQuestionnaire == "etape2" || $EtapeQuestionnaire == 'modifiable') {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise  ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     )
@@ -78,7 +78,7 @@ class DdqQuestionnaireRttType extends AbstractType
             } ##########################################################
             elseif ($EtapeQuestionnaire == "etape3" && $contrat == '2') {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise  ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     )
@@ -102,7 +102,7 @@ class DdqQuestionnaireRttType extends AbstractType
                 );
             } elseif ($EtapeQuestionnaire == "etape3" && $contrat != '2') {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise  ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     )
@@ -127,7 +127,7 @@ class DdqQuestionnaireRttType extends AbstractType
 
             } elseif ($EtapeQuestionnaire == "etape4" && $formuleQuestionnaire == true) {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise  ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     )
@@ -171,7 +171,7 @@ class DdqQuestionnaireRttType extends AbstractType
 
             } elseif ($EtapeQuestionnaire == "etape4" && $formuleQuestionnaire == false) {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise  ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     )
@@ -196,7 +196,7 @@ class DdqQuestionnaireRttType extends AbstractType
 
             } elseif ($EtapeQuestionnaire == "etape5" && $formuleQuestionnaire == true) {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise  ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     ))
@@ -247,7 +247,7 @@ class DdqQuestionnaireRttType extends AbstractType
 
             } elseif ($EtapeQuestionnaire == "etape5" && $formuleQuestionnaire == false && $contrat != '2') {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise à temps partiel  ou maintient au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     ))
@@ -280,7 +280,7 @@ class DdqQuestionnaireRttType extends AbstractType
 
             } elseif ($EtapeQuestionnaire == "etape5" && $formuleQuestionnaire == false && $contrat == '2') {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise à temps partiel  ou maintient au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     ))
@@ -295,7 +295,7 @@ class DdqQuestionnaireRttType extends AbstractType
                         }
                     ))
                     ->add('formule', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                        array('choices' => array(' Deuxième Formule : Gestion au quadrimestre' => false),
+                        array('choices' => array(' Deuxième Formule  : Gestion au quadrimestre' => false),
                             'expanded' => true,
                             'multiple' => false,
                             'disabled' => true,
@@ -314,7 +314,7 @@ class DdqQuestionnaireRttType extends AbstractType
 
             } elseif ($EtapeQuestionnaire == "etape6" && $reprisetp == true) {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise  ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
                     ))
@@ -331,7 +331,7 @@ class DdqQuestionnaireRttType extends AbstractType
 
             } elseif ($EtapeQuestionnaire == "etape6" && $reprisetp == false) {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise  ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
 
@@ -438,7 +438,7 @@ class DdqQuestionnaireRttType extends AbstractType
             }*/
             else {
                 $form->add('reprisetp', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',
-                    array('label' => 'Si reprise à temps partiel au 1er Octobre, cocher la case',
+                    array('label' => 'Si reprise ou maintient à temps partiel au 1er Octobre, cocher la case',
                         'required' => false,
                         'disabled' => true
 

@@ -10,22 +10,55 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\ContactService;
 use AppBundle\Entity\DdqRepartition;
 use Exception;
+
 class QuestionnairesController extends AbstractController
 {
+    const AGENT_BUNDLE = 'AppBundle:Agent';
+    const FORM_FACTORY = 'form.factory';
+    const NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR = 'ne-pas-repondre@assurance-maladie.fr';
+    const APP_BUNDLE_DDQ_QUESTIONNAIRE_PARKING = 'AppBundle:DdqQuestionnaireParking';
+    const ETAPE_3 = 'etape3';
+    const VALIDÉ = 'validé';
+    const INVALIDÉ = 'invalidé';
+    const RESSOURCESHUMAINES_CPAM_AIN_ASSURANCE_MALADIE_FR = 'ressourceshumaines.cpam-ain@assurance-maladie.fr';
+    private const EMAILS_NOTIFICATION_SOUMISSION_HTML_TWIG = 'Emails/NotificationSoumission.html.twig';
+    private const VALIDÉ_N_2 = 'validé N+2';
+    private const ETAPE_6 = 'etape6';
+    private const VALIDÉ_N_1 = 'validé N+1';
+    private const EMAILS_NOTIFICATION_VALIDER_HTML_TWIG = 'Emails/NotificationValider.html.twig';
+    private const CAMPAGNE = 'campagne';
+    private const ETAPE_2 = 'etape2';
+    private const QUESTIONNAIRE_RTT = 'questionnaire_rtt';
+    private const ETAPE_4 = 'etape4';
+    private const ETAPE_5 = 'etape5';
+    private const QUESTIONNAIRE = 'questionnaire';
+    private const CONTRATS = 'contrats';
+    private const FORM = 'form';
+    private const AGENT = 'agent';
+    private const NOUVEAU = 'nouveau';
+    private const INVALIDÉ_N_1 = 'invalidé N+1';
+    private const INVALIDÉ_N_2 = 'invalidé N+2';
+    private const DDQ_NOTIFICATION_NE_PAS_RÉPONDRE = 'DDQ - Notification - Ne pas répondre';
+    private const APP_BUNDLE_DDQ_CONTRAT_REPARTITION = 'AppBundle:DdqContratRepartition';
+    private const APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_TP_TYPE = 'AppBundle\Form\DdqQuestionnaireTpType';
+    private const QUESTIONNAIRE_TP = 'questionnaire_tp';
+    private const HORRAIRE = 'horraire';
+    private const YEAR = 'year';
+
+
     public function getQuestionnaireParkingAction($campagne, Request $request, \Swift_Mailer $mailer)
     {
         /* Identification de l'agent*/
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(QuestionnairesController::AGENT_BUNDLE);
         $agent = $agentRepo->findOneByNomium($nomium);
         /*Recup du questionnaire */
-        // $campagne =$this->get->getStatut();
-        // dump($campagne);
-        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireParking');
+
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_PARKING);
         $qp = $qpRepo->findOneByAgentByCampagne($agent, $campagne);
-        if ($qp->getStatut() !== 'validé' && $qp->getStatut() !== 'invalidé') {
+        if ($qp->getStatut() !== self::VALIDÉ && $qp->getStatut() !== self::INVALIDÉ) {
             /* Création du formulaire */
-            $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp);
+            $form = $this->get(QuestionnairesController::FORM_FACTORY)->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp);
             $form->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
                 'collection' => array(
                     'retablir' => array(
@@ -54,19 +87,19 @@ class QuestionnairesController extends AbstractController
 //                        //création d'un objet mailer
 //                        $mailer = (new \Swift_Mailer($transport));
                     /******** mail à destination de l'agent ****************/
-                    $mailToAgent = (new \Swift_Message('DDQ - Notification - Ne pas répondre'))
-                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    $mailToAgent = (new \Swift_Message(self::DDQ_NOTIFICATION_NE_PAS_RÉPONDRE))
+                        ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                         ->setTo($agent->getMail())
-                        ->setBody($this->renderView('Emails/NotificationSoumission.html.twig',
-                            array('questionnaire' => $qp, 'agent' => $agent)), 'text/html');
+                        ->setBody($this->renderView(self::EMAILS_NOTIFICATION_SOUMISSION_HTML_TWIG,
+                            array(self::QUESTIONNAIRE => $qp, self::AGENT => $agent)), 'text/html');
                     /******** mail à destination des RH ****************/
-                    $mailToRH = (new \Swift_Message('DDQ001 - Notification - ' . $qp->getLibelle() . ' à valider'))
-                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    $mailToRH = (new \Swift_Message('DDQ - Notification - ' . $qp->getLibelle() . ' à valider'))
+                        ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                         // il faudra préciser les bons mails ici
                         //->setTo('florian.bardet@cpam-ain.cnamts.fr')
-                        ->setTo('ressourceshumaines.cpam-ain@assurance-maladie.fr')
-                        ->setBody($this->renderView('Emails/NotificationValider.html.twig',
-                            array('questionnaire' => $qp, 'agent' => $agent)), 'text/html');
+                        ->setTo(self::RESSOURCESHUMAINES_CPAM_AIN_ASSURANCE_MALADIE_FR)
+                        ->setBody($this->renderView(self::EMAILS_NOTIFICATION_VALIDER_HTML_TWIG,
+                            array(self::QUESTIONNAIRE => $qp, self::AGENT => $agent)), 'text/html');
                     $mailer->send($mailToAgent);
                     $mailer->send($mailToRH);
                     /*****************************************************************************/
@@ -79,13 +112,13 @@ class QuestionnairesController extends AbstractController
             }
         } else {
             /* Création du formulaire */
-            $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp, array('disabled' => true));
+            $form = $this->get(QuestionnairesController::FORM_FACTORY)->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp, array('disabled' => true));
         }
 
         return $this->render('AppBundle:Questionnaires:QuestionnaireParking.html.twig', array(
-            'agent' => $agent,
-            'questionnaire' => $qp,
-            'form' => $form->createView()
+            self::AGENT => $agent,
+            self::QUESTIONNAIRE => $qp,
+            self::FORM => $form->createView()
         ));
     }
 
@@ -93,39 +126,33 @@ class QuestionnairesController extends AbstractController
     {
         /* Identification de l'agent*/
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(QuestionnairesController::AGENT_BUNDLE);
         $agent = $agentRepo->findOneByNomium($nomium);
         /*Recup du questionnaire */
         // $campagne =$this->get->getStatut();
         // dump($campagne);
-        $CamapgneRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $CamapgneRepo = $this->getDoctrine()->getManager()->getRepository(self::AGENT_BUNDLE);
         $CamapgneStatut = $CamapgneRepo->findOneByNomium($nomium);
-        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireParking');
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_PARKING);
         $qp = $qpRepo->findOneByAgentByCampagne($agent, $campagne);
 
 
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp, array('disabled' => true));
+        $form = $this->get(QuestionnairesController::FORM_FACTORY)->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp, array('disabled' => true));
 
 
         return $this->render('AppBundle:Questionnaires:QuestionnaireParking.html.twig', array(
-            'agent' => $agent,
-            'questionnaire' => $qp,
-            'form' => $form->createView()
+            self::AGENT => $agent,
+            self::QUESTIONNAIRE => $qp,
+            self::FORM => $form->createView()
         ));
     }
 
     public function getQuestionnaireRttAction($campagne, Request $request, \Swift_Mailer $mailer, ContactService $test)
     {
-        /*   dump($request);
-           $toto = $test->getHappyMessage();
-           $this->addFlash('success', $toto);*/
-        /* Identification de l'agent*/
-//        $nomium = $this->getUser()->getNom().'-'.$this->getUser()->getChrono();
-//        $agentRepo = $this->getDoctrine()->getManager()->getRepository(' AppBundle:Agent');
-//        $agent = $agentRepo->findByNomium($nomium);
+
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(QuestionnairesController::AGENT_BUNDLE);
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
         /*Recup du questionnaire */
@@ -139,12 +166,12 @@ class QuestionnairesController extends AbstractController
         $qrtt->getStatut();
         $signature = $qrtt->getSignature();
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt);
+        $form = $this->get(QuestionnairesController::FORM_FACTORY)->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt);
         //
         // dump($qrtt);
         ($data = $form->getData());
 
-        if ($qrtt->getStatut() !== 'validé N+1' && $qrtt->getStatut() !== 'validé N+2' && $qrtt->getStatut() !== 'etape6') {
+        if ($qrtt->getStatut() !== self::VALIDÉ_N_1 && $qrtt->getStatut() !== self::VALIDÉ_N_2 && $qrtt->getStatut() !== self::ETAPE_6) {
             /** Ajout d'un seul bouton au formulaire */
 
             $form->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
@@ -163,10 +190,10 @@ class QuestionnairesController extends AbstractController
                 )
             );
 
-        } elseif ($qrtt->getStatut() == 'validé N+1' && $qrtt->getStatut() == 'validé N+2') {
+        } elseif ($qrtt->getStatut() == self::VALIDÉ_N_1 && $qrtt->getStatut() == self::VALIDÉ_N_2) {
             /* Création du formulaire */
-            $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
-        } elseif ($qrtt->getStatut() == 'etape5') {
+            $form = $this->get(QuestionnairesController::FORM_FACTORY)->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
+        } elseif ($qrtt->getStatut() == self::ETAPE_5) {
             $form->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
                     'collection' => array(
                         'annuler' => array(
@@ -190,12 +217,12 @@ class QuestionnairesController extends AbstractController
             //dump ($data = $form->getData());
             //$em = $this->getDoctrine()->getManager();
 
-            if (($qrtt->getStatut() == 'nouveau' || $qrtt->getStatut() == 'invalidé N+1' || $qrtt->getStatut() == 'invalidé N+2') && $qrtt->getRepriseTp() == true) {
+            if (($qrtt->getStatut() == self::NOUVEAU || $qrtt->getStatut() == self::INVALIDÉ_N_1 || $qrtt->getStatut() == self::INVALIDÉ_N_2) && $qrtt->getRepriseTp() == true) {
 
                 try {
                     $em = $this->getDoctrine()->getManager();
                     // $qrtt->setIdDdqContrat(24);
-                    $qrtt->setStatut('etape6');
+                    $qrtt->setStatut(self::ETAPE_6);
                     $qrtt->setSignature(true);
                     $em->persist($qrtt);
                     $em->flush();
@@ -205,13 +232,13 @@ class QuestionnairesController extends AbstractController
                     //création d'un objet mailer
                     //$mailer = (new \Swift_Mailer($transport));
                     /******** mail à destination de l'agent ****************/
-                    $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Ne pas répondre'))
-                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    $mailToAgent = (new \Swift_Message(self::DDQ_NOTIFICATION_NE_PAS_RÉPONDRE))
+                        ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                         ->setTo($agent->getMail())
-                        ->setBody($this->renderView('Emails/NotificationSoumission.html.twig',
+                        ->setBody($this->renderView(self::EMAILS_NOTIFICATION_SOUMISSION_HTML_TWIG,
                             array(
-                                'questionnaire' => $qrtt,
-                                'agent' => $agent
+                                self::QUESTIONNAIRE => $qrtt,
+                                self::AGENT => $agent
                             )
                         ),
                             'text/html'
@@ -220,14 +247,14 @@ class QuestionnairesController extends AbstractController
                     /*** on recup le mail du responsable de service ***/
                     $respId = $agent->getIdresponsable();
 
-                    $mailToResponsableService = (new \Swift_Message('DDQ001 - Notification - ' . $qrtt->getLibelle() . ' à valider'))
-                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    $mailToResponsableService = (new \Swift_Message('DDQ - Notification - ' . $qrtt->getLibelle() . ' à valider'))
+                        ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                         // il faudra préciser le bon mail ici
                         ->setTo($agentRepo->find($respId)->getMail())
                         ->setBody(
-                            $this->renderView('Emails/NotificationValider.html.twig', array(
-                                'questionnaire' => $qrtt,
-                                'agent' => $agent,
+                            $this->renderView(self::EMAILS_NOTIFICATION_VALIDER_HTML_TWIG, array(
+                                self::QUESTIONNAIRE => $qrtt,
+                                self::AGENT => $agent,
 
                             )),
                             'text/html'
@@ -240,70 +267,68 @@ class QuestionnairesController extends AbstractController
 
                     $this->notification('Merci, votre demande a bien été enregistrée', 'success');
                     //    return $this->redirectToRoute('campagnes_rtt');
-                    return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
+                    return $this->redirectToRoute(self::QUESTIONNAIRE_RTT, [self::CAMPAGNE => $campagne]);
                 } catch (Exception $e) {
                     $this->notification('Une erreur s\'est produite. Votre demande n\'a pas pu être enregistrée', 'error');
                     return $this->render('DDQ001Bundle:Default:notification.html.twig');
                 }
-            } elseif (($qrtt->getStatut() == 'nouveau' || $qrtt->getStatut() == 'invalidé N+1' || $qrtt->getStatut() == 'invalidé N+2') && $qrtt->getRepriseTp() == false) {
+            } elseif (($qrtt->getStatut() == self::NOUVEAU || $qrtt->getStatut() == self::INVALIDÉ_N_1 || $qrtt->getStatut() == self::INVALIDÉ_N_2) && $qrtt->getRepriseTp() == false) {
 
 
                 try {
                     $em = $this->getDoctrine()->getManager();
-                    $qrtt->setStatut('etape2');
+                    $qrtt->setStatut(self::ETAPE_2);
                     $em->persist($qrtt);
                     $em->flush();
-                    return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
+                    return $this->redirectToRoute(self::QUESTIONNAIRE_RTT, [self::CAMPAGNE => $campagne]);
                 } catch (Exception $e) {
                     $this->notification('Une erreur s\'est produite. Votre demande n\'a pas pu être enregistrée', 'error');
 
                 }
 
-            } elseif ($qrtt->getStatut() == 'etape2' && $contrats != 2) {
+            } elseif ($qrtt->getStatut() == self::ETAPE_2 && $contrats != 2) {
                 $em = $this->getDoctrine()->getManager();
                 // $qrtt->setFormule(false);
 
                 $qrtt->setDatemodif($this->date = new \Datetime());
-                $qrtt->setStatut('etape3');
+                $qrtt->setStatut(self::ETAPE_3);
                 $em->persist($qrtt);
                 $em->flush();
-                return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
+                return $this->redirectToRoute(self::QUESTIONNAIRE_RTT, [self::CAMPAGNE => $campagne]);
                 // return $this->redirectToRoute('campagnes_rtt');
-            } elseif ($qrtt->getStatut() == 'etape2' && $contrats == '2') {
+            } elseif ($qrtt->getStatut() == self::ETAPE_2 && $contrats == '2') {
                 $em = $this->getDoctrine()->getManager();
-                $qrtt->setStatut('etape3');
+                $qrtt->setStatut('' . self::ETAPE_3 . '');
                 $em->persist($qrtt);
                 $em->flush();
 
-                return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
+                return $this->redirectToRoute(self::QUESTIONNAIRE_RTT, [self::CAMPAGNE => $campagne]);
 
 
-            } elseif ($qrtt->getStatut() == 'etape3') {
+            } elseif ($qrtt->getStatut() == self::ETAPE_3) {
                 $em = $this->getDoctrine()->getManager();
-                $qrtt->setStatut('etape4');
+                $qrtt->setStatut(self::ETAPE_4);
                 $em->persist($qrtt);
                 $em->flush();
-                return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
+                return $this->redirectToRoute(self::QUESTIONNAIRE_RTT, [self::CAMPAGNE => $campagne]);
 
-            } elseif ($qrtt->getStatut() == 'etape4' && $formule == false) {
+            } elseif ($qrtt->getStatut() == self::ETAPE_4 && $formule == false) {
                 $em = $this->getDoctrine()->getManager();
-                //dump($formule);
-                //var_dump('toto');
-                $qrtt->setStatut('etape5');
+                $qrtt->setStatut(self::ETAPE_5);
                 $em->persist($qrtt);
                 $em->flush();
-                return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
+                return $this->redirectToRoute(self::QUESTIONNAIRE_RTT, [self::CAMPAGNE => $campagne]);
 
-            } elseif ($qrtt->getStatut() == 'etape4' && $formule == true) {
+            } elseif ($qrtt->getStatut() == self::ETAPE_4 && $formule == true) {
                 $em = $this->getDoctrine()->getManager();
-                $qrtt->setStatut('etape5');
+                $qrtt->setStatut(self::ETAPE_5);
                 $em->persist($qrtt);
                 $em->flush();
-                return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
+                return $this->redirectToRoute(self::QUESTIONNAIRE_RTT, [self::CAMPAGNE => $campagne]);
 
-            } elseif ($qrtt->getStatut() == 'etape5') {
+            } elseif ($qrtt->getStatut() == self::ETAPE_5) {
                 $em = $this->getDoctrine()->getManager();
-                $qrtt->setStatut('etape6');
+                $qrtt->setStatut(self::ETAPE_6);
                 $em->persist($qrtt);
                 $em->flush();
                 /******** Envoi des notifications par mail *********************/
@@ -312,13 +337,13 @@ class QuestionnairesController extends AbstractController
                 //création d'un objet mailer
                 //$mailer = (new \Swift_Mailer($transport));
                 /******** mail à destination de l'agent ****************/
-                $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                $mailToAgent = (new \Swift_Message(self::DDQ_NOTIFICATION_NE_PAS_RÉPONDRE))
+                    ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     ->setTo($agent->getMail())
-                    ->setBody($this->renderView('Emails/NotificationSoumission.html.twig',
+                    ->setBody($this->renderView(self::EMAILS_NOTIFICATION_SOUMISSION_HTML_TWIG,
                         array(
-                            'questionnaire' => $qrtt,
-                            'agent' => $agent
+                            self::QUESTIONNAIRE => $qrtt,
+                            self::AGENT => $agent
                         )
                     ),
                         'text/html'
@@ -327,14 +352,14 @@ class QuestionnairesController extends AbstractController
                 /*** on recup le mail du responsable de service ***/
                 $respId = $agent->getIdresponsable();
 
-                $mailToResponsableService = (new \Swift_Message('DDQ001 - Notification - ' . $qrtt->getLibelle() . ' à valider'))
-                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                $mailToResponsableService = (new \Swift_Message('DDQ - Notification - ' . $qrtt->getLibelle() . ' à valider'))
+                    ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     // il faudra préciser le bon mail ici
                     ->setTo($agentRepo->find($respId)->getMail())
                     ->setBody(
-                        $this->renderView('Emails/NotificationValider.html.twig', array(
-                            'questionnaire' => $qrtt,
-                            'agent' => $agent,
+                        $this->renderView(self::EMAILS_NOTIFICATION_VALIDER_HTML_TWIG, array(
+                            self::QUESTIONNAIRE => $qrtt,
+                            self::AGENT => $agent,
 
                         )),
                         'text/html'
@@ -347,135 +372,135 @@ class QuestionnairesController extends AbstractController
 
                 $this->notification('Merci, votre demande a bien été enregistrée', 'success');
                 //    return $this->redirectToRoute('campagnes_rtt');
-                return $this->redirectToRoute('questionnaire_rtt', ['campagne' => $campagne]);
+                return $this->redirectToRoute(self::QUESTIONNAIRE_RTT, [self::CAMPAGNE => $campagne]);
 
 
             }
         }
         //CONSTRUCTION  DES VUES SELON L'ETAPE
-        if ($qrtt->getStatut() == 'nouveau') {
+        if ($qrtt->getStatut() == self::NOUVEAU) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRtt.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape2') {
+        } elseif ($qrtt->getStatut() == self::ETAPE_2) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape2.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape3') {
+        } elseif ($qrtt->getStatut() == self::ETAPE_3) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape3.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape4' && $qrtt->getFormule() == true) {
+        } elseif ($qrtt->getStatut() == self::ETAPE_4 && $qrtt->getFormule() == true) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape4.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape4' && $qrtt->getFormule() == false) {
+        } elseif ($qrtt->getStatut() == self::ETAPE_4 && $qrtt->getFormule() == false) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape4Quadrimestre.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape5' && $qrtt->getFormule() == true) {
+        } elseif ($qrtt->getStatut() == self::ETAPE_5 && $qrtt->getFormule() == true) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape5_F1.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape5' && $qrtt->getFormule() == false) {
+        } elseif ($qrtt->getStatut() == self::ETAPE_5 && $qrtt->getFormule() == false) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape5_F2.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape6' && $qrtt->getReprisetp() == true) {
+        } elseif ($qrtt->getStatut() == self::ETAPE_6 && $qrtt->getReprisetp() == true) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape6.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'etape6' && $qrtt->getReprisetp() == false) {
+        } elseif ($qrtt->getStatut() == self::ETAPE_6 && $qrtt->getReprisetp() == false) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtape6SansReprise.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'validé N+1') {
+        } elseif ($qrtt->getStatut() == self::VALIDÉ_N_1) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtapeTransmission.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'invalidé N+1') {
+        } elseif ($qrtt->getStatut() == self::INVALIDÉ_N_1) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRtt.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'validé N+2') {
+        } elseif ($qrtt->getStatut() == self::VALIDÉ_N_2) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtapeTransmission.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($qrtt->getStatut() == 'invalidé N+2') {
+        } elseif ($qrtt->getStatut() == self::INVALIDÉ_N_2) {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRtt.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
         } else {
             return $this->render('AppBundle:Questionnaires/RTT:QuestionnaireRttEtapeTransmission.html.twig', array(
-                'agent' => $agent,
-                'campagne' => $campagne,
-                'questionnaire' => $qrtt,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::CAMPAGNE => $campagne,
+                self::QUESTIONNAIRE => $qrtt,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
         }
@@ -573,13 +598,11 @@ class QuestionnairesController extends AbstractController
         ($contratHoraire = ($qtp->getidddqContrat()->gethorairecontrat()));
         /************************************************************************************************************************/
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireTpType', $qtp);
-        $RepartitionRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqContratRepartition');
-        if ($qtp->getStatut() !== 'validé N+1' && $qtp->getStatut() !== 'validé N+2') {
+        $form = $this->get(QuestionnairesController::FORM_FACTORY)->create(self::APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_TP_TYPE, $qtp);
+        $RepartitionRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_CONTRAT_REPARTITION);
+        if ($qtp->getStatut() !== self::VALIDÉ_N_1 && $qtp->getStatut() !== self::VALIDÉ_N_2) {
             /** Ajout d'un seul bouton au formulaire */
             /************************************************************************************************************************/
-
-
             $form->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
                 'collection' => array(
                     'annuler' => array(
@@ -597,24 +620,24 @@ class QuestionnairesController extends AbstractController
             ));
         } else {
             /* Création du formulaire */
-            $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireTpType', $qtp, array('disabled' => true));
+            $form = $this->get(QuestionnairesController::FORM_FACTORY)->create(self::APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_TP_TYPE, $qtp, array('disabled' => true));
         }
 
         if ($form->handleRequest($request)->isValid() && $form->isSubmitted()) {
 
-            if (($EtapeQuestionnaire == 'nouveau' || $EtapeQuestionnaire == 'invalidé N+1' || $EtapeQuestionnaire == 'invalidé N+2') && $qtp->getMotif() != '') {
+            if (($EtapeQuestionnaire == self::NOUVEAU || $EtapeQuestionnaire == self::INVALIDÉ_N_1 || $EtapeQuestionnaire == self::INVALIDÉ_N_2) && $qtp->getMotif() != '') {
                 $em = $this->getDoctrine()->getManager();
-                $qtp->setStatut('etape2');
+                $qtp->setStatut(self::ETAPE_2);
                 $em->persist($qtp);
                 $em->flush();
-                return $this->redirectToRoute('questionnaire_tp', ['campagne' => $campagne]);
-            } elseif ($EtapeQuestionnaire == 'etape2' && $qtp->getMotif() != '') {
+                return $this->redirectToRoute(self::QUESTIONNAIRE_TP, [self::CAMPAGNE => $campagne]);
+            } elseif ($EtapeQuestionnaire == self::ETAPE_2 && $qtp->getMotif() != '') {
                 $em = $this->getDoctrine()->getManager();
-                $qtp->setStatut('etape3');
+                $qtp->setStatut(self::ETAPE_3);
                 $em->persist($qtp);
                 $em->flush();
-                return $this->redirectToRoute('questionnaire_tp', ['campagne' => $campagne]);
-            } elseif ($EtapeQuestionnaire == 'etape3' && $contratID != '') {
+                return $this->redirectToRoute(self::QUESTIONNAIRE_TP, [self::CAMPAGNE => $campagne]);
+            } elseif ($EtapeQuestionnaire == self::ETAPE_3 && $contratID != '') {
                 $nbjours = $qtp->getIdDdqContrat()->getNbjours();
                 $nbJoursInteger = (int)$nbjours;
                 ($nbdemijournee = $qtp->getIdDdqContrat()->getNbdemiesjournees());
@@ -625,20 +648,20 @@ class QuestionnairesController extends AbstractController
                     $em->flush();
                     $this->notification('Merci, le nombre de jours sélectionnés n\'est pas correct', 'error');
                     return $this->render('AppBundle:Questionnaires\TP:QuestionnaireTPEtape3.html.twig', array(
-                        'agent' => $agent,
-                        'horraire' => $contratHoraire,
-                        'questionnaire' => $qtp,
-                        'year' => $year,
-                        'form' => $form->createView()
+                        self::AGENT => $agent,
+                        self::HORRAIRE => $contratHoraire,
+                        self::QUESTIONNAIRE => $qtp,
+                        self::YEAR => $year,
+                        self::FORM => $form->createView()
                     ));
                 } else {
                     $em = $this->getDoctrine()->getManager();
-                    $qtp->setStatut('etape4');
+                    $qtp->setStatut(self::ETAPE_4);
                     $em->persist($qtp);
                     $em->flush();
-                    return $this->redirectToRoute('questionnaire_tp', ['campagne' => $campagne]);
+                    return $this->redirectToRoute(self::QUESTIONNAIRE_TP, [self::CAMPAGNE => $campagne]);
                 }
-            } elseif ($EtapeQuestionnaire == 'etape4' && $nbJoursVerif != 0) {
+            } elseif ($EtapeQuestionnaire == self::ETAPE_4 && $nbJoursVerif != 0) {
                 ($nbdemijournee = $qtp->getIdDdqContrat()->getNbdemiesjournees());
                 if ($nbDemiJoursVerif != $nbdemijournee) {
                     $em = $this->getDoctrine()->getManager();
@@ -646,20 +669,20 @@ class QuestionnairesController extends AbstractController
                     $em->flush();
                     $this->notification('Merci de renseigner correctement le nombre de demi-journées', 'error');
                     return $this->render('AppBundle:Questionnaires\TP:QuestionnaireTPEtape4.html.twig', array(
-                        'agent' => $agent,
-                        'horraire' => $contratHoraire,
-                        'questionnaire' => $qtp,
-                        'year' => $year,
-                        'form' => $form->createView()
+                        self::AGENT => $agent,
+                        self::HORRAIRE => $contratHoraire,
+                        self::QUESTIONNAIRE => $qtp,
+                        self::YEAR => $year,
+                        self::FORM => $form->createView()
                     ));
                 } else {
                     $em = $this->getDoctrine()->getManager();
-                    $qtp->setStatut('etape5');
+                    $qtp->setStatut(self::ETAPE_5);
                     $em->persist($qtp);
                     $em->flush();
-                    return $this->redirectToRoute('questionnaire_tp', ['campagne' => $campagne]);
+                    return $this->redirectToRoute(self::QUESTIONNAIRE_TP, [self::CAMPAGNE => $campagne]);
                 }
-            } elseif ($EtapeQuestionnaire == 'etape5' and $qtp->getSignature() == true) {
+            } elseif ($EtapeQuestionnaire == self::ETAPE_5 and $qtp->getSignature() == true) {
                 try {
                     $em = $this->getDoctrine()->getManager();
                     //$qtp->setIdDdqRepartition(  $qtpRepartition);
@@ -670,15 +693,15 @@ class QuestionnairesController extends AbstractController
                     //création d'un objet transport
                     $transport = new \Swift_SmtpTransport();
                     //création d'un objet mailer
-                    $mailers = (new \Swift_Mailer($transport));
+                    $mailer = (new \Swift_Mailer($transport));
                     /******** mail à destination de l'agent ****************/
-                    $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Ne pas répondre'))
-                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    $mailToAgent = (new \Swift_Message(self::DDQ_NOTIFICATION_NE_PAS_RÉPONDRE))
+                        ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                         ->setTo($agent->getMail())
                         ->setBody(
-                            $this->renderView('Emails/NotificationSoumission.html.twig', array(
-                                'questionnaire' => $qtp,
-                                'agent' => $agent
+                            $this->renderView(self::EMAILS_NOTIFICATION_SOUMISSION_HTML_TWIG, array(
+                                self::QUESTIONNAIRE => $qtp,
+                                self::AGENT => $agent
                             )),
                             'text/html'
                         );
@@ -687,18 +710,18 @@ class QuestionnairesController extends AbstractController
                     $respId = $agent->getIdresponsable();
 
                     $mailToResponsableService = (new \Swift_Message('DDQ - Notification - ' . $qtp->getLibelle() . ' à valider'))
-                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                        ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                         // il faudra préciser le bon mail ici
                         ->setTo($agentRepo->find($respId)->getMail())
                         ->setBody(
-                            $this->renderView('Emails/NotificationValider.html.twig', array(
-                                'questionnaire' => $qtp,
-                                'agent' => $agent
+                            $this->renderView(self::EMAILS_NOTIFICATION_VALIDER_HTML_TWIG, array(
+                                self::QUESTIONNAIRE => $qtp,
+                                self::AGENT => $agent
                             )),
                             'text/html'
                         );
 
-                    $mailers->send($mailToAgent);
+                    $mailer->send($mailToAgent);
                     //  dump($mailToResponsableService);
                     //$mailer->send($mailToResponsableService);
                     /*****************************************************************************/
@@ -713,62 +736,62 @@ class QuestionnairesController extends AbstractController
 
         }
 ############################ NAVIGATION DU FORMULAIRE ############################################
-        if ($EtapeQuestionnaire == 'nouveau' || $EtapeQuestionnaire == 'invalidé N+1' || $EtapeQuestionnaire == 'invalidé N+2') {
+        if ($EtapeQuestionnaire == self::NOUVEAU || $EtapeQuestionnaire == self::INVALIDÉ_N_1 || $EtapeQuestionnaire == self::INVALIDÉ_N_2) {
 
             $year = date('Y');
             return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape1.html.twig', array(
-                'agent' => $agent,
-                'horraire' => $contratHoraire,
-                'questionnaire' => $qtp,
-                'contrats' => $contrats,
-                'year' => $year,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::HORRAIRE => $contratHoraire,
+                self::QUESTIONNAIRE => $qtp,
+                self::CONTRATS => $contrats,
+                self::YEAR => $year,
+                self::FORM => $form->createView()
             ));
-        } elseif ($EtapeQuestionnaire == 'etape2') {
+        } elseif ($EtapeQuestionnaire == self::ETAPE_2) {
 
             $year = date('Y');
             return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape2.html.twig', array(
-                'agent' => $agent,
-                'horraire' => $contratHoraire,
-                'questionnaire' => $qtp,
-                'year' => $year,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::HORRAIRE => $contratHoraire,
+                self::QUESTIONNAIRE => $qtp,
+                self::YEAR => $year,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($EtapeQuestionnaire == 'etape3') {
+        } elseif ($EtapeQuestionnaire == self::ETAPE_3) {
 
             $year = date('Y');
             return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape3.html.twig', array(
-                'agent' => $agent,
-                'horraire' => $contratHoraire,
-                'questionnaire' => $qtp,
-                'year' => $year,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::HORRAIRE => $contratHoraire,
+                self::QUESTIONNAIRE => $qtp,
+                self::YEAR => $year,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
-        } elseif ($EtapeQuestionnaire == 'etape4') {
+        } elseif ($EtapeQuestionnaire == self::ETAPE_4) {
 
             $year = date('Y');
             return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTPEtape4.html.twig', array(
-                'agent' => $agent,
-                'horraire' => $contratHoraire,
-                'questionnaire' => $qtp,
-                'year' => $year,
-                'contrats' => $contrats,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::HORRAIRE => $contratHoraire,
+                self::QUESTIONNAIRE => $qtp,
+                self::YEAR => $year,
+                self::CONTRATS => $contrats,
+                self::FORM => $form->createView()
             ));
 
         } else {
 
             $year = date('Y');
             return $this->render('AppBundle:Questionnaires/TP:QuestionnaireTp.html.twig', array(
-                'agent' => $agent,
-                'horraire' => $contratHoraire,
-                'questionnaire' => $qtp,
-                'year' => $year,
-                'form' => $form->createView()
+                self::AGENT => $agent,
+                self::HORRAIRE => $contratHoraire,
+                self::QUESTIONNAIRE => $qtp,
+                self::YEAR => $year,
+                self::FORM => $form->createView()
             ));
         }
 

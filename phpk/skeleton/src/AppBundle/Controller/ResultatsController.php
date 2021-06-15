@@ -7,7 +7,6 @@ use AppBundle\Repository\DdqCampagneRepository;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use CNAMTS\PHPK\CoreBundle\Generator\Graphe\GrapheGenerator;
 use Symfony\Component\HttpFoundation\Request;
-use Exception;
 
 class ResultatsController extends AbstractController
 {

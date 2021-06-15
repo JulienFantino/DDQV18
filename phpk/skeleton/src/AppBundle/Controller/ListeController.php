@@ -23,16 +23,43 @@ class ListeController extends AbstractController
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
         $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
         $valideur = $repository->findOneByNomium($nomium);
-        // dump( $valideur = $repository->findOneByNomium($nomium));
-        //dump($valideur->getNomResponsable()) ;
+        //dump( $valideur = $repository->findOneByNomium($nomium));
+        ($valideurN1 = $valideur->getNomResponsable());
+        ($sigleEnt = $valideur->getSigleEnt());
+        ($valideur2 = $repository->findOneByNom($valideurN1));
         $qrttRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
 
         $tableau = $this->get('phpk_core.tableau')->get(new TableReponses());
         $tableau->getDataHandler()->setRepository($qrttRepo)
+            //  ->setRepositoryMethod('findByQuestionnairesRemplis')
             ->setRepositoryMethod('findByQuestionnairesRemplis')
             // ->setRepositoryMethodParameters(array($valideur->getNomentabrege()));
             //->setRepositoryMethodParameters(array($valideur->getNomcomplet()));
             ->setRepositoryMethodParameters(array($valideur->getid()));
+        //  ->setRepositoryMethodParameters(array($sigleEnt));
+        //  dump($valideur->getid());
+        return $this->render('AppBundle:Liste:Questionnaires.html.twig', array('tabQuestionnaires' => $tableau));
+    }
+
+    public function getListeRttRemplisN1N2Action()
+    {
+        $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
+        $repository = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $valideur = $repository->findOneByNomium($nomium);
+        //dump( $valideur = $repository->findOneByNomium($nomium));
+        ($valideurN1 = $valideur->getNomResponsable());
+        ($sigleEnt = $valideur->getSigleEnt());
+        ($valideur2 = $repository->findOneByNom($valideurN1));
+        $qrttRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+
+        $tableau = $this->get('phpk_core.tableau')->get(new TableReponses());
+        $tableau->getDataHandler()->setRepository($qrttRepo)
+            //  ->setRepositoryMethod('findByQuestionnairesRemplis') findByQuestionnairesRemplisN1N2($sigleent)
+            ->setRepositoryMethod('findByQuestionnairesRemplisN1N2')
+            // ->setRepositoryMethodParameters(array($valideur->getNomentabrege()));
+            //->setRepositoryMethodParameters(array($valideur->getNomcomplet()));
+            // ->setRepositoryMethodParameters(array($valideur->getid()));
+            ->setRepositoryMethodParameters(array($sigleEnt));
         //  dump($valideur->getid());
         return $this->render('AppBundle:Liste:Questionnaires.html.twig', array('tabQuestionnaires' => $tableau));
     }

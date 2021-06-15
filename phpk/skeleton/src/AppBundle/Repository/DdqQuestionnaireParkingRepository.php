@@ -56,7 +56,9 @@ class DdqQuestionnaireParkingRepository extends \Doctrine\ORM\EntityRepository i
     {
         $query = $this->_em->createQuery(
             'SELECT q FROM AppBundle:DdqQuestionnaireParking q '
-            . 'WHERE q.statut = \'modifiable\'');
+            . 'JOIN q.idDdqCampagne c '
+            . 'WHERE c.statut = \'nouvelle\' '
+            . 'AND q.statut = \'modifiable\'');
         return $query->getResult();
     }
 
@@ -122,7 +124,7 @@ class DdqQuestionnaireParkingRepository extends \Doctrine\ORM\EntityRepository i
     public function findByCampagnesUtilisateur($idCampagne)
     {
         $sql = 'SELECT agent.Nomium AS nomium ORDER BYagent.Nomium ';
-          $query = $this->_em->createQuery(
+        $query = $this->_em->createQuery(
             'SELECT q  FROM AppBundle:DdqQuestionnaireParking q '
             . 'WHERE q.idDdqCampagne = :campagne '
             . 'AND q.statut = \'modifiable\' '

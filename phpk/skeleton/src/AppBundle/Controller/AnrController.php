@@ -7,7 +7,7 @@
  */
 
 namespace AppBundle\Controller;
-use Exception;
+
 class AnrController extends AbstractController
 {
     public function anrAction()

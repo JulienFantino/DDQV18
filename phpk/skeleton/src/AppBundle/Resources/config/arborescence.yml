@@ -60,11 +60,15 @@ phpk_core:
             Niveau 1:
               route: liste_questionnaires_rtt
               libelle: Niveau 1
-              habilitations: [DDQ_VAL_RTT1]
+              habilitations: [ DDQ_VAL_RTT1 ]
+            Niveau 1bis:
+              route: liste_questionnaires_rttN1N2
+              libelle: Niveau 1 Bis
+              habilitations: [ DDQ_VAL_RTT1 ]
             Niveau 2:
               #route: liste_questionnaires_rttN+1
               libelle: Niveau 2
-              habilitations: [DDQ_VAL_RTT2]
+              habilitations: [ DDQ_VAL_RTT2 ]
               fils:
                 Rtt_global:
                   libelle: Global
@@ -90,11 +94,15 @@ phpk_core:
             Niveau 1:
               route: liste_questionnaires_tp
               libelle: Niveau 1
-              habilitations: [DDQ_VAL_TP1]
+              habilitations: [ DDQ_VAL_TP1 ]
+            Niveau 1 bis:
+              route: liste_questionnaires_tp
+              libelle: Niveau 1 Bis
+              habilitations: [ DDQ_VAL_TP1 ]
             Niveau 2:
               route: liste_questionnaires_tpN+1
               libelle: Niveau 2
-              habilitations: [DDQ_VAL_TP2]
+              habilitations: [ DDQ_VAL_TP2 ]
 
     Administration:
       libelle: Administration

@@ -65,10 +65,10 @@ class TableRttAgent extends TableGenerator
     public function getRows()
     {
         foreach ($this->getDataHandler()->getData() as $questionnaire) {
-                 // Création de la cellule avec son contenu
-                 $lien = new CellLink();
-                 $lien->setText($questionnaire->getLibelle());
-                 $lien->setTitle('Accéder au questionnaire');
+            // Création de la cellule avec son contenu
+            $lien = new CellLink();
+            $lien->setText($questionnaire->getLibelle());
+            $lien->setTitle('Accéder au questionnaire');
 
 
             if ($questionnaire->getIdDdqCampagne()->getIdDdqCategorie()->getLibelle() === 'Parking') {
@@ -85,14 +85,14 @@ class TableRttAgent extends TableGenerator
             } /*
                 $lien->setUrl('toto');*/
             $this->addRow(array(
-                         // L'ordre de remplissage des colonnes est celui configuré dans le constructeur
-                         'data' => array(
-                             $questionnaire->getIdAgent()->getNomium(),
-                             $questionnaire->getStatut(),
-                             $questionnaire->getFormule(),
-                             $questionnaire->getReprisetp(),
-                             $lien
-                         )
+                    // L'ordre de remplissage des colonnes est celui configuré dans le constructeur
+                    'data' => array(
+                        $questionnaire->getIdAgent()->getNomium(),
+                        $questionnaire->getStatut(),
+                        $questionnaire->getFormule(),
+                        $questionnaire->getReprisetp(),
+                        $lien
+                    )
                      )
                  );
              }

@@ -36,11 +36,13 @@
     <div class='section'>
         <div>{{ form_widget(form.signature) }}</div>
     </div>
-
-
+    <div class="zone-info"><strong>Avis du responsable de service :</strong></div>
+    <div class="section">
+        {{ form_start(validForm) }}
+        {{ form_errors(validForm) }}
+        <div>{{ form_widget(validForm.avis) }}</div>
         {{ form_end(validForm) }}
     </div>
     {{ form_end(form) }}
 {% endblock %}
-
 

@@ -6,7 +6,8 @@ use AppBundle\Repository\DdqContratRepository;
 use AppBundle\Repository\DdqQuestionnaireTpRepository;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
-use Exception;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 class ValidationController extends AbstractController
 {
     public function validationParkingAction($idQuestionnaire, Request $request)
@@ -302,30 +303,18 @@ class ValidationController extends AbstractController
                 'required' => true
 
             ))
-            ->add('CommentaireValideurN1', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
-                'class' => 'AppBundle:DdqQuestionnaireTp',
-                'choice_label' => 'CommentaireValideurN1',
-                'label' => 'Contrat : Heures Hebdo',
+            ->add('commentaireValideurN1', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
+                'attr' => array('placeholder' => 'Expliquez votre choix'),
+                'required' => true
 
-                'query_builder' => function (DdqQuestionnaireTpRepository $repo) {
-                    $qtpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireTp');
-                    $qtp = $qtpRepo->find('1176');
-                    $agent = '0292677931118200017';
-                    return $repo->findOneByAgentCommentaire($agent);
-                }
             ))
-            ->add('CommentaireValideurN1TEST', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
-                'attr' => array('placeholder' => 'Expliquez votre choix si nécessaire. 255 caractères max...')
-            , 'required' => false))
             ->add('bouton', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
                 'predefined' => Bouton::PREDEFINED_VALIDER,
                 'label' => 'Valider',
                 'highlight' => true,
-                'attr' => array(
-                    'accesskey' => 'l',
-                )))
+            ))
             ->getForm();
-
+        dump($qtp->getIdDdqCampagne()->getidDdqCategorie()->getLibelle());
         /* Traitement du formulaire */
         if ($validForm->handleRequest($request)->isValid()) {
             $data = $validForm->getData();
@@ -339,9 +328,12 @@ class ValidationController extends AbstractController
 
                 if ($data['avis']) {
                     $qtp->setStatut('validé N+1');
+                    dump($data['commentaireValideurN1']);
+                    $qtp->setcommentaireValideurN1($data['commentaireValideurN1']);
 
                 } else {
                     $qtp->setStatut('invalidé N+1');
+                    $qtp->setcommentaireValideurN1($data['commentaireValideurN1']);
                 }
                 $em->persist($qtp);
                 $em->flush();
@@ -356,6 +348,7 @@ class ValidationController extends AbstractController
                         $this->renderView('Emails/NotificationValidation.html.twig', array(
                             'questionnaire' => $qtp,
                             'agent' => $agent,
+                            'campagne' => $qtp->getIdDdqCampagne()->getidDdqCategorie()->getLibelle(),
                             'statut' => $qtp->getStatut()
                         )),
                         'text/html'
@@ -376,6 +369,7 @@ class ValidationController extends AbstractController
                             $this->renderView('Emails/NotificationValider.html.twig', array(
                                 'questionnaire' => $qtp,
                                 'agent' => $agent
+
                             )),
                             'text/html'
                         );
@@ -400,6 +394,7 @@ class ValidationController extends AbstractController
         return $this->render('AppBundle:Validation:QuestionnaireTp.html.twig', array(
             'agent' => $agent,
             'questionnaire' => $qtp,
+
             'year' => $year,
             'form' => $form->createView(),
             'validForm' => $validForm->createView()
@@ -423,14 +418,18 @@ class ValidationController extends AbstractController
                 'expanded' => true,
                 'multiple' => false
             ))
-            ->add('CommentaireValideurN2', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
-                'attr' => array('placeholder' => 'Expliquez votre choix si nécessaire. 255 caractères max...')
-            , 'required' => false))
+            ->add('commentaireValideurN2', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
+                'attr' => array('placeholder' => 'Expliquez votre choix'),
+                'required' => true
+
+            ))
             ->add('bouton', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
                 'predefined' => Bouton::PREDEFINED_VALIDER,
                 'label' => 'Valider',
-                'highlight' => true,))
+                'highlight' => true,
+            ))
             ->getForm();
+        dump($qtp->getIdDdqCampagne());
         /* Traitement du formulaire */
         if ($validForm->handleRequest($request)->isValid()) {
             $data = $validForm->getData();
@@ -444,11 +443,14 @@ class ValidationController extends AbstractController
 
                 if ($data['avis']) {
                     $qtp->setStatut('validé N+2');
+                    $qtp->setcommentaireValideurN2($data['commentaireValideurN2']);
                 } else {
                     $qtp->setStatut('invalidé N+2');
+                    $qtp->setcommentaireValideurN2($data['commentaireValideurN2']);
                 }
                 $em->persist($qtp);
                 $em->flush();
+               
                 /*** on paramètre le mail à envoyer ***/
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
                     ->setFrom('ne-pas-repondre@assurance-maladie.fr')
@@ -459,11 +461,13 @@ class ValidationController extends AbstractController
                     ->setBody(
                         $this->renderView('Emails/NotificationValidation.html.twig', array(
                             'questionnaire' => $qtp,
+                            'campagne' => $qtp->getIdDdqCampagne()->getidDdqCategorie()->getLibelle(),
                             'agent' => $agent,
                             'statut' => $qtp->getStatut()
                         )),
                         'text/html'
                     );
+
                 /*** envoi du mail ***/
                 $mailer->send($mailToAgent);
 

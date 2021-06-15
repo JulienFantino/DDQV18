@@ -102,6 +102,21 @@ class DdqQuestionnaireRttRepository extends \Doctrine\ORM\EntityRepository imple
         return $query->getResult();
     }
 
+    public function findByQuestionnairesRemplisN1N2(array $parameters)
+    {
+        // dump ($parameters);
+        $sigleent = $parameters[0];
+        ($sigleent2 = substr($sigleent, 0, 11));
+        // $sigleent = '/DIR/SD-ADM';
+        $query1 = $this->_em->createQuery(
+            'SELECT q FROM  AppBundle:DdqQuestionnaireRtt q '
+            . 'JOIN q.idAgent a '
+            . 'WHERE a.sigleent LIKE :sigleent '
+            . 'AND q.statut  LIKE \'%etape%\'');
+        $query1->setParameter('sigleent', $sigleent . '%');
+        return $query1->getResult();
+    }
+
     public function findByQuestionnairesRemplisN1BrancheRessources(array $parameters)
     {
 

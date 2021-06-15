@@ -72,7 +72,6 @@ class DdqQuestionnaireRrh
      * })
      */
     private $idDdqCampagne;
-
     public function getId()
     {
         return $this->id;
@@ -101,7 +100,6 @@ class DdqQuestionnaireRrh
     {
         return $this->etat;
     }
-
     /**
      * Set etat.
      *
@@ -125,7 +123,6 @@ class DdqQuestionnaireRrh
     {
         return $this->libelle;
     }
-
     /**
      * Set Modification.
      *
@@ -173,7 +170,6 @@ class DdqQuestionnaireRrh
     {
         return $this->idAgent;
     }
-
     public function setIdEntite(\AppBundle\Entity\Entite $idEntite = null)
     {
         $this->idEntite = $idEntite;
@@ -190,7 +186,6 @@ class DdqQuestionnaireRrh
     {
         return $this->idEntite;
     }
-
     /**
      * Set idDdqCampagne.
      *

@@ -13,7 +13,7 @@ use AppBundle\Entity\DdqCampagne;
 use AppBundle\Table\TableAgentParking;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
-use Exception;
+
 /**
  * Description of GestionUtilisateurController
  *
@@ -86,8 +86,8 @@ class GestionUtilisateurController extends AbstractController
 
             try {
                 $data = $form->getData();
-                $idCampagnes = $data['libelle']->getId();
-                return $this->redirectToRoute('resultats_parking_campagne', array('idCampagne' => $idCampagnes));
+                $idCampagne = $data['libelle']->getId();
+                return $this->redirectToRoute('resultats_parking_campagne', array('idCampagne' => $idCampagne));
             } catch (Exception $e) {
                 $this->notification('Une erreur s\'est produite. La campagne n\'a pas pu être sélectionnée', 'error');
                 return $this->render(' AppBundle:Default:index.html.twig');
