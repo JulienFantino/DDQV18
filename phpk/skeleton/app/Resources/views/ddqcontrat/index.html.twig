@@ -60,6 +60,12 @@
                                         phpk_decorator_text
 
                                         tri
+                                        ">Actif
+                        </th>
+                        <th scope="col" class="
+                                        phpk_decorator_text
+
+                                        tri
                                         ">Actions
                         </th>
                     </tr>
@@ -89,6 +95,7 @@
                             <td>{{ ddqContrat.horairecontractuel }}</td>
                             <td>{{ ddqContrat.nbjours }}</td>
                             <td>{{ ddqContrat.nbdemiesjournees }}</td>
+                            <td>{% if ddqContrat.actif %}Oui{% else %}Non{% endif %}</td>
                             <td>
                                 <ul>
                                     <li>

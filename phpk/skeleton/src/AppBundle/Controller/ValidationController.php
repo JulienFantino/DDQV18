@@ -7,9 +7,16 @@ use AppBundle\Repository\DdqQuestionnaireTpRepository;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Exception;
 
 class ValidationController extends AbstractController
 {
+    private const APP_BUNDLE_AGENT = 'AppBundle:Agent';
+    private const FORM_FACTORY = 'form.factory';
+    private const APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_TP_TYPE = 'AppBundle\Form\DdqQuestionnaireTpType';
+    private const NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR = 'ne-pas-repondre@assurance-maladie.fr';
+    private const JULIEN_FANTINO_ASSURANCE_MALADIE_FR = 'julien.fantino@assurance-maladie.fr';
+
     public function validationParkingAction($idQuestionnaire, Request $request)
     {
         /* Récup du questionnaire */
@@ -18,7 +25,7 @@ class ValidationController extends AbstractController
         /* Récup de l'agent concerné */
         $agent = $qp->getIdAgent();
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp, array('disabled' => true));
+        $form = $this->get(self::FORM_FACTORY)->create('AppBundle\Form\DdqQuestionnaireParkingType', $qp, array('disabled' => true));
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->add('avis', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
@@ -92,11 +99,11 @@ class ValidationController extends AbstractController
         $qrtt = $qrttRepo->find($idQuestionnaire);
         // dump ($qrtt);
         /* Récup du Repo Agent */
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_AGENT);
         /* Récup de l'agent concerné */
         $agent = $qrtt->getIdAgent();
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
+        $form = $this->get(self::FORM_FACTORY)->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->add('avis', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
@@ -138,7 +145,7 @@ class ValidationController extends AbstractController
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     /* ligne à supprimer */
                     //   ->setTo('julien.fantino@assurance-maladie.fr')
                     /* ligne à décommenter */
@@ -159,7 +166,7 @@ class ValidationController extends AbstractController
                 $dirBranche = $agentRepo->findOneBy(array('sigleent' => $branche));
 
                 $mailToDirBranche = (new \Swift_Message('DDQ001 - Notification - ' . $qrtt->getLibelle() . ' à valider'))
-                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     // ->setTo($dirBranche->getMail())
                     ->setTo('campagne-rh-valideur-rtt-n2.cpam-ain@assurance-maladie.fr')
                     ->setBody(
@@ -206,7 +213,7 @@ class ValidationController extends AbstractController
         /* Récup de l'agent concerné */
         $agent = $qrtt->getIdAgent();
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
+        $form = $this->get(self::FORM_FACTORY)->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->add('avis', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
@@ -249,7 +256,7 @@ class ValidationController extends AbstractController
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
                 $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                    ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     /* ligne à supprimer */
                     // ->setTo('ressourceshumaines.cpam-ain@assurance-maladie.fr')
                     /* ligne à décommenter */
@@ -288,11 +295,11 @@ class ValidationController extends AbstractController
         $qtpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireTp');
         $qtp = $qtpRepo->find($idQuestionnaire);
         /* Récup du Repo Agent */
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_AGENT);
         /* Récup de l'agent concerné */
         $agent = $qtp->getIdAgent();
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireTpType', $qtp, array('disabled' => true));
+        $form = $this->get(self::FORM_FACTORY)->create(self::APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_TP_TYPE, $qtp, array('disabled' => true));
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->add('avis', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
@@ -338,10 +345,10 @@ class ValidationController extends AbstractController
                 $em->persist($qtp);
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
-                $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                $mailToAgent = (new \Swift_Message('DDQ - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
+                    ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     /* ligne à supprimer */
-                    ->setTo('julien.fantino@assurance-maladie.fr')
+                    ->setTo(self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR)
                     /* ligne à décommenter */
 //                    ->setTo($agent->getMail())
                     ->setBody(
@@ -361,9 +368,9 @@ class ValidationController extends AbstractController
                 $dirBranche = $agentRepo->findBy(array('sigleent' => $branche));
                 foreach ($dirBranche as $dirBranches) {
                     dump($dirBranches->getMail());
-                    $mailToDirBranche = (new \Swift_Message('DDQ001 - Notification - ' . $qtp->getLibelle() . ' à valider'))
-                        ->setFrom('ne-pas-repondre@assurance-maladie.fr')
-                        ->setTo('julien.fantino@assurance-maladie.fr')
+                    $mailToDirBranche = (new \Swift_Message('DDQ - Notification - ' . $qtp->getLibelle() . ' à valider'))
+                        ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
+                        ->setTo(self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR)
                         //  ->setTo($dirBranches->getMail())
                         ->setBody(
                             $this->renderView('Emails/NotificationValider.html.twig', array(
@@ -409,7 +416,7 @@ class ValidationController extends AbstractController
         /* Récup de l'agent concerné */
         $agent = $qtp->getIdAgent();
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireTpType', $qtp, array('disabled' => true));
+        $form = $this->get(self::FORM_FACTORY)->create(self::APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_TP_TYPE, $qtp, array('disabled' => true));
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->add('avis', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
@@ -429,7 +436,7 @@ class ValidationController extends AbstractController
                 'highlight' => true,
             ))
             ->getForm();
-        dump($qtp->getIdDdqCampagne());
+        ($qtp->getIdDdqCampagne());
         /* Traitement du formulaire */
         if ($validForm->handleRequest($request)->isValid()) {
             $data = $validForm->getData();
@@ -450,12 +457,12 @@ class ValidationController extends AbstractController
                 }
                 $em->persist($qtp);
                 $em->flush();
-               
+
                 /*** on paramètre le mail à envoyer ***/
-                $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
-                    ->setFrom('ne-pas-repondre@assurance-maladie.fr')
+                $mailToAgent = (new \Swift_Message('DDQ - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
+                    ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     /* ligne à supprimer */
-                    ->setTo('julien.fantino@assurance-maladie.fr')
+                    ->setTo(self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR)
                     /* ligne à décommenter */
 //                    ->setTo($agent->getMail())
                     ->setBody(

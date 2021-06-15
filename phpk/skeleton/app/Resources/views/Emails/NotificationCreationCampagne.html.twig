@@ -1,10 +1,142 @@
 <h3>Ouverture de la Campagne {{ campagne.idDdqCategorie.libelle }} {{ campagne.datedebut|date('Y') }}</h3>
-<p>Bonjour,</p>
-<p>Vous pouvez dès à présent soumettre une demande d'attribution de place sur le parking Mourey au service Ressources
-    Humaines en vous rendant à cette adresse :</p>
-<a href="{{ url('campagnes_parking') }}">Votre campagne Parking</a>
-<a href="{{ url('campagnes_tp') }}">Votre campagne Temps partiel</a>
-<a href="{{ url('campagnes_rtt') }}">Votre campagne RTT</a>
-<p>Vous avez jusqu'au {{ campagne.datefin|date('d-m-Y') }}, date de clôture de la campagne, pour soumettre votre
-    demande</p>
-<p>Vous recevrez ue notification par email lorsque votre demande aura été soumise, puis traitée.</p>
+{% if campagne.idDdqCategorie.libelle == 'Parking' %}
+    <p>Bonjour,</p>
+    <p>Vous pouvez dès à présent soumettre une demande d'attribution de place sur le parking Mourey au service
+        Ressources
+        Humaines en vous rendant à cette adresse :</p>
+    <a href="{{ url('campagnes_parking') }}">Votre campagne Parking</a>
+    <p>Vous avez jusqu'au {{ campagne.datefin|date('d-m-Y') }}, date de clôture de la campagne, pour soumettre votre
+        demande</p>
+    <p>Vous recevrez ue notification par email lorsque votre demande aura été soumise, puis traitée.</p>
+{% elseif campagne.idDdqCategorie.libelle == 'RTT' %}
+    <p>Bonjour,</p>
+    <p>Le Protocole d’Accord relatif à la réduction du temps de travail prévoit la révision du choix R.T.T chaque année
+        au
+        30 septembre.</p>
+    <p>
+        En conséquence, <b><u>chaque salarié doit</u></b> faire connaître son choix quant aux formules RTT pour la
+        période allant du 1er
+        octobre année N au 30 septembre année N+1.</p>
+    <p>
+
+        <u>Rappel de l’article 13 du protocole</u><br>
+
+        Pour la formule 39 heures – jour fixe, en cas d’absence d’accord au sein de l’unité de travail, le choix sera
+        effectué la première année en fonction de l’ancienneté puis priorité sera donnée aux agents n’ayant pu obtenir
+        le jour de leur choix l’année précédente.
+    </p><p>
+    Si cela ne suffisait pas à départager les demandes, le deuxième critère serait celui de l’ancienneté au sein de
+    l’Institution.
+</p><p>
+    Par ailleurs, priorité sera donnée aux salariés à temps choisi par rapport aux demandes de jours de repos RTT.
+</p><p>
+    <b>Pour rappel ,le protocole d’accord collectif d’entreprise précise : « <u>dans le cadre des articles 13.1.2 et
+            13.2 ,
+            la prise systématique du repos RTT le mercredi est interdite</u> »</b>
+</p><p>
+    Agents à 39heures : Gestion au quadrimestre</p><p>
+    <ul>
+        <li>Du 01-10 au 31-01 = 7 jours</li>
+        <li> Du 01-02 au 31-05 = 6 jours</li>
+        <li> Du 01-06 au 20-09 = 5 jours</li>
+    </ul>
+    </p><p>
+    Agents à 37heures : Gestion au quadrimestre
+    <ul>
+        <li> Du 01-10 au 31-01 = 3 jours</li>
+        <li> Du 01-02 au 31-05 = 2 jours</li>
+        <li> Du 01-06 au 20-09 = 2 jours</li>
+    </ul>
+    </p><p> Vous trouverez ci-joint le calendrier RTT en jour fixe.
+
+</p><p> Une demande maintenant dématérialisée :
+
+    L’agent doit transmettre son choix de formule RTT en complétant l’applicatif « Campagne RH » rubrique RTT à partir
+    du lien suivant : <br> <a href="{{ url('campagnes_rtt') }}">Votre campagne RTT</a> entre
+    le {{ campagne.datedebut|date('d-m-Y') }} et le {{ campagne.datefin|date('d-m-Y') }}.
+</p><p>
+    Les salariés à temps partiel doivent compléter l’applicatif en précisant qu’ils sont à temps partiel.
+</p><p>
+    Toute demande réceptionnée au-delà de cette date sera refusée
+    Ensuite, le manager émet un avis favorable ou défavorable.
+    Enfin, l’agent de direction valide ou refuse la demande.
+</p><br><p>
+    Le service des Ressources Humaines reste à votre disposition pour tout renseignement complémentaire
+</p>
+{% elseif campagne.idDdqCategorie.libelle == 'Temps_partiel' %}
+    <p> Bonjour, </p>
+    <p> Depuis la loi du 19 janvier 2000 (Aubry 2), est considéré comme travail à temps partiel tout contrat
+        dont la durée est inférieure à la durée légale ou conventionnelle du travail, soit 35 heures hebdomadaires.</p>
+    Conformément au protocole du 20 juillet 1976 relatif au temps réduit dans les organismes de sécurité sociale,
+    l’exercice du travail à temps partiel est à l’initiative du salarié.
+    <p>La CPAM de l’Ain offre 17 formules de temps partiel, et à l’intérieur de chacune de ces formules, la répartition
+        horaire peut encore être déclinée différemment. Ces formules sont consultables sur le portail Intranet –
+        Processus GRH - Gestion du Personnel – Gestion du Temps.</p>
+    <p>
+        Ces mêmes formules existent en matière de temps partiel dans le cadre d’un congé parental d’éducation ou d’une
+        retraite progressive.</p><p>
+    L’exercice à temps réduit s’inscrit dans le cadre d’un accord écrit, d’une durée déterminée avec mention
+    de la durée totale et de la répartition de la durée dans la semaine.
+    Il prend effet le <b>1er octobre de l’année N pour s’achever le 30 septembre de l’année N+1.</b></p>
+
+    <p>A l’issue de cette période, et en l’absence de nouvelle demande du salarié, la réintégration à plein temps
+        s’effectue de plein droit.</p>
+    <p>
+
+        <i> Les contrats de travail à temps partiel étant établis du 1er octobre de l’année N au 30 septembre de l’année
+            N+1,
+            aucune reprise à temps plein avant l’échéance ne sera autorisée.<br>
+            Néanmoins, si l’agent fait face à une diminution de ses ressources (liée à la perte d’emploi du conjoint, à
+            une
+            séparation, un divorce ou encore au décès du conjoint), une demande argumentée de reprise anticipée à temps
+            plein
+            pourra être réalisée et sera soumise à la Direction.</i></p>
+    <p>
+        Une demande maintenant dématérialisée :
+
+        L’agent qui souhaite bénéficier d’un contrat à temps partiel à compter du 1er octobre de l’année en cours doit
+        compléter l’applicatif « Campagne RH » rubrique Temps partiels à partir du lien suivant : <a
+                href="{{ url('campagnes_tp') }}">Votre campagne temps partiel</a> entre le
+        {{ campagne.datedebut|date('d-m-Y') }} et le {{ campagne.datefin|date('d-m-Y') }}.
+        <u><b> Cette procédure ne concerne pas :
+    <ul>
+        <li>
+            - le personnel médical (médecins, diététicien, dentiste) du Centre d’Examen de Santé.
+        </li>
+        <li>
+            - Les salariés en invalidité
+        </li>
+    </ul>
+
+    </b></u>
+
+
+    Toute demande réceptionnée au-delà de cette date sera refusée (hormis les demandes de congé parental et de
+    retraite progressive)
+
+    Ensuite, le manager émet un avis favorable ou défavorable.
+    Enfin, l’agent de direction valide ou refuse la demande.
+
+    Doit remplir ce formulaire :
+    <ul>
+        <li> l’agent souhaitant une reconduction de son contrat à temps partiel en cours,</li>
+        <li>  l’agent souhaitant bénéficier pour la première fois d’un contrat à temps partiel,</li>
+        <li> l’agent souhaitant changer la formule de son contrat à temps partiel en cours.</li>
+    </ul>
+
+
+    Le service ressources humaines reste à disposition pour toute évaluation du salaire à temps partiel ou tout autre renseignement complémentaire.
+
+    Le service des Ressources Humaines.
+
+    </p>
+{% elseif campagne.idDdqCategorie.libelle == 'Recensement' %}
+    La direction vous informe
+    L’agent doit transmettre son choix de formule RTT en complétant l’applicatif « Campagne RH » rubrique RTT à partir
+    du lien suivant : <br> <a href="{{ url('campagnes_recensement') }}">Votre campagne de recensement</a> entre
+    le {{ campagne.datedebut|date('d-m-Y') }} et le {{ campagne.datefin|date('d-m-Y') }}.
+{% else %}
+    <p>!!! Erreur !!!</p>
+{% endif %}
+
+

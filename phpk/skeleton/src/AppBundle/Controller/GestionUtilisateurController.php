@@ -13,7 +13,7 @@ use AppBundle\Entity\DdqCampagne;
 use AppBundle\Table\TableAgentParking;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use Symfony\Component\HttpFoundation\Request;
-
+use Exception;
 /**
  * Description of GestionUtilisateurController
  *
@@ -23,6 +23,9 @@ class GestionUtilisateurController extends AbstractController
 {
     //put your code here
     //
+    private const FORM_FACTORY = 'form.factory';
+    private const FIND_BY_CAMPAGNES_UTILISATEUR_QUERY_BUILDER = 'findByCampagnesUtilisateurQueryBuilder';
+
     public function GestionUtilisateurParkingAction(Request $request)
     {
 
@@ -50,7 +53,7 @@ class GestionUtilisateurController extends AbstractController
         $tableau = $this->get('phpk_core.tableau')->get(new TableAgentParking());
         $tableau->getDataHandler()->setRepository($qpRepo)
             //->setRepositoryMethod('getCampagnesUtilisateur')
-            ->setRepositoryMethod('findByCampagnesUtilisateurQueryBuilder')
+            ->setRepositoryMethod(self::FIND_BY_CAMPAGNES_UTILISATEUR_QUERY_BUILDER)
             ->setRepositoryMethodParameters(array($idCampagne));
         return $this->render('AppBundle:GestionUtilisateur:UtilisateurParking.html.twig', array(
             //           "maVariable" => $maVariable,
@@ -66,7 +69,7 @@ class GestionUtilisateurController extends AbstractController
         $campagne = new DdqCampagne();
         $em = $this->getDoctrine()->getManager();
         $campagneRepo = $em->getRepository('AppBundle:DdqCampagne');
-        $formBuilder = $this->get('form.factory')->createBuilder();
+        $formBuilder = $this->get(self::FORM_FACTORY)->createBuilder();
         $formBuilder
             ->add('libelle', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'label' => 'Campagne :',
@@ -86,8 +89,8 @@ class GestionUtilisateurController extends AbstractController
 
             try {
                 $data = $form->getData();
-                $idCampagne = $data['libelle']->getId();
-                return $this->redirectToRoute('resultats_parking_campagne', array('idCampagne' => $idCampagne));
+                $idsCampagne = $data['libelle']->getId();
+                return $this->redirectToRoute('resultats_parking_campagne', array('idCampagne' => $idsCampagne));
             } catch (Exception $e) {
                 $this->notification('Une erreur s\'est produite. La campagne n\'a pas pu être sélectionnée', 'error');
                 return $this->render(' AppBundle:Default:index.html.twig');

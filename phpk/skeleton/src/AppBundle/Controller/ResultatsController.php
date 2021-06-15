@@ -7,50 +7,32 @@ use AppBundle\Repository\DdqCampagneRepository;
 use CNAMTS\PHPK\CoreBundle\Generator\Form\Bouton;
 use CNAMTS\PHPK\CoreBundle\Generator\Graphe\GrapheGenerator;
 use Symfony\Component\HttpFoundation\Request;
+use Exception;
 
 class ResultatsController extends AbstractController
 {
+    private const FORM_FACTORY = 'form.factory';
+    private const APP_BUNDLE_DDQ_CAMPAGNE = 'AppBundle:DdqCampagne';
+    private const APP_BUNDLE_DDQ_QUESTIONNAIRE_PARKING = 'AppBundle:DdqQuestionnaireParking';
+    private const APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT = 'AppBundle:DdqQuestionnaireRtt';
+    private const APP_BUNDLE_DDQ_QUESTIONNAIRE_TP = 'AppBundle:DdqQuestionnaireTp';
+
     public function ResultatsParkingAction(Request $request)
     {
         $campagne = new DdqCampagne();
         $em = $this->getDoctrine()->getManager();
-        $campagneRepo = $em->getRepository('AppBundle:DdqCampagne');
-
-//        $boutonValider = new Bouton();
-//        $boutonValider->setText('Valider');
-//        $boutonValider->setPredefined(Bouton::PREDEFINED_VALIDER);
-//        $boutonValider->setType(Bouton::TYPE_SUBMIT);
-//        $boutonRetablir = new Bouton();
-//        $boutonRetablir->setText('Rétablir');
-//        $boutonRetablir->setPredefined(Bouton::PREDEFINED_RETABLIR);
-//        $boutonRetablir->setType(Bouton::TYPE_RESET);
-
-        $formBuilder = $this->get('form.factory')->createBuilder();
+        $campagneRepo = $em->getRepository(self::APP_BUNDLE_DDQ_CAMPAGNE);
+        $formBuilder = $this->get(self::FORM_FACTORY)->createBuilder();
         $formBuilder
             ->add('libelle', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'label' => 'Campagne :',
-                'class' => 'AppBundle:DdqCampagne',
+                'class' => self::APP_BUNDLE_DDQ_CAMPAGNE,
                 'choice_label' => 'libelle',
                 'query_builder' => function (DdqCampagneRepository $campagneRepo) {
                     return $campagneRepo->findByCategorieQueryBuilder('Parking');
                 }
             ))
-//            ->add('button', 'CNAMTS\PHPK\CoreBundle\Form\Type\BoutonsType', 
-//                array('attr' => array('boutons' => array($boutonRetablir, $boutonValider))))
-//            ;
-//            ->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
-//            'collection' => array(
-//                'retablir' => array(
-//                    'label' => 'Rétablir',
-//                    'predefined' => Bouton::PREDEFINED_RETABLIR,
-//                    'type'=>Bouton::TYPE_RESET,
-//                ),
-//                'valider' => array(
-//                    'label' => 'Valider',
-//                    'predefined' => Bouton::PREDEFINED_VALIDER,
-//                ),
-//            ),
-//        )); 
+
             ->add('bouton', 'Symfony\Component\Form\Extension\Core\Type\ButtonType', array(
                 'label' => 'Valider',
                 'role' => 'Action',
@@ -65,8 +47,8 @@ class ResultatsController extends AbstractController
 
             try {
                 $data = $form->getData();
-                $idCampagne = $data['libelle']->getId();
-                return $this->redirectToRoute('resultats_parking_campagne', array('idCampagne' => $idCampagne));
+                $idsCampagne = $data['libelle']->getId();
+                return $this->redirectToRoute('resultats_parking_campagne', array('idCampagne' => $idsCampagne));
             } catch (Exception $e) {
                 $this->notification('Une erreur s\'est produite. La campagne n\'a pas pu être sélectionnée', 'error');
                 return $this->render('AppBundle:Default:index.html.twig');
@@ -82,29 +64,17 @@ class ResultatsController extends AbstractController
     {
         $campagne = new DdqCampagne();
         $em = $this->getDoctrine()->getManager();
-        $campagneRepo = $em->getRepository('AppBundle:DdqCampagne');
-
-//        $boutonValider = new Bouton();
-//        $boutonValider->setText('Valider');
-//        $boutonValider->setPredefined(Bouton::PREDEFINED_VALIDER);
-//        $boutonValider->setType(Bouton::TYPE_SUBMIT);
-//        $boutonRetablir = new Bouton();
-//        $boutonRetablir->setText('Rétablir');
-//        $boutonRetablir->setPredefined(Bouton::PREDEFINED_RETABLIR);
-//        $boutonRetablir->setType(Bouton::TYPE_RESET);
-
-        $formBuilder = $this->get('form.factory')->createBuilder();
+        $campagneRepo = $em->getRepository(self::APP_BUNDLE_DDQ_CAMPAGNE);
+        $formBuilder = $this->get(self::FORM_FACTORY)->createBuilder();
         $formBuilder
             ->add('libelle', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'label' => 'Campagne :',
-                'class' => 'AppBundle:DdqCampagne',
+                'class' => self::APP_BUNDLE_DDQ_CAMPAGNE,
                 'choice_label' => 'libelle',
                 'query_builder' => function (DdqCampagneRepository $campagneRepo) {
                     return $campagneRepo->findByCategorieQueryBuilder('RTT');
                 }
             ))
-//            ->add('button', 'CNAMTS\PHPK\CoreBundle\Form\Type\BoutonsType', 
-//                array('attr' => array('boutons' => array($boutonRetablir, $boutonValider))))
             ->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
                 'collection' => array(
                     'annuler' => array(
@@ -117,10 +87,7 @@ class ResultatsController extends AbstractController
                     ),
                 ),
             ));
-
-
         $form = $formBuilder->getForm();
-
         if ($form->handleRequest($request)->isValid()) {
 
             try {
@@ -142,22 +109,12 @@ class ResultatsController extends AbstractController
     {
         $campagne = new DdqCampagne();
         $em = $this->getDoctrine()->getManager();
-        $campagneRepo = $em->getRepository('AppBundle:DdqCampagne');
-
-//        $boutonValider = new Bouton();
-//        $boutonValider->setText('Valider');
-//        $boutonValider->setPredefined(Bouton::PREDEFINED_VALIDER);
-//        $boutonValider->setType(Bouton::TYPE_SUBMIT);
-//        $boutonRetablir = new Bouton();
-//        $boutonRetablir->setText('Rétablir');
-//        $boutonRetablir->setPredefined(Bouton::PREDEFINED_RETABLIR);
-//        $boutonRetablir->setType(Bouton::TYPE_RESET);
-
-        $formBuilder = $this->get('form.factory')->createBuilder();
+        $campagneRepo = $em->getRepository(self::APP_BUNDLE_DDQ_CAMPAGNE);
+        $formBuilder = $this->get(self::FORM_FACTORY)->createBuilder();
         $formBuilder
             ->add('libelle', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'label' => 'Campagne :',
-                'class' => 'AppBundle:DdqCampagne',
+                'class' => self::APP_BUNDLE_DDQ_CAMPAGNE,
                 'choice_label' => 'libelle',
                 'query_builder' => function (DdqCampagneRepository $campagneRepo) {
                     return $campagneRepo->findByCategorieQueryBuilder('Temps_partiel');
@@ -185,8 +142,8 @@ class ResultatsController extends AbstractController
 
             try {
                 $data = $form->getData();
-                $idCampagne = $data['libelle']->getId();
-                return $this->redirectToRoute('resultats_tp_campagne', array('idCampagne' => $idCampagne));
+                $idsCampagne = $data['libelle']->getId();
+                return $this->redirectToRoute('resultats_tp_campagne', array('idCampagne' => $idsCampagne));
             } catch (Exception $e) {
                 $this->notification('Une erreur s\'est produite. La campagne n\'a pas pu être sélectionnée', 'error');
                 return $this->render('AppBundle:Default:index.html.twig');
@@ -201,8 +158,8 @@ class ResultatsController extends AbstractController
     public function getResultatsParkingAction($idCampagne)
     {
         $em = $this->getDoctrine()->getManager();
-        $qr = $em->getRepository('AppBundle:DdqQuestionnaireParking');
-        $cr = $em->getRepository('AppBundle:DdqCampagne');
+        $qr = $em->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_PARKING);
+        $cr = $em->getRepository(self::APP_BUNDLE_DDQ_CAMPAGNE);
         $campagne = $cr->find($idCampagne);
 
         // nombre total de questionnaires pour cette campagne
@@ -242,8 +199,8 @@ class ResultatsController extends AbstractController
     public function getResultatsRttAction($idCampagne)
     {
         $em = $this->getDoctrine()->getManager();
-        $qr = $em->getRepository('AppBundle:DdqQuestionnaireRtt');
-        $cr = $em->getRepository('AppBundle:DdqCampagne');
+        $qr = $em->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT);
+        $cr = $em->getRepository(self::APP_BUNDLE_DDQ_CAMPAGNE);
         $campagne = $cr->find($idCampagne);
 
         // nombre total de questionnaires pour cette campagne
@@ -272,8 +229,8 @@ class ResultatsController extends AbstractController
     public function getResultatsTpAction($idCampagne)
     {
         $em = $this->getDoctrine()->getManager();
-        $qr = $em->getRepository('AppBundle:DdqQuestionnaireTp');
-        $cr = $em->getRepository('AppBundle:DdqCampagne');
+        $qr = $em->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_TP);
+        $cr = $em->getRepository(self::APP_BUNDLE_DDQ_CAMPAGNE);
         $campagne = $cr->find($idCampagne);
 
         // nombre total de questionnaires pour cette campagne

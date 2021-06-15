@@ -6,7 +6,8 @@ parameters:
   indicationLogo: 'CPAM DE L''AIN'
   assistance: 'infolocale.cpam-ain@assurance-maladie.fr'
   secret: 3064cd8809ae6e4eb114b0d17f7ece07
-  contact-us-email: julien.fantino@assurance-maladie.fr
+  contact-us-email: 'julien.fantino@assurance-maladie.fr'
+
 
   database_host: 127.0.0.1
   database_port: 5432
