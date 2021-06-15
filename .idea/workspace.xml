@@ -22,10 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1775b31-87f8-4ca0-979d-edde80fbb67e" name="Default Changelist" comment="Code quality1">
-      <change beforePath="$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Controller/AdministrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Controller/AdministrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Controller/QuestionnairesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Controller/QuestionnairesController.php" afterDir="false" />
-    </list>
+    <list default="true" id="d1775b31-87f8-4ca0-979d-edde80fbb67e" name="Default Changelist" comment="Code quality5" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -325,7 +322,7 @@
       <workItem from="1623223062172" duration="1811000" />
       <workItem from="1623314244111" duration="7624000" />
       <workItem from="1623739314898" duration="6004000" />
-      <workItem from="1623756593650" duration="7499000" />
+      <workItem from="1623756593650" duration="7857000" />
     </task>
     <task id="LOCAL-00001" summary=" &#10; DDQ MODULE RTT CLIENT">
       <created>1565358244698</created>
@@ -432,7 +429,21 @@
       <option name="project" value="LOCAL" />
       <updated>1623771930013</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Code quality5">
+      <created>1623772949257</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1623772949257</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Code quality5">
+      <created>1623773087818</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1623773087818</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -496,7 +507,8 @@
     <MESSAGE value="Création du tableau RTT Administration sans les données" />
     <MESSAGE value="Création du module GDG" />
     <MESSAGE value="Code quality1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code quality1" />
+    <MESSAGE value="Code quality5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code quality5" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
