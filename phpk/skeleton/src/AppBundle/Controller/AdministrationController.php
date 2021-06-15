@@ -13,13 +13,31 @@ use Exception;
 class AdministrationController extends AbstractController
 {
 
+    private const FORM_FACTORY = 'form.factory';
+    private const APP_BUNDLE_FORM_DDQ_CAMPAGNE_TYPE = 'AppBundle\Form\DdqCampagneType';
+    private const NOUVELLE = 'nouvelle';
+    private const JULIEN_FANTINO_ASSURANCE_MALADIE_FR = 'julien.fantino@assurance-maladie.fr';
+    private const TOUS_CAPM_011_CPAM_AIN_ASSURANCE_MALADIE_FR = 'tous-capm011.cpam-ain@assurance-maladie.fr';
+    private const PHPK_CORE_TABLEAU = 'phpk_core.tableau';
+    private const APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT = 'AppBundle:DdqQuestionnaireRtt';
+    private const APP_BUNDLE_AGENT = 'AppBundle:Agent';
+    private const APP_BUNDLE_MES_CAMPAGNES_MES_CAMPAGNES_RTT_HTML_TWIG = 'AppBundle:MesCampagnes:MesCampagnesRtt.html.twig';
+    private const AGENT = 'agent';
+    private const TAB_AGENT_QUESTIONNAIRE = 'tabAgentQuestionnaire';
+    private const APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_RTT_TYPE = 'AppBundle\Form\DdqQuestionnaireRttType';
+    private const APP_BUNDLE_ADMINISTRATION_CONSULTATION_QUESTIONNAIRE_HTML_TWIG = 'AppBundle:Administration:consultation_questionnaire.html.twig';
+    private const QUESTIONNAIRE = 'questionnaire';
+    private const FORM = 'form';
+    private const VALID_FORM = 'validForm';
+    private const SERVEUR_WEB_CPAM_AIN_ASSURANCE_MALADIE_FR = 'serveur-web.cpam-ain@assurance-maladie.fr';
+
     public function nouvelleCampagneAction(Request $request, \Swift_Mailer $mailer)
     {
         /* Création d'une entité agent ou récupération d'une existante */
         $campagne = new DdqCampagne();
 
 
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqCampagneType', $campagne);
+        $form = $this->get(self::FORM_FACTORY)->create(self::APP_BUNDLE_FORM_DDQ_CAMPAGNE_TYPE, $campagne);
 
         /** Ajout d'un seul bouton au formulaire */
 //        $form->add('button', 'CNAMTS\PHPK\CoreBundle\Form\Type\BoutonsType',
@@ -41,7 +59,7 @@ class AdministrationController extends AbstractController
 
             try {
                 // on set le statut de la campagne à 'nouvelle'
-                $campagne->setStatut('nouvelle');
+                $campagne->setStatut(self::NOUVELLE);
                 $em->persist($campagne);
                 $em->flush();
 
@@ -50,11 +68,11 @@ class AdministrationController extends AbstractController
                 $transport = new \Swift_SmtpTransport();
                 //création d'un objet mailer
                 $mailers = (new \Swift_Mailer($transport));
-                $correspondant = 'julien.fantino@assurance-maladie.fr';
-                // $correspondant = 'tous-cpam011.cpam-ain@assurance-maladie.fr';
+                $correspondant = self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR;
+                // $correspondant = self::TOUS_CPAM_011_CPAM_AIN_ASSURANCE_MALADIE_FR;
                 $mail = (new \Swift_Message('CampagneRH - Notification - Nouvelle Campagne - Ne pas répondre'))
                     //->setFrom('ne-pas-repondre@assurance-maladie.fr')
-                    ->setFrom('serveur-web.cpam-ain@assurance-maladie.fr')
+                    ->setFrom(self::SERVEUR_WEB_CPAM_AIN_ASSURANCE_MALADIE_FR)
                     ///*** set l'adresse à 'tous' ***/
                     ->setTo($correspondant)
                     ->setBody(
@@ -79,18 +97,7 @@ class AdministrationController extends AbstractController
         $campagne = new DdqCampagne();
         $em = $this->getDoctrine()->getManager();
         $campagneRepo = $em->getRepository('AppBundle:DdqCampagne');
-
-//        $boutonValider = new Bouton();
-//        $boutonValider->setText('Valider');
-//        $boutonValider->setPredefined(Bouton::PREDEFINED_VALIDER);
-//        $boutonValider->setType(Bouton::TYPE_SUBMIT);
-//        $boutonRetablir = new Bouton();
-//        $boutonRetablir->setText('Rétablir');
-//        $boutonRetablir->setPredefined(Bouton::PREDEFINED_RETABLIR);
-//        $boutonRetablir->setType(Bouton::TYPE_RESET);
-
-        $formBuilder = $this->get('form.factory')->createBuilder();
-
+        $formBuilder = $this->get(self::FORM_FACTORY)->createBuilder();
         $formBuilder
             ->add('libelle', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'label' => 'Campagne :',
@@ -100,8 +107,6 @@ class AdministrationController extends AbstractController
                     return $campagneRepo->findByStatutQueryBuilder('terminée');
                 }
             ))
-//            ->add('button', 'CNAMTS\PHPK\CoreBundle\Form\Type\BoutonsType',
-//                array('attr' => array('boutons' => array($boutonRetablir, $boutonValider))))
             ->add('boutons', 'CNAMTS\PHPK\CoreBundle\Form\Type\CollectionButtonType', array(
                 'collection' => array(
                     'annuler' => array(
@@ -116,17 +121,11 @@ class AdministrationController extends AbstractController
                     ),
                 ),
             ));
-
-
         $form = $formBuilder->getForm();
-
         if ($form->handleRequest($request)->isValid()) {
             try {
                 $tab = $form->getData();
                 $campagne = $tab['libelle'];
-//                var_dump($campagne);
-//                return $this->render('AppBundle:Default:blank.html.twig');
-//                $campagne = $campagneRepo->find($idCampagne);
                 $campagne->setStatut('terminée');
                 $em->persist($campagne);
                 $em->flush();
@@ -140,7 +139,7 @@ class AdministrationController extends AbstractController
                     ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
                     /*** set l'adresse à 'tous' ***/
                     //    ->setTo($agent->getMail())
-                    ->setTo('tous-capm011.cpam-ain@assurance-maladie.fr')
+                    ->setTo(self::TOUS_CAPM_011_CPAM_AIN_ASSURANCE_MALADIE_FR)
                     ->setBody(
                         $this->renderView('Emails/NotificationClotureCampagne.html.twig', array('campagne' => $campagne)),
                         'text/html'
@@ -162,128 +161,128 @@ class AdministrationController extends AbstractController
     public function GetDataGlobalAgentRttAction()
     {
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_AGENT);
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
-        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT);
 
-        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+        $tableau = $this->get(self::PHPK_CORE_TABLEAU)->get(new TableRttAgent());
 
         $tableau->getDataHandler()->setRepository($qpRepo)
             ->setRepositoryMethod('findAll')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render(self::APP_BUNDLE_MES_CAMPAGNES_MES_CAMPAGNES_RTT_HTML_TWIG, array(self::AGENT => $agent, self::TAB_AGENT_QUESTIONNAIRE => $tableau));
 
     }
 
     public function GetData39h00FixeAgentRttAction()
     {
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_AGENT);
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
-        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT);
 
-        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+        $tableau = $this->get(self::PHPK_CORE_TABLEAU)->get(new TableRttAgent());
 
         $tableau->getDataHandler()->setRepository($qpRepo)
             ->setRepositoryMethod('findBy39hJoursFixes')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render(self::APP_BUNDLE_MES_CAMPAGNES_MES_CAMPAGNES_RTT_HTML_TWIG, array(self::AGENT => $agent, self::TAB_AGENT_QUESTIONNAIRE => $tableau));
 
     }
 
     public function GetData39h00QuadrimestreAgentRttAction()
     {
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_AGENT);
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
-        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT);
 
-        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+        $tableau = $this->get(self::PHPK_CORE_TABLEAU)->get(new TableRttAgent());
 
         $tableau->getDataHandler()->setRepository($qpRepo)
             ->setRepositoryMethod('findBy39hQuadrimestre')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render(self::APP_BUNDLE_MES_CAMPAGNES_MES_CAMPAGNES_RTT_HTML_TWIG, array(self::AGENT => $agent, self::TAB_AGENT_QUESTIONNAIRE => $tableau));
 
     }
 
     public function GetData37h00AgentRttAction()
     {
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_AGENT);
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
-        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT);
 
-        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+        $tableau = $this->get(self::PHPK_CORE_TABLEAU)->get(new TableRttAgent());
 
         $tableau->getDataHandler()->setRepository($qpRepo)
             ->setRepositoryMethod('findBy37h00')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render(self::APP_BUNDLE_MES_CAMPAGNES_MES_CAMPAGNES_RTT_HTML_TWIG, array(self::AGENT => $agent, self::TAB_AGENT_QUESTIONNAIRE => $tableau));
 
     }
 
     public function GetData36h00AgentRttAction()
     {
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_AGENT);
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
-        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT);
 
-        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+        $tableau = $this->get(self::PHPK_CORE_TABLEAU)->get(new TableRttAgent());
 
         $tableau->getDataHandler()->setRepository($qpRepo)
             ->setRepositoryMethod('findBy36h00')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render(self::APP_BUNDLE_MES_CAMPAGNES_MES_CAMPAGNES_RTT_HTML_TWIG, array(self::AGENT => $agent, self::TAB_AGENT_QUESTIONNAIRE => $tableau));
 
     }
 
     public function GetDataNonValideAgentRttAction()
     {
         $nomium = $this->getUser()->getNom() . '-' . $this->getUser()->getChrono();
-        $agentRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Agent');
+        $agentRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_AGENT);
         $agent = $agentRepo->findOneByNomium($nomium);
         $idAgent = $agent->getId();
-        $qpRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+        $qpRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT);
 
-        $tableau = $this->get('phpk_core.tableau')->get(new TableRttAgent());
+        $tableau = $this->get(self::PHPK_CORE_TABLEAU)->get(new TableRttAgent());
 
         $tableau->getDataHandler()->setRepository($qpRepo)
             ->setRepositoryMethod('findByNonValide')
             ->setRepositoryMethodParameters(array($idAgent));
 
-        return $this->render('AppBundle:MesCampagnes:MesCampagnesRtt.html.twig', array('agent' => $agent, 'tabAgentQuestionnaire' => $tableau));
+        return $this->render(self::APP_BUNDLE_MES_CAMPAGNES_MES_CAMPAGNES_RTT_HTML_TWIG, array(self::AGENT => $agent, self::TAB_AGENT_QUESTIONNAIRE => $tableau));
 
     }
 
     public function ConsultationRttN1Action($idQuestionnaire, Request $request)
     {
         /* Récup du questionnaire */
-        $qrttRepo = $this->getDoctrine()->getManager()->getRepository('AppBundle:DdqQuestionnaireRtt');
+        $qrttRepo = $this->getDoctrine()->getManager()->getRepository(self::APP_BUNDLE_DDQ_QUESTIONNAIRE_RTT);
         $qrtt = $qrttRepo->find($idQuestionnaire);
         /* Récup de l'agent concerné */
         $agent = $qrtt->getIdAgent();
         /* Création du formulaire */
-        $form = $this->get('form.factory')->create('AppBundle\Form\DdqQuestionnaireRttType', $qrtt, array('disabled' => true));
+        $form = $this->get(self::FORM_FACTORY)->create(self::APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_RTT_TYPE, $qrtt, array('disabled' => true));
         /* Création formulaire de validation/invalidation */
         $validForm = $this->createFormBuilder()
             ->getForm();
-        return $this->render('AppBundle:Administration:consultation_questionnaire.html.twig', array(
-            'agent' => $agent,
-            'questionnaire' => $qrtt,
-            'form' => $form->createView(),
-            'validForm' => $validForm->createView()
+        return $this->render(self::APP_BUNDLE_ADMINISTRATION_CONSULTATION_QUESTIONNAIRE_HTML_TWIG, array(
+            self::AGENT => $agent,
+            self::QUESTIONNAIRE => $qrtt,
+            self::FORM => $form->createView(),
+            self::VALID_FORM => $validForm->createView()
         ));
     }
 }
