@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebResourcesPaths">
+    <contentEntries>
+      <entry url="file://$PROJECT_DIR$">
+        <entryData>
+          <resourceRoots>
+            <path value="file://$PROJECT_DIR$/phpk/skeleton/app/Resources" />
+            <path value="file://$PROJECT_DIR$/phpk/skeleton/app/Resources/views" />
+            <path value="file://$PROJECT_DIR$/phpk/skeleton/app/Resources/views/ddqcontrat" />
+            <path value="file://$PROJECT_DIR$/phpk/skeleton/app/Resources/views/default" />
+            <path value="file://$PROJECT_DIR$/phpk/skeleton/app/Resources/views/Emails" />
+            <path value="file://$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Resources" />
+            <path value="file://$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Resources/views" />
+            <path value="file://$PROJECT_DIR$/phpk/skeleton/src/AppBundle/Resources/config" />
+          </resourceRoots>
+        </entryData>
+      </entry>
+    </contentEntries>
+  </component>
+</project>

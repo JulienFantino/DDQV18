@@ -16,7 +16,7 @@ phpk_core:
         Temps Partiel:
           route: campagnes_tp
           libelle: Temps Partiel
-          habilitations: [ DDQ_ADMIN ]
+          habilitations: [ DDQ_CONSULTE ]
     #        Télétravail:
     #          libelle: Télétravail
     #          habilitations: [DDQ_CONSULTE]
@@ -37,7 +37,7 @@ phpk_core:
         Temps Partiel:
           route: historique_tp
           libelle: Temps Partiel
-          habilitations: [ DDQ_ADMIN ]
+          habilitations: [ DDQ_CONSULTE ]
 
     #        Télétravail:
     #          libelle: Télétravail
@@ -50,10 +50,6 @@ phpk_core:
           habilitations: [DDQ_VAL_PARK]
           route: liste_questionnaires_parking
           libelle: Parking
-        Rencessement RH:
-          habilitations: [DDQ_RRH]
-          route: greve_agent
-          libelle: Recenssement RH
         RTT:
           libelle: RTT
           fils:
@@ -96,13 +92,24 @@ phpk_core:
               libelle: Niveau 1
               habilitations: [ DDQ_VAL_TP1 ]
             Niveau 1 bis:
-              route: liste_questionnaires_tp
+              route: liste_questionnaires_tpN1N2
               libelle: Niveau 1 Bis
               habilitations: [ DDQ_VAL_TP1 ]
             Niveau 2:
               route: liste_questionnaires_tpN+1
               libelle: Niveau 2
               habilitations: [ DDQ_VAL_TP2 ]
+        Recensement:
+          libelle: Recensement
+          fils:
+            Rencessement RH:
+              habilitations: [ DDQ_RRH ]
+              route: greve_agent
+              libelle: Recenssement RH
+            Rencessement Manager:
+              libelle: Recensement Manager
+              habilitations: [ DDQ_RRH ]
+
 
     Administration:
       libelle: Administration
@@ -170,10 +177,43 @@ phpk_core:
               libelle: Gestion des Items
               route: ddqcontrat_index
               habilitations: [ DDQ_ADMIN_ITEM ]
+            Tp_global:
+              libelle: Global
+              route: adminTpGlobal
+        Recensement:
+          libelle: Recensement
+          habilitations: [ DDQ_RRH ]
+          fils:
+            Capmagne_ouverture:
+              libelle: Nouveau Recensement
+              route: admin_recensement_nouveau
+              habilitations: [ DDQ_RRH ]
+            Capmagne_cloture:
+              libelle: Cloture Recensement
+              route: admin_recensement_cloture
+              habilitations: [ DDQ_RRH ]
+            Liste des services:
+              libelle: Liste des services
+              route: admin_recensement_service
+              habilitations: [ DDQ_RRH ]
+            Manager:
+              libelle: Manager
+              habilitations: [ DDQ_RRH ]
+            Droits:
+              libelle: Gestion des droits
+              habilitations: [ DDQ_RRH ]
+            Statistiques:
+              libelle: Statistiques
+              habilitations: [ DDQ_RRH ]
+            Greve_last:
+              libelle: Dernière grève
+              habilitations: [ DDQ_RRH ]
+            Greve_Archives:
+              libelle: Grèves archivées
+              habilitations: [ DDQ_RRH ]
 
-            Utilisateurs:
-              libelle: Utilisateurs
-              habilitations: [ DDQ_ADMIN_UTIL ]
+
+
             #            Télétravail:
             #              libelle: Télétravail
             #              fils:

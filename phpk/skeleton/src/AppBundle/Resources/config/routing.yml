@@ -73,7 +73,10 @@ questionnaire_tp:
   path: /questionnaire_tp/{campagne}
   defaults:
     _controller: AppBundle:Questionnaires:getQuestionnaireTp
-
+questionnaire_tp+1:
+  path: /questionnaire_tpN+1/{idQuestionnaire}
+  defaults:
+    _controller: AppBundle:Administration:ConsultationTpN1
 historique_parking:
   path: /historique_parking
   defaults:
@@ -134,9 +137,9 @@ liste_questionnaires_tp:
     _controller: AppBundle:Liste:getListeTpRemplis
 
 liste_questionnaires_tpN1N2:
-  path: /liste_questionnaires_tp
+  path: /liste_questionnaire_tpN1N2
   defaults:
-    _controller: AppBundle:Liste:getListeTpRemplis
+    _controller: AppBundle:Liste:getListeTpRemplisN1N2
 liste_questionnaires_tpN+1:
   path: /liste_questionnaires_tpN+1
   defaults:
@@ -261,6 +264,10 @@ adminRttNonValide:
   path: /AdminRttNonValide
   defaults:
     _controller: AppBundle:Administration:GetDataNonValideAgentRtt
+adminTpGlobal:
+  path: /AdminTpAll
+  defaults:
+    _controller: AppBundle:Administration:GetDataGlobalAgentTp
 anr_test:
   path: /anr
   defaults: { _controller: 'AppBundle:Anr:anr' }
@@ -272,6 +279,21 @@ anr_agent:
 anr_update_anr:
   path: /update_anr
   defaults: { _controller: 'AppBundle:AnrUpdate:persist' }
+
+
+admin_recensement_nouveau:
+  path: /RRH_nouveau
+  defaults:
+    _controller: AppBundle:Recensement:nouveauRecensement
+
+admin_recensement_cloture:
+  path: /RRH_cloture
+  defaults:
+    { _controller: 'AppBundle:Administration:clotureCampagne' }
+admin_recensement_service:
+  path: /RRH_service
+  defaults:
+    _controller: 'AppBundle:Recensement:getListeServiceRrhRemplis'
 
 greve_agent:
   path: /greve_agent

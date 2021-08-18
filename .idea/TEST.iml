@@ -37,6 +37,11 @@
       <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/knplabs/knp-snappy/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/vendor/symfony/symfony/src/Symfony/Component/ClassLoader/Tests/Fixtures/fallback" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/src/AppBundle/Controller" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/src/AppBundle/Form" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/src/AppBundle/Repository" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/src/AppBundle/Tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/phpk/skeleton/src/AppBundle/Tests/Controller" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/app/sessions" />
       <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/bin" />
       <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/doc" />
@@ -46,6 +51,7 @@
       <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/web/css" />
       <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/web/js" />
       <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/web/webfonts" />
+      <excludeFolder url="file://$MODULE_DIR$/phpk/skeleton/web" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

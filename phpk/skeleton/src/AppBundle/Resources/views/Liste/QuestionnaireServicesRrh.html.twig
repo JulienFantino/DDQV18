@@ -1,0 +1,15 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Liste des services qui n'ont pas renseigné leurs agents :</h1>
+    <div>
+        {{ phpk('tableau', {
+            affichageLignesTrouvees: true,
+            export: [ 'csv' ],
+            filter: false,
+            formTag: true,
+            pagination: 'both',
+            tableau: tabQuestionnaires
+        }) }}</div>
+{% endblock %}

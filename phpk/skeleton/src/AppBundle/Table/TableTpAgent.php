@@ -17,7 +17,7 @@ use CNAMTS\PHPK\CoreBundle\Generator\Table\TableGenerator;
  *
  * @author FANTINO-02926
  */
-class TableRttAgent extends TableGenerator
+class TableTpAgent extends TableGenerator
 {
 
     public function __construct()
@@ -40,15 +40,15 @@ class TableRttAgent extends TableGenerator
                 'decorator' => Decorator::DEFAUT
             ))
             ->addColumn(array(
-                'id' => 'formule',
-                'name' => 'Formule',
+                'id' => 'motif',
+                'name' => 'Motif',
                 'filtrable' => false,
                 'triable' => false,
                 'decorator' => Decorator::DEFAUT
             ))
             ->addColumn(array(
-                'id' => 'reprisetp',
-                'name' => 'Reprise TP',
+                'id' => 'Nbheures',
+                'name' => 'Contrat',
                 'filtrable' => false,
                 'triable' => false,
                 'decorator' => Decorator::DEFAUT
@@ -78,7 +78,7 @@ class TableRttAgent extends TableGenerator
                 $url = 'quetionnaire_rttN+1/' . $questionnaire->getId();
                 $lien->setUrl($url);
             } else if ($questionnaire->getIdDdqCampagne()->getIdDdqCategorie()->getLibelle() === 'Temps_partiel') {
-                $url = 'questionnaire_tp/' . $questionnaire->getIdDdqCampagne()->getLibelle();
+                $url = 'questionnaire_tpN+1/' . $questionnaire->getId();
                 $lien->setUrl($url);
             } else {
                 $lien->setUrl('error');
@@ -89,13 +89,13 @@ class TableRttAgent extends TableGenerator
                     'data' => array(
                         $questionnaire->getIdAgent()->getNomium(),
                         $questionnaire->getStatut(),
-                        $questionnaire->getFormule(),
-                        $questionnaire->getReprisetp(),
+                        $questionnaire->getMotif(),
+                        $questionnaire->getIdDdqContrat()->getNbheures(),
                         $lien
                     )
-                     )
-                 );
-             }
+                )
+            );
+        }
         return $this->rows;
     }
     //put your code here

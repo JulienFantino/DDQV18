@@ -1,0 +1,74 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+
+{% block body %}
+    <h1>Création d'une nouvelle Campagne de recensement</h1>
+    <div class="section">
+        {{ form_start(form) }}
+
+        {{ form_errors(form) }}
+        <div class="ligne "><label class="w150px" for="cnamts_AppBundle_Ddqcampagne_libelle">
+                Libellé
+                &nbsp;<span class="obligatoire">*</span></label><span class="zone_champ_saisie">
+               {{ form_widget(form.libelle) }}  </span>
+
+
+        </div>
+        <div class="ligne "><label class="w150px" for="cnamts_AppBundle_Ddqcampagne_libelle">
+                Date de début
+                &nbsp;<span class="obligatoire">*</span></label><span class="zone_champ_saisie">
+              {{ form_widget(form.datedebut) }}  </span>
+
+
+        </div>
+        <div class="ligne "><label class="w150px" for="cnamts_AppBundle_Ddqcampagne_libelle">
+                Date de fin
+                &nbsp;<span class="obligatoire">*</span></label><span class="zone_champ_saisie">
+               {{ form_widget(form.datefin) }}  </span>
+
+
+        </div>
+        <div class="ligne "><label class="w150px" for="cnamts_AppBundle_Ddqcampagne_libelle">
+                Type de Campagne
+                &nbsp;<span class="obligatoire">*</span></label><span class="zone_champ_saisie">
+             {{ form_widget(form.idDdqCategorie) }} </span>
+
+
+        </div>
+        <div class="ligne "><label class="w150px" for="cnamts_AppBundle_Ddqcampagne_libelle">
+                Syndicat
+                &nbsp;<span class="obligatoire">*</span></label><span class="zone_champ_saisie">
+              {{ form_widget(form.syndicat) }}  </span>
+
+
+        </div>
+        <div class="section"><strong> Modalitées:</strong>
+            <div class="ligne "><label class="w150px" for="cnamts_AppBundle_Ddqcampagne_libelle">
+                    Journée
+                    &nbsp;<span class="obligatoire">*</span></label><span class="zone_champ_saisie">
+               {{ form_widget(form.journee) }}  </span>
+
+
+            </div>
+            <div class="ligne "><label class="w150px" for="cnamts_AppBundle_Ddqcampagne_libelle">
+                    Demi-journée
+                    &nbsp;<span class="obligatoire">*</span></label><span class="zone_champ_saisie">
+               {{ form_widget(form.demijournee) }} </span>
+
+
+            </div>
+            <div class="ligne "><label class="w150px" for="cnamts_AppBundle_Ddqcampagne_libelle">
+                    Heure
+                    &nbsp;<span class="obligatoire">*</span></label><span class="zone_champ_saisie">
+               {{ form_widget(form.heure) }}  </span>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+
+
+
+
+{% endblock %}

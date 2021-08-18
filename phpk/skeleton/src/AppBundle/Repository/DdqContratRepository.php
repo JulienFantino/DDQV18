@@ -39,7 +39,8 @@ class DdqContratRepository extends \Doctrine\ORM\EntityRepository implements Rep
     {
         $query = $this->_em->createQuery(
             'SELECT c FROM AppBundle:DdqContrat c '
-            . 'WHERE c.tempspartiel = true AND c.actif = true');
+            . 'WHERE c.tempspartiel = true AND c.actif = true '
+            . 'ORDER BY c.id');
         return $query->getResult();
     }
 }

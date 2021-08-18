@@ -20,7 +20,7 @@ class DdqContratController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $ddqContrats = $em->getRepository('AppBundle:DdqContrat')->findAll();
+        $ddqContrats = $em->getRepository('AppBundle:DdqContrat')->findByTempsPartiel();
 
         return $this->render('ddqcontrat/index.html.twig', array(
             'ddqContrats' => $ddqContrats,

@@ -11,19 +11,21 @@ namespace AppBundle\Controller;
 use Exception;
 class AnrController extends AbstractController
 {
+    private const C = '77931118200017';
+
     public function anrAction()
     {
         $anr = $this->get('phpk_webservice.client.anr');
 
         /* Récupération d'un agent à partir de son nom et de son prénom */
         try {
-            $organismes = $anr->findAllOrganismesBy(array('numSiret' => '77931118200017'));
-            $sites = $anr->findAllSitesBy(array('numSiret' => '77931118200017'));
+            $organismes = $anr->findAllOrganismesBy(array('numSiret' => self::C));
+            $sites = $anr->findAllSitesBy(array('numSiret' => self::C));
             //var_dump($site);
-            $entites = $anr->findAllEntitesBy(array('numSiret' => '77931118200017'));
+            $entites = $anr->findAllEntitesBy(array('numSiret' => self::C));
             //var_dump($entite);
 
-            $agents = $anr->findAllAgentsBy(array('numSiret' => '77931118200017'));
+            $agents = $anr->findAllAgentsBy(array('numSiret' => self::C));
             //var_dump($agents);*/
 
         } catch (Exception $e) {

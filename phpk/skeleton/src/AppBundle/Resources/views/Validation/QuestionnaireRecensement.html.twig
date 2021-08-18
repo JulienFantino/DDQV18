@@ -4,13 +4,22 @@
 {% block body %}
     <h1>Questionnaire RTT</h1>
 
-    <div class='zone-info'>
+    <div id='content_1' class='zone-info'>
         <strong>N° Agent :</strong> {{ agent.nomium }}</br>
         <strong>Nom :</strong> {{ agent.nom }}</br>
         <strong>Prénom :</strong> {{ agent.prenom }}</br>
         <strong>Service :</strong> {{ agent.nomEntite }}
     </div>
 
+    {{ phpk('accordeon', {
+        selection: 'content2',
+        contents: [
+            {content:'content_1', title:'Contenu 1'},
+            {content:'content_2', title:'Contenu 2', id: 'content2' },
+            {content:'content_3',title:'contenu 3'},
+            {ajax:true, path: 'campagnes_parking', title: 'Ajax'}
+        ]
+    }) }}
 
 {% endblock %}
 

@@ -2,7 +2,7 @@
 {% from "PHPKTemplateBundle::import.html.twig" import phpk %}
 
 {% block body %}
-{# <h1>Demande de travail à temps partiel choisi</h1>
+    {# <h1>Demande de travail à temps partiel choisi</h1>
     {{ phpk('bouton',{
         predefined: 'question',
         text: 'Question',
@@ -65,19 +65,16 @@
         </div>
     </div>
     <div class="col2-2">
-        <div class="zone-info">
-            <h3>Du 1er Octobre {{ year }} au 30 Septembre {{ year+1 }}</h3>
-        </div>
+
         <div class="section">
             <h3>Choix du contrat :</h3>
             <p>{{ form_widget(form.idDdqContrat) }}</p>
-            <h3>Horraire du contrat :</h3>
-            <p>{{ horraire }}</p>
-            <p>{#{ form_widget(form.idDdqRepartition) }}#}</p>
-            {#    <h3>Choix de la repartition :</h3>#}
+
+            <p>{# { form_widget(form.idDdqRepartition) }} #}</p>
+            {# <h3>Choix de la repartition :</h3> #}
 
             <p>
-                {#{form_widget(form.idDdqRepartition) }#######}</p>
+                {# {form_widget(form.idDdqRepartition) }###### #}</p>
 
 
         </div>

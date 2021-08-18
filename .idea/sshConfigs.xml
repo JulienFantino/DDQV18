@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig authType="PASSWORD" host="55.40.6.100" id="a7ac15df-39a6-45ae-afeb-aeeef4a2ca7f" port="22" customName="PROD" nameFormat="CUSTOM">
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="55.40.6.100" id="a7ac15df-39a6-45ae-afeb-aeeef4a2ca7f" port="22" customName="PROD" nameFormat="CUSTOM">
         <option name="customName" value="PROD" />
       </sshConfig>
     </configs>

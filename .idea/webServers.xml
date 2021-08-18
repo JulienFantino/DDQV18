@@ -2,21 +2,21 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="fbc1773a-50cd-4c01-91fa-c0862b694e62" name="PROD" url="http://55.40.6.100">
-        <fileTransfer rootFolder="/var/www/html/app" accessType="SFTP" sshConfigId="86caaa69-9296-4df8-8042-989e1c00ee77" sshConfig="PROD">
+      <webServer id="4a598bc0-548b-4a10-9a31-7f3a222515a0" name="PROD (project level)" url="http://55.40.6.100">
+        <fileTransfer rootFolder="/var/www/html/app" accessType="SFTP" host="55.40.6.100" port="22" sshConfigId="a7ac15df-39a6-45ae-afeb-aeeef4a2ca7f" sshConfig="PROD">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="fbc1773a-50cd-4c01-91fa-c0862b694e62" name="PROD" url="http://55.40.6.100">
-        <fileTransfer rootFolder="/var/www/html/app" accessType="SFTP" sshConfigId="da0e6604-0e3c-4050-9908-5c9ba714fba7" sshConfig="PROD">
+      <webServer id="41aa68db-94d1-4748-8a1b-d5e8166d9fbe" name="PROD (project level) (1)" url="http://55.40.6.100">
+        <fileTransfer rootFolder="/var/www/html/app" accessType="SFTP" host="55.40.6.100" port="22" sshConfigId="a7ac15df-39a6-45ae-afeb-aeeef4a2ca7f" sshConfig="PROD">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="fbc1773a-50cd-4c01-91fa-c0862b694e62" name="PROD" url="http://55.40.6.100">
+      <webServer id="d8466fe0-b316-403f-a048-8575e6bd2d42" name="PROD (project level) (2)" url="http://55.40.6.100">
         <fileTransfer rootFolder="/var/www/html/app" accessType="SFTP" host="55.40.6.100" port="22" sshConfigId="a7ac15df-39a6-45ae-afeb-aeeef4a2ca7f" sshConfig="PROD">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />

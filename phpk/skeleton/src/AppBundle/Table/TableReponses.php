@@ -74,6 +74,10 @@ class TableReponses extends TableGenerator
                 } else {
                     $url = 'validation_tp/' . $questionnaire->getId();
                 }
+
+                $lien->setUrl($url);
+            } else if ($questionnaire->getIdDdqCampagne()->getIdDdqCategorie()->getLibelle() === 'Recensement') {
+                $url = 'validationservice/' . $questionnaire->getId();
                 $lien->setUrl($url);
             } else $lien->setUrl('error');
 

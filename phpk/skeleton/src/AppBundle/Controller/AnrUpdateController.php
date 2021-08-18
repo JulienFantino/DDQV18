@@ -16,6 +16,9 @@ use Exception;
 
 class AnrUpdateController extends AbstractController
 {
+    private const C = '77931118200017';
+    private const YOUR_CUSTOM_MESSAGE = 'Your custom message';
+
     public function persistAction()
     {
         // on rallonge le temps d'execution max car c'est long !
@@ -24,10 +27,10 @@ class AnrUpdateController extends AbstractController
         $anr = $this->get('phpk_webservice.client.anr');
         $em = $this->getDoctrine()->getManager();
 
-        $organismes = $anr->findAllOrganismesBy(array('numSiret' => '77931118200017'));
-        $sites = $anr->findAllSitesBy(array('numSiret' => '77931118200017'));
-        $entites = $anr->findAllEntitesBy(array('numSiret' => '77931118200017'));
-        $agents = $anr->findAllAgentsBy(array('numSiret' => '77931118200017'));
+        $organismes = $anr->findAllOrganismesBy(array('numSiret' => self::C));
+        $sites = $anr->findAllSitesBy(array('numSiret' => self::C));
+        $entites = $anr->findAllEntitesBy(array('numSiret' => self::C));
+        $agents = $anr->findAllAgentsBy(array('numSiret' => self::C));
 
         try {
             foreach ($organismes as $organisme) {
@@ -69,7 +72,7 @@ class AnrUpdateController extends AbstractController
                 $em->flush();
             }
         } catch (Exception $e) {
-            $this->get('session')->getFlashBag()->add('error', 'Your custom message');
+            $this->get('session')->getFlashBag()->add('error', self::YOUR_CUSTOM_MESSAGE);
             $message = $this->get('logger')->error($e->getTraceAsString());
         }
 
@@ -84,13 +87,13 @@ class AnrUpdateController extends AbstractController
                 $anrSite->setBoitepostale($site->getBoitePostale());
                 $anrSite->setCodepostal($site->getCodePostal());
                 $anrSite->setVille($site->getVille());
-                $anrSite->setIdorganisme('77931118200017');
+                $anrSite->setIdorganisme(self::C);
                 $anrSite->setNomorganisme($site->getNomOrganisme());
                 $em->persist($anrSite);
                 $em->flush();
             }
         } catch (Exception $e) {
-            $this->get('session')->getFlashBag()->add('error', 'Your custom message');
+            $this->get('session')->getFlashBag()->add('error', self::YOUR_CUSTOM_MESSAGE);
             $message = $this->get('logger')->error($e->getTraceAsString());
         }
 
@@ -112,7 +115,7 @@ class AnrUpdateController extends AbstractController
                     $anrEntite->setParent(substr($entite->getParent(), 2, 19));
                 }
 
-                $anrEntite->setIdorganisme('77931118200017');
+                $anrEntite->setIdorganisme(self::C);
                 $anrEntite->setNomorganisme($entite->getNomOrganisme());
                 // id site
                 if (is_array($entite->getIdSite([0]))) {
@@ -157,7 +160,7 @@ class AnrUpdateController extends AbstractController
                 $em->flush();
             }
         } catch (Exception $e) {
-            $this->get('session')->getFlashBag()->add('error', 'Your custom message');
+            $this->get('session')->getFlashBag()->add('error', self::YOUR_CUSTOM_MESSAGE);
             $message = $this->get('logger')->error($e->getTraceAsString());
         }
 
@@ -265,7 +268,7 @@ class AnrUpdateController extends AbstractController
                 $anrAgent->setFinvaliditeentree($agent->getFinValiditeEntree());
                 $anrAgent->setAbslongueduree($agent->getAbsLongueDuree());
                 $anrAgent->setEntreeinvalidee($agent->getEntreeInvalidee());
-                $anrAgent->setIdorganisme('77931118200017');
+                $anrAgent->setIdorganisme(self::C);
                 $anrAgent->setTypeorganisme($agent->getTypeOrganisme());
                 $anrAgent->setListerougephoto($agent->getListeRougePhoto());
                 $anrAgent->setListeorange($agent->getListeOrange());
@@ -277,7 +280,7 @@ class AnrUpdateController extends AbstractController
                 $em->flush();
             }
         } catch (Exception $e) {
-            $this->get('session')->getFlashBag()->add('error', 'Your custom message');
+            $this->get('session')->getFlashBag()->add('error', self::YOUR_CUSTOM_MESSAGE);
             $message = $this->get('logger')->error($e->getTraceAsString());
         }
 

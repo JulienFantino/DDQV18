@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * DdqQuestionnaireRrh
  *
  * @ORM\Table(name="ddq_questionnaire_rrh")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Entity\DdqQuestionnaireRrhRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DdqQuestionnaireRrhRepository")
  */
 class DdqQuestionnaireRrh
 {
@@ -107,7 +107,7 @@ class DdqQuestionnaireRrh
      *
      * @return DdqQuestionnaireRrh
      */
-    public function setlibelle($libelle)
+    public function setLibelle($libelle)
     {
         $this->libelle = $libelle;
 
@@ -115,7 +115,7 @@ class DdqQuestionnaireRrh
     }
 
     /**
-     * Get libelle.
+     * Get Libelle.
      *
      * @return string
      */

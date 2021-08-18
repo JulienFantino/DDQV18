@@ -131,10 +131,7 @@
 
     </p>
 {% elseif campagne.idDdqCategorie.libelle == 'Recensement' %}
-    La direction vous informe
-    L’agent doit transmettre son choix de formule RTT en complétant l’applicatif « Campagne RH » rubrique RTT à partir
-    du lien suivant : <br> <a href="{{ url('campagnes_recensement') }}">Votre campagne de recensement</a> entre
-    le {{ campagne.datedebut|date('d-m-Y') }} et le {{ campagne.datefin|date('d-m-Y') }}.
+    La direction vous informe qu'un nouveau recensement va avoir lieu pour la date du{{ campagne.datedebut|date('d-m-Y') }} et le {{ campagne.datefin|date('d-m-Y') }}.
 {% else %}
     <p>!!! Erreur !!!</p>
 {% endif %}

@@ -1,0 +1,39 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% from "PHPKTemplateBundle::import.html.twig" import phpk %}
+{% block body %}
+    <h1>Managers list</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nomiusm</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for manager in managers %}
+            <tr>
+                <td><a href="{{ path('manager_show', { 'id': manager.id }) }}">{{ manager.id }}</a></td>
+                <td>{{ manager.nomIusm }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('manager_show', { 'id': manager.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('manager_edit', { 'id': manager.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('manager_new') }}">Create a new manager</a>
+        </li>
+    </ul>
+{% endblock %}

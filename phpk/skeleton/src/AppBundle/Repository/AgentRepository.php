@@ -24,7 +24,6 @@ class AgentRepository extends \Doctrine\ORM\EntityRepository implements Reposito
         $query->setParameter('nomium', $nomium);
         return $query->getSingleResult();
     }
-
     public function findOneByNom($nomium)
     {
         $query = $this->_em->createQuery('SELECT a FROM AppBundle:Agent a WHERE a.nomcomplet = :nomium');

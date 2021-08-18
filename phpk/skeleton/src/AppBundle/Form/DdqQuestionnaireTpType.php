@@ -39,11 +39,11 @@ class DdqQuestionnaireTpType extends AbstractType
 
 
             if ($EtapeQuestionnaire == 'etape5' || $EtapeQuestionnaire == 'etape4' || $EtapeQuestionnaire == 'etape3' || $EtapeQuestionnaire == 'modifiable' || $EtapeQuestionnaire == 'validé N+1' || $EtapeQuestionnaire == 'validé N+2') {
-                $form->add('lundi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Lundi', 'required' => false))
-                    ->add('mardi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Mardi', 'required' => false))
-                    ->add('mercredi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Mercredi', 'required' => false))
-                    ->add('jeudi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Jeudi', 'required' => false))
-                    ->add('vendredi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Vendredi', 'required' => false));
+                $form->add('lundi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Lundi', 'value' => 1, 'required' => false))
+                    ->add('mardi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Mardi', 'value' => 1, 'required' => false))
+                    ->add('mercredi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Mercredi', 'value' => 1, 'required' => false))
+                    ->add('jeudi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Jeudi', 'value' => 1, 'required' => false))
+                    ->add('vendredi', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('label' => 'Vendredi', 'value' => 1, 'required' => false));
             }
 
             if ($EtapeQuestionnaire == 'etape5' || $EtapeQuestionnaire == 'etape4' || $EtapeQuestionnaire == 'etape3' || $EtapeQuestionnaire == 'etape2' || $EtapeQuestionnaire == 'modifiable' || $EtapeQuestionnaire == 'validé N+1' || $EtapeQuestionnaire == 'validé N+2') {

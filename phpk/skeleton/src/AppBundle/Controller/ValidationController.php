@@ -15,7 +15,7 @@ class ValidationController extends AbstractController
     private const FORM_FACTORY = 'form.factory';
     private const APP_BUNDLE_FORM_DDQ_QUESTIONNAIRE_TP_TYPE = 'AppBundle\Form\DdqQuestionnaireTpType';
     private const NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR = 'ne-pas-repondre@assurance-maladie.fr';
-    private const JULIEN_FANTINO_ASSURANCE_MALADIE_FR = 'julien.fantino@assurance-maladie.fr';
+    private const JULIEN_FANTINO_ASSURANCE_MALADIE_FR = 'administrationdupersonnel.cpam-ain@assurance-maladie.fr';
 
     public function validationParkingAction($idQuestionnaire, Request $request)
     {
@@ -59,7 +59,7 @@ class ValidationController extends AbstractController
                 $em->persist($qp);
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
-                $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qp->getLibelle() . ' - Ne pas répondre'))
+                $mailToAgent = (new \Swift_Message('DDQ - Notification - Réponse à votre ' . $qp->getLibelle() . ' - Ne pas répondre'))
                     ->setFrom('ne-pas-repondre@cpam-ain.cnamts.fr')
                     /* ligne à supprimer */
                     //->setTo('florian.bardet@cpam-ain.cnamts.fr')
@@ -144,7 +144,7 @@ class ValidationController extends AbstractController
                 $em->persist($qrtt);
                 $em->flush();
                 /*** on paramètre le mail à envoyer ***/
-                $mailToAgent = (new \Swift_Message('DDQ001 - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
+                $mailToAgent = (new \Swift_Message('DDQ - Notification - Réponse à votre ' . $qrtt->getLibelle() . ' - Ne pas répondre'))
                     ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     /* ligne à supprimer */
                     //   ->setTo('julien.fantino@assurance-maladie.fr')
@@ -164,10 +164,10 @@ class ValidationController extends AbstractController
                 $branche = '/' . $sigleent[1] . '/' . $sigleent[2];
                 // recup du directeur de branche
                 $dirBranche = $agentRepo->findOneBy(array('sigleent' => $branche));
-
-                $mailToDirBranche = (new \Swift_Message('DDQ001 - Notification - ' . $qrtt->getLibelle() . ' à valider'))
+                //  dump($dirBranche);
+                $mailToDirBranche = (new \Swift_Message('DDQ - Notification - ' . $qrtt->getLibelle() . ' à valider'))
                     ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
-                    // ->setTo($dirBranche->getMail())
+                    //       ->setTo($dirBranche->getMail())
                     ->setTo('campagne-rh-valideur-rtt-n2.cpam-ain@assurance-maladie.fr')
                     ->setBody(
                         $this->renderView('Emails/NotificationValider.html.twig', array(
@@ -321,10 +321,11 @@ class ValidationController extends AbstractController
                 'highlight' => true,
             ))
             ->getForm();
-        dump($qtp->getIdDdqCampagne()->getidDdqCategorie()->getLibelle());
+        ($qtp->getIdDdqCampagne()->getidDdqCategorie()->getLibelle());
         /* Traitement du formulaire */
         if ($validForm->handleRequest($request)->isValid()) {
             $data = $validForm->getData();
+
             $em = $this->getDoctrine()->getManager();
             try {
                 /******** Envoi des notifications par mail *********************/
@@ -335,7 +336,7 @@ class ValidationController extends AbstractController
 
                 if ($data['avis']) {
                     $qtp->setStatut('validé N+1');
-                    dump($data['commentaireValideurN1']);
+                    ($data['commentaireValideurN1']);
                     $qtp->setcommentaireValideurN1($data['commentaireValideurN1']);
 
                 } else {
@@ -348,9 +349,9 @@ class ValidationController extends AbstractController
                 $mailToAgent = (new \Swift_Message('DDQ - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
                     ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
                     /* ligne à supprimer */
-                    ->setTo(self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR)
+                    // ->setTo(self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR)
                     /* ligne à décommenter */
-//                    ->setTo($agent->getMail())
+                    ->setTo($agent->getMail())
                     ->setBody(
                         $this->renderView('Emails/NotificationValidation.html.twig', array(
                             'questionnaire' => $qtp,
@@ -360,34 +361,37 @@ class ValidationController extends AbstractController
                         )),
                         'text/html'
                     );
+
+
                 /*** on paramètre le mail à envoyer au directeur de branche ***/
                 // recup du sigleent
                 $sigleent = explode("/", $agent->getSigleent());
                 $branche = '/' . $sigleent[1] . '/' . $sigleent[2];
                 // recup du directeur de branche
-                $dirBranche = $agentRepo->findBy(array('sigleent' => $branche));
-                foreach ($dirBranche as $dirBranches) {
-                    dump($dirBranches->getMail());
-                    $mailToDirBranche = (new \Swift_Message('DDQ - Notification - ' . $qtp->getLibelle() . ' à valider'))
-                        ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
-                        ->setTo(self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR)
-                        //  ->setTo($dirBranches->getMail())
-                        ->setBody(
-                            $this->renderView('Emails/NotificationValider.html.twig', array(
-                                'questionnaire' => $qtp,
-                                'agent' => $agent
+                $dirBranche = $agentRepo->findOneBy(array('sigleent' => $branche));
+                ($dirBranche);
+                // foreach ($dirBranche as $dirBranches) {
+                ($dirBranche->getMail());
+                $mailToDirBranche = (new \Swift_Message('DDQ - Notification - ' . $qtp->getLibelle() . ' à valider'))
+                    ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
+                    // ->setTo(self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR)
+                    ->setTo($dirBranche->getMail())
+                    ->setBody(
+                        $this->renderView('Emails/NotificationValider.html.twig', array(
+                            'questionnaire' => $qtp,
+                            'agent' => $agent
 
-                            )),
-                            'text/html'
-                        );
-                    /*** envoi des mails ***/
-                    $mailer->send($mailToAgent);
-//               $mailer->send($mailToDirBranche);
+                        )),
+                        'text/html'
+                    );
+                /*** envoi des mails ***/
 
-                }
+                $mailer->send($mailToDirBranche);
+                $mailer->send($mailToAgent);
+                //   }
 
 
-                $this->notification('Merci, votre validation pour la Demande de temps partiel de ' . $agent->getPrenom() . ' ' . $agent->getNom() . ' a bien été enregistrée.', 'success');
+                $this->notification('Merci, votre validation pour la demande de temps partiel de ' . $agent->getPrenom() . ' ' . $agent->getNom() . ' a bien été enregistrée.', 'success');
                 return $this->redirectToRoute('liste_questionnaires_tp');
             } catch (Exception $e) {
                 $this->notification('Votre demande n\'a pas été prise en compte. Une erreur s\'est produite.', 'error');
@@ -461,10 +465,8 @@ class ValidationController extends AbstractController
                 /*** on paramètre le mail à envoyer ***/
                 $mailToAgent = (new \Swift_Message('DDQ - Notification - Réponse à votre ' . $qtp->getLibelle() . ' - Ne pas répondre'))
                     ->setFrom(self::NE_PAS_REPONDRE_ASSURANCE_MALADIE_FR)
-                    /* ligne à supprimer */
-                    ->setTo(self::JULIEN_FANTINO_ASSURANCE_MALADIE_FR)
                     /* ligne à décommenter */
-//                    ->setTo($agent->getMail())
+                    ->setTo($agent->getMail())
                     ->setBody(
                         $this->renderView('Emails/NotificationValidation.html.twig', array(
                             'questionnaire' => $qtp,

@@ -51,6 +51,32 @@ class DdqCampagne
     private $statut;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="syndicat", type="string", length=32, nullable=true)
+     */
+    private $syndicat;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="journee", type="boolean", nullable=true)
+     */
+    private $journee;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="demijournee", type="boolean", nullable=true)
+     */
+    private $demijournee;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="heure", type="boolean", nullable=true)
+     */
+    private $heure;
+
+
+    /**
      * @var \AppBundle\Entity\DdqCategorie
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DdqCategorie")
@@ -190,4 +216,72 @@ class DdqCampagne
     {
         return $this->idDdqCategorie;
     }
+
+    /**
+     * Get syndicat
+     * @return string
+     */
+    public function getSyndicat()
+    {
+        return $this->syndicat;
+    }
+
+    /**
+     * Set syndicat
+     *
+     * @param string $syndicat
+     */
+    public function setSyndicat($syndicat)
+    {
+        $this->syndicat = $syndicat;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getJournee()
+    {
+        return $this->journee;
+    }
+
+    /**
+     * @param bool $journee
+     */
+    public function setJournee($journee)
+    {
+        $this->journee = $journee;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDemijournee()
+    {
+        return $this->demijournee;
+    }
+
+    /**
+     * @param bool $demijournee
+     */
+    public function setDemijournee($demijournee)
+    {
+        $this->demijournee = $demijournee;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHeure()
+    {
+        return $this->heure;
+    }
+
+    /**
+     * @param bool $heure
+     */
+    public function setHeure($heure)
+    {
+        $this->heure = $heure;
+    }
+
 }
